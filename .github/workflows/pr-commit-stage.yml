@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  lint:
+  checkout_and_lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
           cache-name: cache-node-modules
         with:
           # Cache dependencies using a key for installers and dependencies
-          path: ~/.npm
+          path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -36,3 +36,61 @@ jobs:
 
       - name: Run Lint
         run: npm run lint
+
+  test:
+    needs: checkout_and_lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # Cache dependencies using a key for installers and dependencies
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: No-op Test Placeholder
+        run: echo "No tests implemented yet"
+
+  build_and_package_app:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # Cache dependencies using a key for installers and dependencies
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Build Next.js App
+        run: npm run build
+
+      - name: Package Build Artifacts
+        run: |
+          tar -czf nextjs-build.tar.gz .next # Add other necessary files or directories
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: nextjs-build
+          path: nextjs-build.tar.gz
