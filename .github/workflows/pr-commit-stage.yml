@@ -106,8 +106,8 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            📦 New Docker Image has been pushed to Github Container Registry (GHCR)!
-            Image: ${{ steps.docker_build.outputs.image }}
+            📦 New Docker Image has been pushed to Github Container Registry (GHCR)
+            Image: ${{ steps.generate_ghcr_tag.outputs.image }}
 
 
       - name: Deploy to AWS using Copilot
