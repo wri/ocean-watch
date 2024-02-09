@@ -85,7 +85,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/${{ github.head_ref }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
             ghcr.io/${{ github.repository }}/${{ github.head_ref }}:latest
 
       - name: Deploy to AWS using Copilot
