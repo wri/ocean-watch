@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  lint:
+  checkout_and_lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
           cache-name: cache-node-modules
         with:
           # Cache dependencies using a key for installers and dependencies
-          path: ~/.npm
+          path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -36,3 +36,85 @@ jobs:
 
       - name: Run Lint
         run: npm run lint
+
+  test:
+    needs: checkout_and_lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.17'
+
+      - name: Cache Node Modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # Cache dependencies using a key for installers and dependencies
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: No-op Test Placeholder
+        run: echo "No tests implemented yet"
+
+  build-and-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: generate ghcr tag
+        id: generate_ghcr_tag
+        run: echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}"
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64/v8
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ steps.generate_ghcr_tag.outputs.image }}
+            ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:latest
+
+      - name: Comment PR with GHCR details
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            📦 New Docker Image has been pushed to Github Container Registry (GHCR)
+            Image: ${{ steps.generate_ghcr_tag.outputs.image }}
+
+
+      - name: Deploy to AWS using Copilot
+        if: false # This condition effectively disables the step until copilot is set up
+        run: |
+          copilot svc deploy --name your-service-name --env your-environment-name
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: your-aws-region # e.g., us-east-1
