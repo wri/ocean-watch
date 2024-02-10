@@ -10,7 +10,7 @@
 - [Usage](#usage)
     - [Running Directly On Your Machine](#running-directly-on-your-machine) 
     - [Building the Docker Image Locally](#building-the-docker-image-locally)
-    - [Running the Docker Container](#running-the-docker-container) 
+    - [Running the GHCR Docker Container](#running-the-ghcr-docker-container)
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [License](#license)
