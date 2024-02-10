@@ -127,7 +127,7 @@ Our project's Docker images are hosted on GitHub Container Registry (GHCR), allo
    Example to pull the latest version of the image:
 
     ```bash
-    docker pull ghcr.io/wri/ocean-watch:latest
+    docker pull ghcr.io/wri/ocean-watch/BRANCH_NAME:latest
     ```
 
 3. **Run the Docker Container**: Once the image is pulled, you can run it with the following command. This command maps port 3000 of the container to port 3000 on your host machine, as specified in the Dockerfile.
