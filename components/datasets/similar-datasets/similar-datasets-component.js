@@ -19,16 +19,9 @@ class SimilarDatasets extends PureComponent {
       <div className="c-similar-datasets">
         <Spinner isLoading={loading} className="-light" />
 
-        {!loading && !data.length
-          && <p>No data available</p>}
+        {!loading && !data.length && <p>No data available</p>}
 
-        {!!data.length
-          && (
-            <DatasetList
-              list={data}
-              mode="grid"
-            />
-          )}
+        {!!data.length && <DatasetList list={data} mode="grid" />}
       </div>
     );
   }

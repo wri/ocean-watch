@@ -4,9 +4,7 @@ import Link from 'next/link';
 // components
 import Icon from 'components/ui/icon';
 
-export default function Breadcrumbs({
-                                      items,
-                                    }) {
+export default function Breadcrumbs({ items }) {
   return (
     <ul className="c-breadcrumbs">
       {items.map((item) => (

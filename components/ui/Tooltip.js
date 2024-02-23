@@ -42,14 +42,12 @@ class Tooltip extends React.Component {
   }
 
   getContent() {
-    return this.props.tooltip.children
-      ? (
-        <this.props.tooltip.children
-          {...this.props.tooltip.childrenProps}
-          onResize={() => this.tether && this.tether.position()}
-        />
-      )
-      : null;
+    return this.props.tooltip.children ? (
+      <this.props.tooltip.children
+        {...this.props.tooltip.childrenProps}
+        onResize={() => this.tether && this.tether.position()}
+      />
+    ) : null;
   }
 
   getStyles() {
@@ -93,9 +91,9 @@ class Tooltip extends React.Component {
     const { width } = this.el.parentNode.getBoundingClientRect();
 
     if (width / 2 > target.left) {
-      tipOffset = target.left - (width / 2);
+      tipOffset = target.left - width / 2;
     } else if (width / 2 > target.right) {
-      tipOffset = (width / 2) - target.right;
+      tipOffset = width / 2 - target.right;
     }
 
     if (tipOffset !== this.state.tipOffset) {
@@ -117,27 +115,26 @@ class Tooltip extends React.Component {
 
     return (
       <Tether
-        ref={(node) => { this.tether = node; }}
+        ref={(node) => {
+          this.tether = node;
+        }}
         attachment={`${direction} center`}
         targetAttachment="top center"
-        constraints={[{
-          // Don't change this without making sure the tooltip doesn't
-          // disappear in an embedded widget when the cursor is at the
-          // top of the iframe or when the tooltip is close to the edges
-          // of the screen
-          to: 'window',
-          // We don't pin at the top or the bottom because the tooltip
-          // is either displayed above or below the target
-          pin: ['left', 'right'],
-        }]}
+        constraints={[
+          {
+            // Don't change this without making sure the tooltip doesn't
+            // disappear in an embedded widget when the cursor is at the
+            // top of the iframe or when the tooltip is close to the edges
+            // of the screen
+            to: 'window',
+            // We don't pin at the top or the bottom because the tooltip
+            // is either displayed above or below the target
+            pin: ['left', 'right'],
+          },
+        ]}
         classes={{ element: tooltipClasses }}
         offset={`${(direction === 'bottom' ? 1 : -1) * 20}px 0`} // The offset is needed for the follow option
-        renderTarget={(ref) => (
-          <div
-            ref={ref}
-            style={this.getStyles()}
-          />
-        )}
+        renderTarget={(ref) => <div ref={ref} style={this.getStyles()} />}
         renderElement={(ref) => {
           if (!this.props.tooltip.opened) return null;
 

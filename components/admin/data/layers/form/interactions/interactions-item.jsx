@@ -33,12 +33,7 @@ const DATA_FORMATS = {
 };
 
 const InteractionsItem = (props) => {
-  const {
-    interaction,
-    removeInteraction,
-    editInteraction,
-    custom,
-  } = props;
+  const { interaction, removeInteraction, editInteraction, custom } = props;
 
   const interactionsFieldClasses = classnames({
     'c-field-flex': true,
@@ -48,17 +43,12 @@ const InteractionsItem = (props) => {
   });
 
   return (
-    <li
-      className={interactionsFieldClasses}
-      key={interaction.column}
-    >
+    <li className={interactionsFieldClasses} key={interaction.column}>
       <InteractionsHandler />
 
       {custom && (
         <p className="c-interactions__warning">
-          <strong>
-            Custom interaction
-          </strong>
+          <strong>Custom interaction</strong>
           &nbsp;Make sure the data matches the format you want. Otherwise it wont display correctly.
         </p>
       )}
@@ -89,7 +79,9 @@ const InteractionsItem = (props) => {
       <section className="c-interactions__format">
         <Field
           key={`${interaction.column}format`}
-          ref={(c) => { if (c) FORM_ELEMENTS.elements[`format${interaction.column}`] = c; }}
+          ref={(c) => {
+            if (c) FORM_ELEMENTS.elements[`format${interaction.column}`] = c;
+          }}
           onChange={(value) => editInteraction({ value, key: 'format', field: interaction })}
           options={custom ? DATA_FORMATS.getAll() : DATA_FORMATS[interaction.type]}
           properties={{
@@ -104,7 +96,9 @@ const InteractionsItem = (props) => {
         </Field>
       </section>
 
-      <button type="button" className="c-btn" onClick={() => removeInteraction(interaction)}>Remove</button>
+      <button type="button" className="c-btn" onClick={() => removeInteraction(interaction)}>
+        Remove
+      </button>
     </li>
   );
 };

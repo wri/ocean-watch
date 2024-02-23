@@ -17,7 +17,7 @@ class BlogFeed extends PureComponent {
   static defaultProps = {
     latestPostsError: null,
     spotlightPostsError: null,
-  }
+  };
 
   getCard = (post = {}) => {
     const {
@@ -36,7 +36,7 @@ class BlogFeed extends PureComponent {
         className={clardClass}
         background={`url(${image})`}
         clickable={!!link}
-        {...link && { route: link }}
+        {...(link && { route: link })}
         anchor
       >
         <div>
@@ -47,35 +47,27 @@ class BlogFeed extends PureComponent {
           <div className="source">
             <span style={{ backgroundImage: `url(${authorImage}` }} />
             <div className="source-name">
-              by
-              {' '}
-              <a href={path} target="_blank" rel="noopener noreferrer">{name}</a>
+              by{' '}
+              <a href={path} target="_blank" rel="noopener noreferrer">
+                {name}
+              </a>
             </div>
           </div>
-          {ranking && (<Rating rating={ranking} />)}
+          {ranking && <Rating rating={ranking} />}
         </div>
       </CardStatic>
     );
   };
 
   render() {
-    const {
-      latestPosts,
-      spotlightPosts,
-      latestPostsError,
-      spotlightPostsError,
-    } = this.props;
+    const { latestPosts, spotlightPosts, latestPostsError, spotlightPostsError } = this.props;
 
     const errors = latestPostsError !== null || spotlightPostsError !== null;
 
     return (
       <div className="c-blog-feed">
-        {errors && (
-          <div className="error">
-            {latestPostsError || spotlightPostsError}
-          </div>
-        )}
-        {!errors && (!!latestPosts.length && !!spotlightPosts.length) && (
+        {errors && <div className="error">{latestPostsError || spotlightPostsError}</div>}
+        {!errors && !!latestPosts.length && !!spotlightPosts.length && (
           <div className="insight-cards">
             <div className="row">
               <div className="column small-12 medium-8">

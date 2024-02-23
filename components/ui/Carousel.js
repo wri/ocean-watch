@@ -10,10 +10,10 @@ const defaultSettings = {
   autoplayInterval: 3500,
   initialSlideHeight: 56,
   wrapAround: true,
-  renderTopCenterControls: () => {},
-  renderCenterLeftControls: () => {},
-  renderCenterRightControls: () => {},
-  renderBottomCenterControls: () => {},
+  renderTopCenterControls: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  renderCenterLeftControls: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  renderCenterRightControls: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  renderBottomCenterControls: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
 };
 
 function Carousel({ settings = defaultSettings, items = [] }) {
@@ -24,9 +24,7 @@ function Carousel({ settings = defaultSettings, items = [] }) {
 
   return (
     <div className="c-carousel">
-      <Slider {...settings}>
-        {items.map((item) => item)}
-      </Slider>
+      <Slider {...settings}>{items.map((item) => item)}</Slider>
     </div>
   );
 }

@@ -39,15 +39,15 @@ export interface LayerPreviewProps {
 }
 
 export const LayerPreview = ({
-                               adminLayerPreview,
-                               layer,
-                               layers,
-                               interactions,
-                               generateLayerGroups,
-                               setLayerInteraction,
-                               setLayerInteractionSelected,
-                               setLayerInteractionLatLng,
-                             }: LayerPreviewProps): JSX.Element => {
+  adminLayerPreview,
+  layer,
+  layers,
+  interactions,
+  generateLayerGroups,
+  setLayerInteraction,
+  setLayerInteractionSelected,
+  setLayerInteractionLatLng,
+}: LayerPreviewProps): JSX.Element => {
   const [viewport, setViewport] = useState<ViewportProps>(DEFAULT_VIEWPORT);
 
   const { layerGroups, interaction, interactionLatLng, interactionSelected } = adminLayerPreview;

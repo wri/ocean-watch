@@ -12,7 +12,7 @@ class SearchInput extends PureComponent {
     link: {},
     onlyDesktop: false,
     disableButton: false,
-  }
+  };
 
   static propTypes = {
     input: PropTypes.object.isRequired,
@@ -47,7 +47,7 @@ class SearchInput extends PureComponent {
       if (this.props.escapeText) this.props.onSearch(escapeRegExp(value));
       if (!this.props.escapeText) this.props.onSearch(value);
     });
-  }
+  };
 
   onKeyDown(c) {
     const { onKeyDown } = this.props;
@@ -98,12 +98,11 @@ class SearchInput extends PureComponent {
           </div>
         </div>
 
-        {link.route
-          && (
-            <Link href={link.route}>
-              <a className={linkClassNames}>{link.label}</a>
-            </Link>
-          )}
+        {link.route && (
+          <Link href={link.route}>
+            <a className={linkClassNames}>{link.label}</a>
+          </Link>
+        )}
       </div>
     );
   }

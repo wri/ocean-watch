@@ -39,11 +39,12 @@ function SuggestStoryPost() {
         <div className="l-container">
           <div className="row align-center">
             <div className="column small-12">
-              <Banner className="-text-center" bgImage="/static/images/backgrounds/partners-02@2x.jpg">
+              <Banner
+                className="-text-center"
+                bgImage="/static/images/backgrounds/partners-02@2x.jpg"
+              >
                 <p className="-claim">
-                  Questions, comments, or feedback?
-                  {' '}
-                  <br />
+                  Questions, comments, or feedback? <br />
                   Help us improve Resource Watch.
                 </p>
                 <Link href="/about/contact-us">

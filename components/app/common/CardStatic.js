@@ -28,12 +28,7 @@ class CardStatic extends React.Component {
   }
 
   handleClick(event) {
-    const {
-      clickable,
-      route,
-      anchor,
-      router,
-    } = this.props;
+    const { clickable, route, anchor, router } = this.props;
     if (!anchor && clickable && event.target.tagName !== 'A') {
       router.push(route);
     }
@@ -44,9 +39,7 @@ class CardStatic extends React.Component {
   }
 
   render() {
-    const {
-      background, backgroundSize, className, children,
-    } = this.props;
+    const { background, backgroundSize, className, children } = this.props;
     const style = { background, backgroundSize: backgroundSize || 'cover' };
     const classNameObj = classNames({
       'c-card-static': true,

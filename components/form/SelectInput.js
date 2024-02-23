@@ -28,9 +28,9 @@ class SelectInput extends FormElement {
     let value;
 
     if (Array.isArray(selected)) {
-      value = (selected) ? selected.map((s) => s.value) : null;
+      value = selected ? selected.map((s) => s.value) : null;
     } else {
-      value = (selected) ? selected.value : null;
+      value = selected ? selected.value : null;
     }
 
     this.setState({ value }, () => {

@@ -56,7 +56,7 @@ class FormElement extends React.Component {
 
     const validations = validationsState || validationsProps;
 
-    const isValuePresent = (Array.isArray(value)) ? value.length > 0 : value;
+    const isValuePresent = Array.isArray(value) ? value.length > 0 : value;
     let valid;
     let error;
 
@@ -66,19 +66,22 @@ class FormElement extends React.Component {
     if (validations && (isValuePresent || validations.indexOf('required') !== -1)) {
       const validateArr = this.validator.validate(validations, value);
       valid = validateArr.every((element) => element.valid);
-      error = (!valid) ? validateArr.map((element) => element.error) : [];
+      error = !valid ? validateArr.map((element) => element.error) : [];
     } else {
-      valid = (isValuePresent) ? true : null;
+      valid = isValuePresent ? true : null;
       error = [];
     }
 
     // Save the valid and the error in the state
-    this.setState({
-      valid,
-      error,
-    }, () => {
-      if (this.props.onValid) this.props.onValid(valid, error);
-    });
+    this.setState(
+      {
+        valid,
+        error,
+      },
+      () => {
+        if (this.props.onValid) this.props.onValid(valid, error);
+      },
+    );
   }
 
   isValid() {

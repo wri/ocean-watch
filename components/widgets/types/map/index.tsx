@@ -38,14 +38,14 @@ export interface MapTypeWidgetContainerProps {
 }
 
 const MapTypeWidgetContainer = ({
-                                  widgetId,
-                                  params = {},
-                                  style = {},
-                                  isEmbed = false,
-                                  isWebshot = false,
-                                  areaOfInterest = null,
-                                  onToggleShare,
-                                }: MapTypeWidgetContainerProps): JSX.Element => {
+  widgetId,
+  params = {},
+  style = {},
+  isEmbed = false,
+  isWebshot = false,
+  areaOfInterest = null,
+  onToggleShare,
+}: MapTypeWidgetContainerProps): JSX.Element => {
   const [minZoom, setMinZoom] = useState(null);
   const { data: user } = useMe();
   const { isInACollection } = useBelongsToCollection(widgetId, user?.token);
@@ -95,9 +95,9 @@ const MapTypeWidgetContainer = ({
       select: (_layer) =>
         _layer
           ? {
-            ..._layer,
-            params,
-          }
+              ..._layer,
+              params,
+            }
           : null,
     })),
   );

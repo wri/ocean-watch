@@ -26,15 +26,17 @@ class SearchBar extends PureComponent {
     router: PropTypes.shape({
       replace: PropTypes.func.isRequired,
     }).isRequired,
-  }
+  };
 
   static defaultProps = {
     isHeader: false,
     selected: null,
-  }
+  };
 
   componentDidUpdate() {
-    const { header: { searchOpened } } = this.props;
+    const {
+      header: { searchOpened },
+    } = this.props;
     if (searchOpened) {
       // If we don't wait until animation is over it won't focus
       // If we only animate opcity it won't make the leave animation
@@ -55,9 +57,7 @@ class SearchBar extends PureComponent {
       setSearchTerm,
       fetchSearch,
       router,
-      search: {
-        page,
-      },
+      search: { page },
     } = this.props;
 
     if (!isHeader) {
@@ -80,15 +80,11 @@ class SearchBar extends PureComponent {
       setSearchTerm(term);
       fetchSearch();
     }
-  }, 500)
+  }, 500);
 
   onKeyDown(e) {
     const { key } = e;
-    const {
-      search,
-      selected,
-      setSearchSelected,
-    } = this.props;
+    const { search, selected, setSearchSelected } = this.props;
 
     const keyTargets = /Arrow(Up|Down)|Enter/.test(key);
 
@@ -118,11 +114,7 @@ class SearchBar extends PureComponent {
   }
 
   setSearchOpened(opened) {
-    const {
-      setSearchTerm,
-      fetchSearch,
-      setSearchOpened,
-    } = this.props;
+    const { setSearchTerm, fetchSearch, setSearchOpened } = this.props;
 
     if (!opened) {
       document.documentElement.classList.remove('-no-scroll');
@@ -143,7 +135,9 @@ class SearchBar extends PureComponent {
       <div className="c-search--term">
         <SearchInput
           isHeader={isHeader}
-          getRef={(c) => { this.input = c; }}
+          getRef={(c) => {
+            this.input = c;
+          }}
           onKeyDown={(e) => this.onKeyDown(e)}
           input={{
             placeholder: 'Search term',
@@ -152,19 +146,15 @@ class SearchBar extends PureComponent {
           onSearch={this.onSearch}
         />
 
-        {isHeader
-          && (
-            <button
-              className="z-10 flex items-center justify-center bg-white rounded-full search-close"
-              type="button"
-              onClick={() => this.setSearchOpened(false)}
-            >
-              <Icon
-                name="icon-cross"
-                className="-smaller"
-              />
-            </button>
-          )}
+        {isHeader && (
+          <button
+            className="z-10 flex items-center justify-center bg-white rounded-full search-close"
+            type="button"
+            onClick={() => this.setSearchOpened(false)}
+          >
+            <Icon name="icon-cross" className="-smaller" />
+          </button>
+        )}
       </div>
     );
   }

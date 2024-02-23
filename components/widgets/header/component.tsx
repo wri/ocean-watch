@@ -15,13 +15,13 @@ import { useMe } from 'hooks/user';
 import type { User, UserData, RWApplicationData } from 'types/user';
 
 export default function WidgetHeader({
-                                       widget,
-                                       params = {},
-                                       isInACollection,
-                                       onToggleInfo,
-                                       onToggleShare,
-                                       isInfoVisible = false,
-                                     }) {
+  widget,
+  params = {},
+  isInACollection,
+  onToggleInfo,
+  onToggleShare,
+  isInfoVisible = false,
+}) {
   const starIconName = classnames({
     'icon-star-full': isInACollection,
     'icon-star-empty': !isInACollection,

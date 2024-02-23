@@ -10,40 +10,42 @@ export const setSimilarDatasets = createAction('similar-datasets/setSimilarDatas
 export const resetSimilarDatasets = createAction('similar-datasets/resetSimilarDatasets');
 
 // Async actions
-export const getSimilarDatasets = createThunkAction('similar-datasets/getSimilarDatasets', (datasetIds, locale = 'en') => (dispatch) => {
-  dispatch(setSimilarDatasetsLoading(true));
+export const getSimilarDatasets = createThunkAction(
+  'similar-datasets/getSimilarDatasets',
+  (datasetIds, locale = 'en') =>
+    (dispatch) => {
+      dispatch(setSimilarDatasetsLoading(true));
 
-  return fetchSimilarDatasets(
-    {
-      dataset: datasetIds.join(','),
-      published: true,
-      limit: 6,
-      env: process.env.NEXT_PUBLIC_ENVS_SHOW,
-    },
-  )
-    .then((data) => {
-      if (data.length > 0) {
-        fetchDatasets({
-          ids: data.map((d) => d.dataset).join(','),
-          language: locale,
-          includes: 'widget,metadata,layer,vocabulary',
+      return fetchSimilarDatasets({
+        dataset: datasetIds.join(','),
+        published: true,
+        limit: 6,
+        env: process.env.NEXT_PUBLIC_ENVS_SHOW,
+      })
+        .then((data) => {
+          if (data.length > 0) {
+            fetchDatasets({
+              ids: data.map((d) => d.dataset).join(','),
+              language: locale,
+              includes: 'widget,metadata,layer,vocabulary',
+            })
+              .then((similarDatasets) => {
+                dispatch(setSimilarDatasetsLoading(false));
+                dispatch(setSimilarDatasets(similarDatasets));
+                return similarDatasets;
+              })
+              .catch((err) => {
+                dispatch(setSimilarDatasetsLoading(false));
+                dispatch(setSimilarDatasetsError({ payload: err.message }));
+              });
+          } else {
+            dispatch(setSimilarDatasetsLoading(false));
+            dispatch(setSimilarDatasets([]));
+          }
         })
-          .then((similarDatasets) => {
-            dispatch(setSimilarDatasetsLoading(false));
-            dispatch(setSimilarDatasets(similarDatasets));
-            return similarDatasets;
-          })
-          .catch((err) => {
-            dispatch(setSimilarDatasetsLoading(false));
-            dispatch(setSimilarDatasetsError({ payload: err.message }));
-          });
-      } else {
-        dispatch(setSimilarDatasetsLoading(false));
-        dispatch(setSimilarDatasets([]));
-      }
-    })
-    .catch((err) => {
-      dispatch(setSimilarDatasetsLoading(false));
-      dispatch(setSimilarDatasetsError({ payload: err.message }));
-    });
-});
+        .catch((err) => {
+          dispatch(setSimilarDatasetsLoading(false));
+          dispatch(setSimilarDatasetsError({ payload: err.message }));
+        });
+    },
+);

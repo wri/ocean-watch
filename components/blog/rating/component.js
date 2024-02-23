@@ -9,9 +9,9 @@ class Rating extends PureComponent {
   static propTypes = {
     rating: PropTypes.number.isRequired,
     className: PropTypes.any,
-  }
+  };
 
-  static defaultProps = { className: null }
+  static defaultProps = { className: null };
 
   render() {
     const { className, rating } = this.props;
@@ -19,10 +19,7 @@ class Rating extends PureComponent {
 
     return (
       <div className={componentClass}>
-        <Icon
-          name="icon-star-full"
-          className="-small icon-star-full rating-star"
-        />
+        <Icon name="icon-star-full" className="-small icon-star-full rating-star" />
         <span>{rating}</span>
       </div>
     );

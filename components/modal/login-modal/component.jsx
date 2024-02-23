@@ -33,9 +33,7 @@ class LoginModal extends PureComponent {
     if (e) e.preventDefault();
     FORM_ELEMENTS.validate();
     const isValid = FORM_ELEMENTS.isValid();
-    const {
-      callbackUrl,
-    } = this.props;
+    const { callbackUrl } = this.props;
     const { register, captcha, ...userSettings } = this.state;
 
     if (captcha === null && register) toastr.error('Please fill the captcha');
@@ -48,10 +46,14 @@ class LoginModal extends PureComponent {
         this.setState({ loading: true }, () => {
           registerUser(userSettings)
             .then(() => {
-              toastr.success('Confirm registration',
-                'You will receive an email shortly. Please confirm your registration.');
+              toastr.success(
+                'Confirm registration',
+                'You will receive an email shortly. Please confirm your registration.',
+              );
             })
-            .catch(() => { toastr.error('Something went wrong'); })
+            .catch(() => {
+              toastr.error('Something went wrong');
+            })
             .then(() => {
               this.setState({
                 loading: false,
@@ -61,34 +63,27 @@ class LoginModal extends PureComponent {
         });
       } else {
         try {
-          const {
-            email,
-            password,
-          } = userSettings;
+          const { email, password } = userSettings;
 
           await signIn('email-password', {
             email,
             password,
-            ...callbackUrl && { callbackUrl },
+            ...(callbackUrl && { callbackUrl }),
           });
         } catch (err) {
-          const message = err.message === '401'
-            ? 'Your email and password combination is incorrect.'
-            : 'Something went wrong';
+          const message =
+            err.message === '401'
+              ? 'Your email and password combination is incorrect.'
+              : 'Something went wrong';
 
           toastr.error(message);
         }
       }
     }, 0);
-  }
+  };
 
   render() {
-    const {
-      email,
-      password,
-      register,
-      loading,
-    } = this.state;
+    const { email, password, register, loading } = this.state;
 
     return (
       <div className="c-login-modal">
@@ -103,7 +98,9 @@ class LoginModal extends PureComponent {
                 <span>Access with your email</span>
                 <form onSubmit={this.onSubmit}>
                   <Field
-                    ref={(c) => { if (c) FORM_ELEMENTS.elements.email = c; }}
+                    ref={(c) => {
+                      if (c) FORM_ELEMENTS.elements.email = c;
+                    }}
                     onChange={(value) => this.setState({ email: value })}
                     className="-fluid"
                     validations={['required', 'email']}
@@ -120,7 +117,9 @@ class LoginModal extends PureComponent {
                   </Field>
                   {!register && (
                     <Field
-                      ref={(c) => { if (c) FORM_ELEMENTS.elements.password = c; }}
+                      ref={(c) => {
+                        if (c) FORM_ELEMENTS.elements.password = c;
+                      }}
                       onChange={(value) => this.setState({ password: value })}
                       className="-fluid"
                       validations={['required']}
@@ -150,20 +149,21 @@ class LoginModal extends PureComponent {
                     <div className="recaptcha-container">
                       <ReCAPTCHA
                         // https://developers.google.com/recaptcha/docs/faq#id-like-to-run-automated-tests-with-recaptcha.-what-should-i-do
-                        sitekey={process.env.NEXT_PUBLIC_RW_ENV === 'test'
-                          ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' : '6LeBy3YUAAAAACLNnSGCnvok_tRDnQut-Mc7SBh8'}
-                        onChange={(value) => { this.setState({ captcha: value }); }}
+                        sitekey={
+                          process.env.NEXT_PUBLIC_RW_ENV === 'test'
+                            ? '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+                            : '6LeBy3YUAAAAACLNnSGCnvok_tRDnQut-Mc7SBh8'
+                        }
+                        onChange={(value) => {
+                          this.setState({ captcha: value });
+                        }}
                       />
                     </div>
                   )}
                   <div className="c-button-container form-buttons">
                     <ul>
                       <li>
-                        <button
-                          type="submit"
-                          className="c-button -primary"
-                          data-cy="submit-button"
-                        >
+                        <button type="submit" className="c-button -primary" data-cy="submit-button">
                           {register ? 'Register' : 'Log in'}
                         </button>
                       </li>
@@ -172,7 +172,9 @@ class LoginModal extends PureComponent {
                           type="button"
                           data-cy="register-button"
                           className="c-button -tertirary"
-                          onClick={() => { this.setState({ register: !register }); }}
+                          onClick={() => {
+                            this.setState({ register: !register });
+                          }}
                         >
                           {!register ? 'Register' : 'I have an account'}
                         </button>

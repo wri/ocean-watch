@@ -31,13 +31,13 @@ export interface CollectionsPanelProps {
 }
 
 const CollectionsPanel = ({
-                            resource,
-                            resourceType,
-                            onKeyPress,
-                            onClick,
-                            onToggleFavorite,
-                            onToggleCollection,
-                          }: CollectionsPanelProps): JSX.Element => {
+  resource,
+  resourceType,
+  onKeyPress,
+  onClick,
+  onToggleFavorite,
+  onToggleCollection,
+}: CollectionsPanelProps): JSX.Element => {
   const { data: user } = useMe();
   const { mutate: mutateAddToCollection } = useAddToCollection({
     onSuccess: async (updatedCollection, variables) => {
@@ -51,12 +51,12 @@ const CollectionsPanel = ({
   });
   const { mutate: mutateAddCollection } = useAddCollection();
   const { mutate: mutateAddFavorite } = useSaveFavorite({
-    onSuccess: async (updatedFavorite, variables) => {
+    onSuccess: async (updatedFavorite) => {
       if (onToggleFavorite) onToggleFavorite(true, updatedFavorite);
     },
   });
   const { mutate: mutateRemoveFavorite } = useDeleteFavorite({
-    onSuccess: async (updatedFavorite, variables) => {
+    onSuccess: async (updatedFavorite) => {
       if (onToggleFavorite) onToggleFavorite(false, updatedFavorite);
     },
   });

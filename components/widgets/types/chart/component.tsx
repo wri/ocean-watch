@@ -24,17 +24,17 @@ export interface ChartTypeProps extends Omit<ChartContainerProps, 'widgetId'> {
 }
 
 const ChartType = ({
-                     widget,
-                     adapter,
-                     style,
-                     params,
-                     isEmbed,
-                     isWebshot,
-                     isFetching,
-                     isError,
-                     isInACollection,
-                     onToggleShare,
-                   }: ChartTypeProps): JSX.Element => {
+  widget,
+  adapter,
+  style,
+  params,
+  isEmbed,
+  isWebshot,
+  isFetching,
+  isError,
+  isInACollection,
+  onToggleShare,
+}: ChartTypeProps): JSX.Element => {
   const [isInfoWidgetVisible, setInfoWidgetVisibility] = useState(false);
 
   const handleInfoToggle = useCallback(() => {

@@ -24,7 +24,8 @@ class Validator {
 
       url: {
         validate(value) {
-          const regex = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
+          const regex =
+            /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
           return regex.test(value || '');
         },
         message() {
@@ -59,8 +60,12 @@ class Validator {
         },
       },
       equal: {
-        validate(value, condition, data) { return value === data; },
-        message(message) { return message; },
+        validate(value, condition, data) {
+          return value === data;
+        },
+        message(message) {
+          return message;
+        },
       },
     };
   }
@@ -84,7 +89,7 @@ class Validator {
 
       return {
         valid,
-        error: (!valid) ? { message } : null,
+        error: !valid ? { message } : null,
       };
     });
   }

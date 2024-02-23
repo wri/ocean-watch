@@ -164,9 +164,9 @@ export const createSubscriptionToArea = createThunkAction(
     dispatch(setSubscriptionSuccess(false));
     dispatch(setSubscriptionLoading(true));
 
-    axios.all(
-      datasets
-        .map((_dataset) => {
+    axios
+      .all(
+        datasets.map((_dataset) => {
           const datasetId = _dataset.id;
           const datasetQuery = {
             d: _dataset.id,
@@ -193,7 +193,7 @@ export const createSubscriptionToArea = createThunkAction(
               toastr.error('Error: unable to create the subscription', err);
             });
         }),
-    )
+      )
       .then(() => {
         // Reload user areas
         dispatch(getUserAreas());
@@ -218,9 +218,9 @@ export const createSubscriptionOnNewArea = createThunkAction(
       .then((data) => {
         const areaId = data.id;
 
-        axios.all(
-          datasets
-            .map((_dataset) => {
+        axios
+          .all(
+            datasets.map((_dataset) => {
               const datasetId = _dataset.id;
               const datasetQuery = {
                 d: _dataset.id,
@@ -247,7 +247,7 @@ export const createSubscriptionOnNewArea = createThunkAction(
                   toastr.error('Error: unable to create the subscription', err);
                 });
             }),
-        )
+          )
           .then(() => {
             toastr.success('Subscriptions created successfully');
             // Reload user areas
@@ -269,10 +269,7 @@ export const updateSubscription = createThunkAction(
     const { userSelection } = subscriptions;
     const {
       datasets,
-      area: {
-        id: areaId,
-        subscriptions: newSubscriptions,
-      },
+      area: { id: areaId, subscriptions: newSubscriptions },
     } = userSelection;
     const { locale } = common;
     const promises = [];
@@ -280,10 +277,12 @@ export const updateSubscription = createThunkAction(
     const oldDatasets = newSubscriptions.map((s) => ({
       subscription: {
         id: s.id,
-        ...datasets.filter((d) => d.id === s.datasets[0].id).map((_d) => ({
-          threshold: _d.threshold,
-          type: _d.subscriptions[0].value,
-        }))[0],
+        ...datasets
+          .filter((d) => d.id === s.datasets[0].id)
+          .map((_d) => ({
+            threshold: _d.threshold,
+            type: _d.subscriptions[0].value,
+          }))[0],
       },
       datasetId: s.datasets[0].id,
     }));
@@ -292,7 +291,9 @@ export const updateSubscription = createThunkAction(
     const newDatasetsIds = datasets.map((d) => d.id);
 
     // Removed datasets
-    const removedDatasetsIds = oldDatasetsIds.filter((dId) => !newDatasetsIds.find((e) => e === dId));
+    const removedDatasetsIds = oldDatasetsIds.filter(
+      (dId) => !newDatasetsIds.find((e) => e === dId),
+    );
     const removedDatasets = oldDatasets.filter(
       (d) => !!removedDatasetsIds.find((e) => d.datasetId === e),
     );

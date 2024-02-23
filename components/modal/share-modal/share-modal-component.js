@@ -31,10 +31,10 @@ class ShareModalComponent extends PureComponent {
     links: {},
     loading: true,
     analytics: {
-      facebook: () => {},
-      twitter: () => {},
-      email: () => {},
-      copy: () => {},
+      facebook: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+      twitter: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+      email: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+      copy: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
     },
   };
 

@@ -5,14 +5,14 @@ import classnames from 'classnames';
 import Icon from 'components/ui/icon';
 
 export default function CardIndicator({
-                                        id,
-                                        icon,
-                                        title,
-                                        onClickCard,
-                                        theme,
-                                        isSelected,
-                                        className,
-                                      }) {
+  id,
+  icon,
+  title,
+  onClickCard,
+  theme,
+  isSelected,
+  className,
+}) {
   return (
     <button
       type="button"

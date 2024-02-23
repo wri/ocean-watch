@@ -61,29 +61,29 @@ export interface MapProps extends InteractiveMapProps {
 }
 
 export const Map = ({
-                      children,
-                      className,
-                      viewport,
-                      bounds,
-                      basemap = 'dark',
-                      labels = 'light',
-                      boundaries = false,
-                      onMapReady,
-                      onMapLoad,
-                      onMapViewportChange,
-                      dragPan,
-                      dragRotate,
-                      scrollZoom,
-                      touchZoom,
-                      touchRotate,
-                      doubleClickZoom,
-                      width = '100%',
-                      height = '100%',
-                      onFitBoundsChange,
-                      getCursor,
-                      attributions,
-                      ...mapboxProps
-                    }: MapProps): JSX.Element => {
+  children,
+  className,
+  viewport,
+  bounds,
+  basemap = 'dark',
+  labels = 'light',
+  boundaries = false,
+  onMapReady,
+  onMapLoad,
+  onMapViewportChange,
+  dragPan,
+  dragRotate,
+  scrollZoom,
+  touchZoom,
+  touchRotate,
+  doubleClickZoom,
+  width = '100%',
+  height = '100%',
+  onFitBoundsChange,
+  getCursor,
+  attributions,
+  ...mapboxProps
+}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null);
 

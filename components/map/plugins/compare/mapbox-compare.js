@@ -8,14 +8,14 @@ class MapboxCompare extends PureComponent {
     swiper: PropTypes.object,
     leftRef: PropTypes.object,
     rightRef: PropTypes.object,
-  }
+  };
 
   static defaultProps = {
     options: {},
     swiper: null,
     leftRef: null,
     rightRef: null,
-  }
+  };
 
   componentDidMount() {
     this._swiper = this.props.swiper ? this.props.swiper.current : null;
@@ -43,7 +43,9 @@ class MapboxCompare extends PureComponent {
   }
 
   _init = () => {
-    const { options: { swiper } } = this.props;
+    const {
+      options: { swiper },
+    } = this.props;
     const swiperPosition = (this._horizontal ? this._bounds.height : this._bounds.width) / 2;
     this._setPosition(swiperPosition);
 
@@ -61,11 +63,11 @@ class MapboxCompare extends PureComponent {
       const { offset } = swiper;
       this._swiper.style.height = `calc(100% - ${offset}px)`;
     }
-  }
+  };
 
   _setPointerEvents = (v) => {
     this._swiper.style.pointerEvents = v;
-  }
+  };
 
   _onDown = (evt) => {
     if (evt.touches) {
@@ -75,15 +77,11 @@ class MapboxCompare extends PureComponent {
       document.addEventListener('mousemove', this._onMove);
       document.addEventListener('mouseup', this._onMouseUp);
     }
-  }
+  };
 
   _setPosition = (x) => {
-    const _x = Math.min(x, this._horizontal
-      ? this._bounds.height
-      : this._bounds.width);
-    const pos = this._horizontal
-      ? `translate(0, ${x}px)`
-      : `translate(${x}px, 0)`;
+    const _x = Math.min(x, this._horizontal ? this._bounds.height : this._bounds.width);
+    const pos = this._horizontal ? `translate(0, ${x}px)` : `translate(${x}px, 0)`;
     this._swiper.style.transform = pos;
     this._swiper.style.left = 0;
     const clip = this._horizontal
@@ -91,7 +89,7 @@ class MapboxCompare extends PureComponent {
       : `rect(0, 999em, ${this._bounds.height}px, ${x}px)`;
     this._rightRef.getContainer().style.clip = clip;
     this.currentPosition = _x;
-  }
+  };
 
   _onMove = (evt) => {
     if (this.options && this.options.mousemove) {
@@ -100,23 +98,23 @@ class MapboxCompare extends PureComponent {
 
     if (this._horizontal) this._setPosition(this._getY(evt));
     else this._setPosition(this._getX(evt));
-  }
+  };
 
   _onMouseUp = () => {
     document.removeEventListener('mousemove', this._onMove);
     document.removeEventListener('mouseup', this._onMouseUp);
     this.fire('slideend', { currentPosition: this.currentPosition });
-  }
+  };
 
   _onTouchEnd = () => {
     document.removeEventListener('touchmove', this._onMove);
     document.removeEventListener('touchend', this._onTouchEnd);
-  }
+  };
 
   _onResize = () => {
     this._bounds = this._rightRef.getContainer().getBoundingClientRect();
     if (this.currentPosition) this._setPosition(this.currentPosition);
-  }
+  };
 
   _getX = (e) => {
     const _e = e.touches ? e.touches[0] : e;
@@ -124,7 +122,7 @@ class MapboxCompare extends PureComponent {
     if (x < 0) x = 0;
     if (x > this._bounds.width) x = this._bounds.width;
     return x;
-  }
+  };
 
   _getY = (e) => {
     const _e = e.touches ? e.touches[0] : e;
@@ -132,22 +130,22 @@ class MapboxCompare extends PureComponent {
     if (y < 0) y = 0;
     if (y > this._bounds.height) y = this._bounds.height;
     return y;
-  }
+  };
 
   on = (type, fn) => {
     this._ev.on(type, fn);
     return this;
-  }
+  };
 
   fire = (type, data) => {
     this._ev.emit(type, data);
     return this;
-  }
+  };
 
   off = (type, fn) => {
     this._ev.removeListener(type, fn);
     return this;
-  }
+  };
 
   render() {
     return null;

@@ -14,10 +14,10 @@ export interface CollectionPanelItemProps {
 }
 
 const CollectionPanelItem = ({
-                               collection,
-                               isChecked,
-                               onToggleCollection,
-                             }: CollectionPanelItemProps): JSX.Element => {
+  collection,
+  isChecked,
+  onToggleCollection,
+}: CollectionPanelItemProps): JSX.Element => {
   const onCheck = useCallback(
     (evt) => {
       const newIsChecked = evt.currentTarget.checked;

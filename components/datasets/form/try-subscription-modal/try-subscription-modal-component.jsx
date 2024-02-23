@@ -24,9 +24,7 @@ class TrySubscriptionModal extends PureComponent {
   }
 
   render() {
-    const {
-      data, loading, error, query,
-    } = this.props;
+    const { data, loading, error, query } = this.props;
 
     return (
       <div className="c-try-subscription-modal">
@@ -43,7 +41,6 @@ class TrySubscriptionModal extends PureComponent {
         >
           {Code}
         </Field>
-
       </div>
     );
   }

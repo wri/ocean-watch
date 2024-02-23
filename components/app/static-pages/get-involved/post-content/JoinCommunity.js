@@ -63,12 +63,13 @@ class JoinCommunity extends PureComponent {
           <div className="l-container">
             <div className="row align-center">
               <div className="column small-12">
-                <Banner className="-text-center" bgImage="/static/images/backgrounds/bg-partner-maryland.jpg">
+                <Banner
+                  className="-text-center"
+                  bgImage="/static/images/backgrounds/bg-partner-maryland.jpg"
+                >
                   <p className="-claim">
                     Let&rsquo;s build a more sustainable
-                    <br />
-                    {' '}
-                    world together.
+                    <br /> world together.
                   </p>
                   <Link href="/about/partners">
                     <a className="c-btn -primary -alt">Partners</a>

@@ -4,10 +4,8 @@ import LoginModal from './component';
 
 export default function LoginModalContainer() {
   const {
-    query: {
-      callbackUrl,
-    },
+    query: { callbackUrl },
   } = useRouter();
 
-  return (<LoginModal callbackUrl={callbackUrl} />);
+  return <LoginModal callbackUrl={callbackUrl} />;
 }
