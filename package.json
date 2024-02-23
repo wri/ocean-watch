@@ -31,7 +31,7 @@
     "@widget-editor/renderer": "2.7.2",
     "@widget-editor/rw-adapter": "2.7.2",
     "@widget-editor/widget-editor": "2.7.2",
-    "axios": "^0.21.2",
+    "axios": "^0.21.1",
     "basic-auth": "1.1.0",
     "bitly": "^7.1.2",
     "body-parser": "1.16.0",
