@@ -1,0 +1,45 @@
+.l-content {
+  $header-main-height: 75px;
+
+  position: relative;
+  // min-height: calc(100vh - #{$header-main-height});
+
+  &.-dark {
+    background-color: #242426;
+  }
+
+  .l-content-header {
+    padding: $margin-size-extra-small 0;
+    background-color: $porcelain;
+    text-align: center;
+
+    p {
+      line-height: 1.33;
+      color: $dove-grey;
+      max-width: 80%;
+      margin: 1rem auto;
+
+      @media screen and (min-width: map-get($breakpoints, medium)) {
+        font-size: $font-size-big;
+      }
+    }
+  }
+
+  .l-content-body {
+    padding: $margin-size 0;
+
+    @media screen and (min-width: map-get($breakpoints, medium)) {
+      padding: 100px 0;
+    }
+
+    .l-container {
+      & + .l-container {
+        margin-top: $margin-size;
+
+        @media screen and (min-width: map-get($breakpoints, medium)) {
+          margin-top: 100px;
+        }
+      }
+    }
+  }
+}

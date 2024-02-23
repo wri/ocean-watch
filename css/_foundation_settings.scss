@@ -1,0 +1,30 @@
+// 1. Global (related with grid)
+// -----------------------------
+
+$global-width: 1080px;
+
+// 2. Breakpoints
+// --------------
+
+$breakpoints: (
+  small: 0,
+  medium: 780px,
+  large: 1024px,
+  xlarge: 1260px,
+  xxlarge: 1560px,
+);
+$print-breakpoint: large;
+$breakpoint-classes: (small medium large xlarge xxlarge);
+
+// 3. The Grid
+// -----------
+
+$grid-row-width: $global-width;
+$grid-column-count: 12;
+$grid-column-gutter: (
+  small: 20px,
+  medium: 20px,
+);
+$grid-column-align-edge: true;
+$grid-column-alias: 'columns';
+$block-grid-max: 8;

@@ -1,0 +1,43 @@
+.c-datasets-card {
+  // Colors
+  $dark-pink: #c32d7b;
+  $sea-blue: #3bb2d0;
+  $porcelain: #f4f5f6;
+  $white: #fff;
+  $black: #000;
+  $blue-grey: #e3e4e6;
+  $color-13: #e23035;
+  $color-14: #65b60d;
+
+  $border-color-1: #e3e4e6;
+  $border-color-2: #ccc;
+
+  $charcoal-grey: #393f44;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid $border-color-1;
+  cursor: pointer;
+
+  &:hover {
+    background: $porcelain;
+  }
+
+  &.-selected {
+    background: $porcelain;
+  }
+
+  h3 {
+    font-size: 16px;
+    color: $sea-blue;
+    margin: 0;
+  }
+
+  p {
+    color: $charcoal-grey;
+    margin: 0;
+  }
+}

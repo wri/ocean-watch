@@ -1,0 +1,19 @@
+.c-we-chart {
+  width: 100%;
+  // height: 100%;
+  height: 150px; // We should remove this...
+
+  .chart {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+
+    .vega {
+      canvas {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+}

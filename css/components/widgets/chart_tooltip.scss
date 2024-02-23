@@ -1,0 +1,34 @@
+.c-we-chart-tooltip {
+    display: flex;
+    font-size: $font-size-normal;
+
+  > .labels,
+  > .values {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    span {
+      display: block;
+
+      & + span {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  > .labels {
+    margin-right: 20px;
+    color: $dove-grey;
+  }
+
+  > .values {
+    font-weight: $font-weight-bold;
+    color: $charcoal-grey;
+
+    span:first-of-type {
+      font-size: $font-size-extra-big;
+    }
+  }
+}

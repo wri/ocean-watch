@@ -1,0 +1,107 @@
+.c-widget-chart {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  @media screen and (min-width: map-get($breakpoints, medium)) {
+    padding: 20px;
+  }
+
+
+  // These following styles are used in MY RW,
+  // specifically in "My Widgets"
+  .c-we-chart {
+    // The pie and bar chart will overflow without
+    // this property because they auto determine the
+    // space they need
+    height: auto;
+    // For the other charts, we need a minimum height
+    // and to make the container "flex" so we force the
+    // chart to use at least the min-height
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    // In case of a bar chart with scrolling, we need
+    // to use an overflow
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+
+    .chart {
+      // For smaller charts than the 300px, we center them
+      // both vertically and horizontally
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      // This is needed for the scatter and 1d_* charts
+      // in order to take the whole 300px vertically
+      flex-basis: 100%;
+      flex-grow: 1;
+
+      .vega {
+        display: flex;
+        // We can't justify the content at the center because
+        // bar charts that are really wide will be cut on each
+        // side
+        justify-content: flex-start;
+
+        canvas {
+          display: block; // Mandatory to avoid a gap below it
+        }
+      }
+    }
+  }
+
+  // These styles are used in the Explore page
+  // (the list of datasets) and My RW > Widgets
+  // when in grid mode
+  &.-grid {
+    max-height: 150px;
+
+    .c-we-chart {
+      display: block;
+      height: 130px;
+      min-height: 130px; // Override a rule above
+
+      .chart {
+        display: block;
+        height: 100%;
+      }
+
+      &.-no-preview {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .c-text-chart {
+      height: 160px;
+      text-decoration: none;
+    }
+  }
+
+  // These styles are used in My RW to display
+  // the map widgets
+  &.-map {
+    min-height: 300px;
+
+    &.-grid {
+      min-height: 100px;
+    }
+  }
+
+  // These styles are used in My RW to display
+  // the embed widgets
+  &.-embed {
+    display: flex;
+    align-items: stretch;
+    min-height: 300px;
+
+    iframe {
+      width: 100%;
+    }
+  }
+}

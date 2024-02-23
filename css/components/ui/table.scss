@@ -1,0 +1,167 @@
+$table-column-padding: 10px;
+$table-font-size: $font-size-small;
+
+.c-table {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+
+  .table, table {
+    border-collapse: separate;
+    border-spacing:0;
+    width: 100%;
+    padding: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    border-top: 1px solid $border-color-1;
+    border-left: 1px solid $border-color-1;
+    border-right: 1px solid $border-color-1;
+
+    font-size: $table-font-size;
+
+    li {
+      list-style: none;
+    }
+
+    // thead, tbody, tfoot {
+    //   border-top: 1px solid $border-color-1;
+    //   border-left: 1px solid $border-color-1;
+    //   border-right: 1px solid $border-color-1;
+    // }
+
+    // tbody {
+    //   border-bottom: 1px solid $border-color-1;
+    // }
+
+    td, th {
+      border-bottom: 1px solid $border-color-1;
+    }
+
+    thead {
+      background-color: $white;
+
+      th {
+        position: relative;
+        font-size: $table-font-size;
+        color: $charcoal-grey;
+        font-weight: bold;
+        white-space: nowrap;
+
+        padding: $table-column-padding;
+
+        .filter-action {
+          fill: $light-grey;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        background-color: $white;
+
+        &.-selected {
+          // background-color: $sea-blue;
+        }
+      }
+
+      td {
+        width: 100%; // It will force the tds to be expanded along the table
+        padding: $table-column-padding;
+      }
+
+      .individual-actions {
+        > ul {
+          display: inline-flex;
+          margin: 0;
+          padding: 0;
+
+          > li {
+            margin-right: 20px;
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .th-wrapper {
+    display: flex;
+    align-items: flex-end;
+
+    ul {
+      display: flex;
+      margin: 0;
+      padding: 0;
+      margin-left: 10px;
+    }
+  }
+
+  .table-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $space-1;
+    margin-top: 10px;
+  }
+
+  .c-paginator {
+    margin-bottom: 20px;
+  }
+
+  // CUSTOM TDs
+  // Main
+  td.main {
+    color: $charcoal-grey;
+    font-weight: 700;
+    min-width: 200px;
+
+    a {
+      color: $charcoal-grey;
+      text-decoration: none;
+
+      &:hover {
+        color: darken($charcoal-grey, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Status
+  td.status {
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 5px;
+      margin-bottom: 1px;
+    }
+
+    &.-success,
+    &.-saved,
+    &.-completed {
+      color: $color-14;
+      &:before { background-color: $color-14; }
+    }
+
+    &.-pending {
+      color: $light-grey;
+      &:before { background-color: $light-grey; }
+    }
+
+    &.-failed {
+      color: $yellow;
+      &:before { background-color: $yellow; }
+    }
+
+    &.-deleted {
+      color: $color-13;
+      &:before { background-color: $color-13; }
+    }
+  }
+}
