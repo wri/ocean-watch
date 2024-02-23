@@ -1,0 +1,13 @@
+@import 'css/settings';
+
+.c-explore-favorites {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0 (4 * $space) (2 * $space) (3 * $space);
+
+  .message {
+    text-align: center;
+  }
+}

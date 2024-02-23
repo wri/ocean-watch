@@ -1,0 +1,40 @@
+@import 'css/settings';
+
+.c-explore-detail-header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: (2 * $space) (8 * $space);
+  background: transparent;
+  pointer-events: none;
+
+  button {
+    pointer-events: all;
+  }
+
+  .all-datasets-button {
+    .c-icon {
+      height: 10px;
+    }
+  }
+
+  .right-buttons {
+    display: flex;
+
+    > button {
+      &:not(:first-child) {
+        margin: 0 0 0 ($space * 2);
+      }
+    }
+
+    .share-button {
+      .c-icon {
+        height: 13px;
+      }
+    }
+  }
+}

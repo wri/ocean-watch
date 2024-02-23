@@ -1,0 +1,20 @@
+{
+  "presets": [
+    "next/babel"
+  ],
+  "env": {
+    "test": {
+      "plugins": ["istanbul"],
+      "presets": [
+        [
+          "next/babel",
+          {
+            "preset-env": {
+              "modules": "commonjs"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@use "sass:math";
+
+// Related content
+.c-related-content {
+  > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    > li {
+      margin: 0 0 0 $space-1;
+      &:first-child { margin: 0; }
+
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: $charcoal-grey;
+        fill: $charcoal-grey;
+        padding: math.div($space-1, 2) 6px;
+        border-radius: 4px;
+        font-size: $font-size-normal;
+        cursor: pointer;
+
+        > * {
+          margin: 0 0 0 math.div($space-1, 2);
+          &:first-child { margin: 0; }
+        }
+
+        &.-empty {
+          color: $white;
+          fill: $white;
+          background: $yellow;
+        }
+
+        &:hover {
+          color: $white;
+          fill: $white;
+          background: $charcoal-grey;
+        }
+      }
+
+      &.-is-disabled {
+        > a {
+          pointer-events: none;
+          cursor: default;
+          color: rgba($charcoal-grey, .3);
+
+          > svg {
+            fill: rgba($charcoal-grey, .3);
+          }
+        }
+      }
+    }
+  }
+}

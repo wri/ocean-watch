@@ -1,0 +1,16 @@
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+// ! Required to draw on the map.
+.map-overlays-no-pointer-events {
+  .overlays {
+    pointer-events: none;
+  }
+}
+
+.compare-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}

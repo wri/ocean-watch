@@ -1,0 +1,182 @@
+@use "sass:math";
+
+.c-field {
+  margin-bottom: 20px;
+
+  // temporary...
+  &-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  label, .label {
+    display: block;
+    position: relative;
+    min-height: 23px;
+    margin-bottom: 5px;
+
+    font-size: $font-size-small;
+    color: $charcoal-grey;
+    font-weight: 700;
+    line-height: 1.8; // Prevent style issues with inline loaders
+
+    background: none;
+
+    .c-spinner {
+      vertical-align: middle; // Prevent style issues (shifting/jumping content)
+      margin-left: 5px;
+    }
+  }
+
+  &__helpMessage {
+    display: block;
+    font-size: 13px;
+    color: #989898;
+    position: relative;
+    top: -15px;
+  }
+
+  &__map {
+    margin: 20px 0 0 0;
+    &--container {
+      display: inline-block;
+      height: 410px;
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  .hint {
+    font-style: italic;
+    padding: 0 0 5px;
+    font-size: 12px;
+    margin: 0;
+
+    ul {
+      list-style: disc;
+      margin-left: 20px;
+    }
+  }
+
+  .error {
+    color: $color-13;
+    margin: 3px 0 0;
+    font-size: 12px;
+  }
+
+  .field-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > input,
+    > textarea,
+    > select,
+    .input {
+      display: inline-block;
+      box-shadow: none;
+      outline: none;
+      font-size: $font-size-medium;
+      padding: math.div($margin-size-extra-small, 2) 10px;
+      margin: 0;
+      width: 100%;
+
+      font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans;
+      font-size: $font-size-normal;
+      color: $charcoal-grey;
+
+      border-radius: 4px;
+      border: 1px solid $border-color-2;
+    }
+
+    // I don't know why are we using height attribute... For me this is completely wrong
+    // https://github.com/resource-watch/resource-watch/commit/d9f7325a02b81366db3b067009e87808e158d8cf
+    // https://github.com/resource-watch/resource-watch/blob/d9f7325a02b81366db3b067009e87808e158d8cf/css/components/form/field.scss#L41
+    > input,
+    > select,
+    .input {
+      height: 45px;
+    }
+
+    > input::placeholder,
+    > textarea::placeholder,
+    > select::placeholder,
+    .input::placeholder {
+      color: rgba($charcoal-grey, .6);
+    }
+  }
+
+  .Select {
+    &--large {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  /**
+   * STATES
+   * -fluid
+   * -valid
+   * -error
+  */
+  &.-fluid {
+    width: 100%;
+
+    .field-container {
+      > input,
+      > textarea,
+      > select,
+      .input,
+      .Select {
+        width: 100%;
+        max-width: none;
+      }
+    }
+  }
+
+  &.-log-in {
+    margin: 30px 0;
+  }
+
+  &.-disabled {
+    .field-container {
+      > input,
+      > textarea,
+      > select,
+      .input,
+      .Select {
+        background: $porcelain;
+      }
+    }
+  }
+
+  &.-error {
+    .field-container {
+      > input,
+      > textarea,
+      > select,
+      .input,
+      .Select-control {
+        border-color: $color-13;
+      }
+    }
+  }
+
+  &.-pi-hidden {
+      position: absolute;
+      width: 190px;
+      left: -9999px;
+      top: -9999px;
+      visibility: hidden;
+  }
+
+  &.-disabled {
+    > .field-container {
+      > input {
+        border-color: rgba($border-color-2, .3);
+        color:  rgba($charcoal-grey, .3);
+        background: transparent;
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+import { createAction, createThunkAction } from 'redux-tools';
+
+import { fetchDatasets } from 'services/dataset';
+
+/**
+ * CONSTANTS
+ */
+const GET_DATASETS_SUCCESS = 'datasets/getDatasetsSuccess';
+const GET_DATASETS_ERROR = 'datasets/getDatasetsError';
+const GET_DATASETS_LOADING = 'datasets/getDatasetsLoading';
+const SET_DATASETS_FILTERS = 'datasets/getDatasetsFilters';
+const SET_DATASETS_ORDER_DIRECTION = 'datasets/setOrderDirection';
+const SET_DATASETS_PAGINATION_PAGE = 'datasets/setDatasetsPaginationPage';
+const SET_DATASETS_PAGINATION_TOTAL = 'datasets/setDatasetsPaginationTotal';
+const SET_DATASETS_PAGINATION_LIMIT = 'datasets/setDatasetsPaginationLimit';
+const RESET_DATASETS = 'datasets/resetDatasets';
+
+/**
+ * STORE
+ * @property {string} datasets.error
+ * @property {{ key: string, value: string|number }[]} datasets.filters
+ */
+const initialState = {
+  datasets: {
+    list: [], // Actual list of datasets
+    loading: false, // Are we loading the data?
+    error: null, // An error was produced while loading the data
+    filters: [], // Filters for the list of datasets
+    orderDirection: 'desc', // sort's direction of the list
+    pagination: {
+      page: 1, // current page of the pagination
+      total: 0, // total items to be paginated
+      limit: 9, // size of the pagination
+    },
+  },
+};
+
+/**
+ * REDUCER
+ * @export
+ * @param {initialState} state
+ * @param {{ type: string, payload: any }} action
+ */
+export default function Datasets(state = initialState, action) {
+  switch (action.type) {
+    case GET_DATASETS_LOADING: {
+      const datasets = {
+        ...state.datasets,
+        loading: true,
+        error: null,
+      };
+      return { ...state, datasets };
+    }
+
+    case GET_DATASETS_SUCCESS: {
+      const datasets = {
+        ...state.datasets,
+        list: action.payload,
+        loading: false,
+        error: null,
+      };
+      return { ...state, datasets };
+    }
+
+    case GET_DATASETS_ERROR: {
+      const datasets = {
+        ...state.datasets,
+        loading: false,
+        error: action.payload,
+      };
+      return { ...state, datasets };
+    }
+
+    case SET_DATASETS_FILTERS: {
+      const datasets = { ...state.datasets, filters: action.payload };
+      return { ...state, datasets };
+    }
+
+    case SET_DATASETS_ORDER_DIRECTION: {
+      return { ...state, datasets: { ...state.datasets, orderDirection: action.payload } };
+    }
+
+    case SET_DATASETS_PAGINATION_PAGE: {
+      return {
+        ...state,
+        datasets: {
+          ...state.datasets,
+          pagination: {
+            ...state.datasets.pagination,
+            page: action.payload,
+          },
+        },
+      };
+    }
+
+    case SET_DATASETS_PAGINATION_TOTAL: {
+      return {
+        ...state,
+        datasets: {
+          ...state.datasets,
+          pagination: {
+            ...state.datasets.pagination,
+            total: action.payload,
+          },
+        },
+      };
+    }
+
+    case SET_DATASETS_PAGINATION_LIMIT: {
+      return {
+        ...state,
+        datasets: {
+          ...state.datasets,
+          pagination: {
+            ...state.datasets.pagination,
+            limit: action.payload,
+          },
+        },
+      };
+    }
+
+    case RESET_DATASETS: {
+      const datasets = {
+        ...state.datasets,
+        list: [],
+        loading: false,
+        error: null,
+      };
+      return { ...state, datasets };
+    }
+
+    default:
+      return state;
+  }
+}
+
+/**
+ * ACTIONS
+ */
+export const setFilters = createAction(SET_DATASETS_FILTERS);
+export const setOrderDirection = createAction(SET_DATASETS_ORDER_DIRECTION);
+export const setPaginationPage = createAction(SET_DATASETS_PAGINATION_PAGE);
+export const setPaginationTotal = createAction(SET_DATASETS_PAGINATION_TOTAL);
+export const setPaginationLimit = createAction(SET_DATASETS_PAGINATION_LIMIT);
+export const resetDatasets = createAction(RESET_DATASETS);
+
+export const getAllDatasets = createThunkAction(
+  'datasets/getAllDatasets',
+  (options) => (dispatch, getState) => {
+    dispatch({ type: GET_DATASETS_LOADING });
+    const { user } = getState();
+    return fetchDatasets(
+      { ...options.filters, includes: options.includes },
+      {
+        Authorization: user.token,
+        'Upgrade-Insecure-Requests': 1,
+      },
+      true,
+    )
+      .then((result) => {
+        const { datasets, meta } = result;
+        const { 'total-items': totalItems } = meta;
+
+        dispatch({
+          type: GET_DATASETS_SUCCESS,
+          payload: datasets,
+        });
+        dispatch(setPaginationTotal(totalItems));
+      })
+      .catch((err) => {
+        dispatch({ type: GET_DATASETS_ERROR, payload: err.message });
+      });
+  },
+);
+
+export const getDatasetsByTab = createThunkAction(
+  'datasets/getDatasetsByTab',
+  (tab) => (dispatch, getState) => {
+    const { user, datasets } = getState();
+    const { id } = user;
+    const { orderDirection, pagination, filters } = datasets.datasets;
+    const { page, limit } = pagination;
+    let options = {
+      filters: {
+        'page[size]': limit,
+        'page[number]': page,
+        sort: orderDirection === 'asc' ? 'updatedAt' : '-updatedAt',
+        name: (filters.find((filter) => filter.key === 'name') || {}).value,
+      },
+      includes: ['widget', 'layer', 'metadata', 'vocabulary'].join(','),
+    };
+
+    switch (tab) {
+      // when the user asks for a its own datasets...
+      case 'my_datasets':
+        options = {
+          ...options,
+          filters: {
+            ...options.filters,
+            userId: id,
+          },
+        };
+
+        break;
+
+      // when the user asks for its favorites datasets...
+      case 'favorites':
+        options = {
+          ...options,
+          filters: {
+            ...options.filters,
+            favourite: true,
+          },
+        };
+        break;
+
+      // when the user asks for a specific collection...
+      default:
+        options = {
+          ...options,
+          filters: {
+            ...options.filters,
+            collection: tab,
+          },
+        };
+    }
+
+    dispatch(getAllDatasets({ ...options }));
+  },
+);

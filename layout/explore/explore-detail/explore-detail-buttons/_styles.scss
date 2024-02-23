@@ -1,0 +1,20 @@
+@import 'css/settings';
+
+.c-explore-detail-buttons {
+    width: 100%;
+    margin: ($space * 6) 0;
+
+    > .dataset-actions {
+      display: flex;
+      justify-content: space-between;
+      margin: ($space * 4) 0 0;
+
+      > *:not(:first-child) {
+        margin: 0 0 0 ($space * 2);
+      }
+
+      button {
+        flex: 1;
+      }
+    }
+}
