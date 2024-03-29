@@ -119,7 +119,7 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
                     </h4>
                     <a
                       className="c-button -alt -primary"
-                      href="https://resourcewatch.org/dashboards/coral-reef-dashboards"
+                      href="/dashboards/coral-reef-dashboards"
                     >
                       Coral Reefs
                     </a>
