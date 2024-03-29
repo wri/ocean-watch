@@ -509,7 +509,7 @@ export default function OceanWatchCountryProfilePage({ iso }) {
                 <p className="-claim">Check out the Coral Reefs dashboards</p>
                 <a
                   className="c-button -alt -primary"
-                  href="https://resourcewatch.org/dashboards/coral-reef-dashboards"
+                  href="/dashboards/coral-reef-dashboards"
                 >
                   Coral Reefs
                 </a>
@@ -600,7 +600,7 @@ export default function OceanWatchCountryProfilePage({ iso }) {
                   <br />
                   on the Explore page
                 </p>
-                <Link href='/data/explore?section=All data&topics=["ocean"]'>
+                <Link href='https://resourcewatch.org/data/explore?section=All data&topics=["ocean"]'>
                   <a className="c-button -alt -primary">Go to explore</a>
                 </Link>
               </Banner>
