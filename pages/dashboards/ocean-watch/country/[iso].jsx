@@ -507,10 +507,7 @@ export default function OceanWatchCountryProfilePage({ iso }) {
                 bgImage="/static/images/pages/app/banner-coral.jpg"
               >
                 <p className="-claim">Check out the Coral Reefs dashboards</p>
-                <a
-                  className="c-button -alt -primary"
-                  href="/dashboards/coral-reef-dashboards"
-                >
+                <a className="c-button -alt -primary" href="/dashboards/coral-reef-dashboards">
                   Coral Reefs
                 </a>
               </Banner>
