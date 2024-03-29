@@ -1,4 +1,4 @@
-import { RESOURCE_TYPES } from '../rw/resource-watch/types';
+import { RESOURCE_TYPES } from 'types';
 
 export interface Favorite {
   id: string;
