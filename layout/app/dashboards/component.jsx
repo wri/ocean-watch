@@ -1,7 +1,4 @@
-import {
-  useCallback,
-  useMemo,
-} from 'react';
+import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -13,62 +10,54 @@ import Banner from 'components/app/common/Banner';
 import LoginRequired from 'components/ui/login-required';
 
 // hooks
-import {
-  useFeaturedDashboards,
-  useHighlightedDashboards,
-} from 'hooks/dashboard';
+import { useFeaturedDashboards, useHighlightedDashboards } from 'hooks/dashboard';
 
-export default function LayoutDashboards({
-  dataPage,
-}) {
+export default function LayoutDashboards({ dataPage }) {
   const router = useRouter();
   const styles = useMemo(() => {
-    if (dataPage?.photo?.cover) return ({ backgroundImage: `url(${dataPage.photo.cover})` });
-    return ({});
+    if (dataPage?.photo?.cover) return { backgroundImage: `url(${dataPage.photo.cover})` };
+    return {};
   }, [dataPage]);
 
-  const onSelectDashboard = useCallback(({ slug }) => {
-    router.push(`/dashboards/${slug}`);
-  }, [router]);
+  const onSelectDashboard = useCallback(
+    ({ slug }) => {
+      router.push(`/dashboards/${slug}`);
+    },
+    [router],
+  );
 
-  const {
-    data: featuredDashboards,
-  } = useFeaturedDashboards({ env: process.env.NEXT_PUBLIC_ENVS_SHOW }, {
-    select: (_dashboards) => _dashboards.map(({
-      name,
-      slug,
-      photo,
-      user,
-    }) => ({
-      name: slug === 'ocean' ? 'Ocean Watch' : name,
-      slug: slug === 'ocean' ? 'ocean-watch' : slug,
-      photo,
-      user,
-    })),
-    placeholderData: [],
-    refetchOnWindowFocus: false,
-  });
+  const { data: featuredDashboards } = useFeaturedDashboards(
+    { env: process.env.NEXT_PUBLIC_ENVS_SHOW },
+    {
+      select: (_dashboards) =>
+        _dashboards.map(({ name, slug, photo, user }) => ({
+          name: slug === 'ocean' ? 'Ocean Watch' : name,
+          slug: slug === 'ocean' ? 'ocean-watch' : slug,
+          photo,
+          user,
+        })),
+      placeholderData: [],
+      refetchOnWindowFocus: false,
+    },
+  );
 
-  const {
-    data: highlightedDashboards,
-  } = useHighlightedDashboards({
-    include: 'user',
-    env: process.env.NEXT_PUBLIC_ENVS_SHOW,
-  }, {
-    select: (_dashboards) => _dashboards.map(({
-      name,
-      slug,
-      photo,
-      user,
-    }) => ({
-      name,
-      slug,
-      photo,
-      user,
-    })),
-    placeholderData: [],
-    refetchOnWindowFocus: false,
-  });
+  const { data: highlightedDashboards } = useHighlightedDashboards(
+    {
+      include: 'user',
+      env: process.env.NEXT_PUBLIC_ENVS_SHOW,
+    },
+    {
+      select: (_dashboards) =>
+        _dashboards.map(({ name, slug, photo, user }) => ({
+          name,
+          slug,
+          photo,
+          user,
+        })),
+      placeholderData: [],
+      refetchOnWindowFocus: false,
+    },
+  );
 
   return (
     <Layout
@@ -83,7 +72,10 @@ export default function LayoutDashboards({
               <div className="column small-12">
                 <div className="content">
                   <h1>Dashboards</h1>
-                  <p>{dataPage?.summary || 'Find data and visualizations for different topic areas of interest'}</p>
+                  <p>
+                    {dataPage?.summary ||
+                      'Find data and visualizations for different topic areas of interest'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -98,8 +90,8 @@ export default function LayoutDashboards({
               <div className="c-dashboards-subheader-block">
                 <h2>Featured dashboards</h2>
                 <p>
-                  Discover collections of curated data on the major
-                  challenges facing human society and the planet
+                  Discover collections of curated data on the major challenges facing human society
+                  and the planet
                 </p>
               </div>
               <DashboardThumbnailList
@@ -110,7 +102,7 @@ export default function LayoutDashboards({
           </div>
         </div>
       </div>
-      {(highlightedDashboards.length > 0) && (
+      {highlightedDashboards.length > 0 && (
         <div id="dashboardsGallery" className="l-section -small">
           <div className="l-container">
             <div className="row">
@@ -118,8 +110,8 @@ export default function LayoutDashboards({
                 <div className="c-dashboards-subheader-block">
                   <h2>Dashboard gallery</h2>
                   <p>
-                    Browse collections of data and visualizations
-                    developed by the Resource Watch team and partners
+                    Browse collections of data and visualizations developed by the Resource Watch
+                    team and partners
                   </p>
                 </div>
                 <DashboardThumbnailList
@@ -138,20 +130,12 @@ export default function LayoutDashboards({
             <div className="column small-12">
               <Banner className="-text-center">
                 <p className="-claim">
-                  Create and share
-                  {' '}
-                  <br />
+                  Create and share <br />
                   custom visualizations.
                 </p>
                 <LoginRequired>
-                  <Link
-                    href="/myrw/dashboards"
-                  >
-                    <a
-                      className="c-button -alt -primary"
-                    >
-                      Create a dashboard
-                    </a>
+                  <Link href="/myrw/dashboards">
+                    <a className="c-button -alt -primary">Create a dashboard</a>
                   </Link>
                 </LoginRequired>
               </Banner>

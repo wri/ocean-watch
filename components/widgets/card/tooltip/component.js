@@ -11,9 +11,9 @@ class WidgetActionsTooltip extends PureComponent {
     onEditWidget: PropTypes.func.isRequired,
     onDownloadPDF: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
-  }
+  };
 
-  static defaultProps = { widgetLinks: [] }
+  static defaultProps = { widgetLinks: [] };
 
   componentDidMount() {
     document.addEventListener('mousedown', this.triggerMouseDown);
@@ -30,14 +30,8 @@ class WidgetActionsTooltip extends PureComponent {
   };
 
   handleClick = (action) => {
-    const {
-      onEditWidget,
-      onGoToDataset,
-      onShareEmbed,
-      onDownloadPDF,
-      onRemove,
-      toggleTooltip,
-    } = this.props;
+    const { onEditWidget, onGoToDataset, onShareEmbed, onDownloadPDF, onRemove, toggleTooltip } =
+      this.props;
 
     switch (action) {
       case 'edit_widget':
@@ -80,50 +74,32 @@ class WidgetActionsTooltip extends PureComponent {
             </li>
           )}
           <li>
-            <button
-              type="button"
-              onClick={() => this.handleClick('share_embed')}
-            >
+            <button type="button" onClick={() => this.handleClick('share_embed')}>
               Share/Embed
             </button>
           </li>
           {widgetLinks.length === 0 && (
             <li>
-              <button
-                type="button"
-                onClick={() => this.handleClick('go_to_dataset')}
-              >
+              <button type="button" onClick={() => this.handleClick('go_to_dataset')}>
                 Go to dataset
               </button>
             </li>
           )}
           {widgetLinks.map((link) => (
             <li>
-              <a
-                href={link.link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Go to
-                {' '}
-                {link.name}
+              <a href={link.link} target="_blank" rel="noopener noreferrer">
+                Go to {link.name}
               </a>
             </li>
           ))}
           <li>
-            <button
-              type="button"
-              onClick={() => this.handleClick('download_pdf')}
-            >
+            <button type="button" onClick={() => this.handleClick('download_pdf')}>
               Download as PDF
             </button>
           </li>
           {isWidgetOwner && (
             <li>
-              <button
-                type="button"
-                onClick={() => this.handleClick('delete')}
-              >
+              <button type="button" onClick={() => this.handleClick('delete')}>
                 Delete visualization
               </button>
             </li>

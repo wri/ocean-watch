@@ -19,9 +19,11 @@ class LayerChart extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(nextProps.data, this.props.data)
-           || nextState.background !== this.state.background
-           || nextState.basemap !== this.state.basemap;
+    return (
+      !isEqual(nextProps.data, this.props.data) ||
+      nextState.background !== this.state.background ||
+      nextState.basemap !== this.state.basemap
+    );
   }
 
   componentWillUnmount() {
@@ -41,14 +43,17 @@ class LayerChart extends React.Component {
       body: {
         maxzoom: 18,
         minzoom: 3,
-        layers: [{
-          type: 'mapnik',
-          options: {
-            sql: 'SELECT * FROM gadm28_countries',
-            cartocss: '#gadm28_countries{ polygon-fill: #bbbbbb; polygon-opacity: 1; line-color: #FFFFFF; line-width: 0.5; line-opacity: 0.5;}',
-            cartocss_version: '2.3.0',
+        layers: [
+          {
+            type: 'mapnik',
+            options: {
+              sql: 'SELECT * FROM gadm28_countries',
+              cartocss:
+                '#gadm28_countries{ polygon-fill: #bbbbbb; polygon-opacity: 1; line-color: #FFFFFF; line-width: 0.5; line-opacity: 0.5;}',
+              cartocss_version: '2.3.0',
+            },
           },
-        }],
+        ],
       },
     };
 
@@ -132,9 +137,13 @@ class LayerChart extends React.Component {
     return (
       <div className="c-we-chart">
         <div
-          ref={(c) => { this.chart = c; }}
+          ref={(c) => {
+            this.chart = c;
+          }}
           className="chart"
-          style={{ backgroundImage: `url('${this.state.background}') , url('${this.state.basemap}')` }}
+          style={{
+            backgroundImage: `url('${this.state.background}') , url('${this.state.basemap}')`,
+          }}
         />
       </div>
     );
