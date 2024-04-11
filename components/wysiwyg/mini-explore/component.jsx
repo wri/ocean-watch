@@ -28,6 +28,7 @@ export default function MiniExploreBlockWithErrorBoundary(props) {
     <ErrorBoundary
       FallbackComponent={CustomErrorFallback}
       onError={(error) => {
+        // eslint-disable-next-line no-console
         console.error(error.message);
       }}
     >

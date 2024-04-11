@@ -84,6 +84,7 @@ class LayerChart extends React.Component {
             basemap: `https://${response.cdn_url.https}/${basemap.account}/api/v1/map/static/center/${options.token}/${options.z}/${options.lat}/${options.lng}/${options.width}/${options.height}.${options.format}`,
           });
         } else {
+          // eslint-disable-next-line no-console
           console.error('Basemap could not be loaded');
         }
       }
@@ -126,6 +127,7 @@ class LayerChart extends React.Component {
             background: `https://${response.cdn_url.https}/${data.account}/api/v1/map/static/center/${options.token}/${options.z}/${options.lat}/${options.lng}/${options.width}/${options.height}.${options.format}`,
           });
         } else {
+          // eslint-disable-next-line no-console
           console.error('Basemap could not be loaded');
         }
       }

@@ -59,6 +59,7 @@ class DashboardDetail extends PureComponent {
     try {
       items = JSON.parse(content);
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
     }
 

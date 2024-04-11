@@ -13,7 +13,6 @@ import { miniExploreSlice } from '../reducer';
 const { toggleMapLayerGroup, resetMapLayerGroupsInteraction } = miniExploreSlice.actions;
 
 export default function DatasetsSidebarContainer({ datasetGroups, activeDatasets, dispatch }) {
-  const datasetsMap = new Map();
   const datasetIDs = useMemo(
     () => datasetGroups.reduce((acc, group) => [...acc, ...group.datasets], []),
     [datasetGroups],
@@ -52,6 +51,7 @@ export default function DatasetsSidebarContainer({ datasetGroups, activeDatasets
   );
 
   const data = useMemo(() => {
+    const datasetsMap = new Map();
     datasets.forEach((dataset) => {
       datasetsMap.set(dataset.id, {
         ...dataset,
@@ -72,7 +72,7 @@ export default function DatasetsSidebarContainer({ datasetGroups, activeDatasets
         ? group.datasets.map((datasetId) => datasetsMap.get(datasetId))
         : [],
     }));
-  }, [datasets, activeDatasets, datasetsMap, datasetGroups]);
+  }, [datasets, activeDatasets, datasetGroups]);
 
   return <DatasetsSidebar datasetGroups={data} handleAddMap={handleAddMap} />;
 }

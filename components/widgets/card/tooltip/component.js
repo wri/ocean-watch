@@ -50,6 +50,7 @@ class WidgetActionsTooltip extends PureComponent {
         onRemove();
         break;
       default:
+        // eslint-disable-next-line no-console
         console.error('action not supported');
     }
 
