@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormElement from '../../../rw/resource-watch/components/form/FormElement';
+import FormElement from 'components/form/FormElement';
 
 class TextArea extends FormElement {
   /**
