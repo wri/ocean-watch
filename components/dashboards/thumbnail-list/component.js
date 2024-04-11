@@ -11,7 +11,7 @@ class DashboardThumbnailList extends PureComponent {
   };
 
   static defaultProps = {
-    onSelect: () => {},
+    onSelect: () => ({}),
     dashboards: [],
     user: false,
   };

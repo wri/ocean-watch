@@ -10,7 +10,7 @@ class TextChart extends React.Component {
   };
 
   static defaultProps = {
-    toggleLoading: () => {},
+    toggleLoading: () => ({}),
   };
 
   constructor(props) {

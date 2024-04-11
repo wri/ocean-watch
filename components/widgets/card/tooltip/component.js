@@ -86,7 +86,7 @@ class WidgetActionsTooltip extends PureComponent {
             </li>
           )}
           {widgetLinks.map((link) => (
-            <li>
+            <li key={link.name}>
               <a href={link.link} target="_blank" rel="noopener noreferrer">
                 Go to {link.name}
               </a>

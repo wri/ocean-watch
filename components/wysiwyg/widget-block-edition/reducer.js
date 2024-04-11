@@ -10,7 +10,7 @@ import {
   SET_SEARCH,
 } from './actions';
 
-export default (state, { type, payload }) => {
+const widgetBlockEditionReducer = (state, { type, payload }) => {
   switch (type) {
     case SET_WIDGETS:
       return { ...state, widgets: payload };
@@ -35,3 +35,5 @@ export default (state, { type, payload }) => {
       throw new Error('action not found');
   }
 };
+
+export default widgetBlockEditionReducer;
