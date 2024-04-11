@@ -25,9 +25,6 @@ const MiniExploreDatasetsActions = (props) => {
     refetch();
   }, [refetch]);
 
-  const userIsLoggedIn = user?.token;
-  const datasetName = dataset?.metadata[0]?.info?.name;
-
   const starIconName = classnames({
     'icon-star-full': isInACollection,
     'icon-star-empty': !isInACollection,

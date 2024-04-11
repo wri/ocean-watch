@@ -117,12 +117,9 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
                     <h4 className="text-lg font-light text-center text-white md:text-xl md:leading-10 ">
                       Check out the Coral Reefs dashboards
                     </h4>
-                    <a
-                      className="c-button -alt -primary"
-                      href="https://resourcewatch.org/dashboards/coral-reef-dashboards"
-                    >
-                      Coral Reefs
-                    </a>
+                    <Link href="/dashboards/coral-reef-dashboards">
+                      <a className="c-button -alt -primary">Coral Reefs</a>
+                    </Link>
                   </div>
                 </Banner>
               </div>
