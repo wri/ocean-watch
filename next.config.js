@@ -10,7 +10,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer({
   poweredByHeader: false,
-
+  experimental: {
+    outputStandalone: true,
+  },
   eslint: {
     // prevents compilation process to fail due to eslint warnings/errors.
     // todo: fix eslint errors/warnings slowly until we ensure we can remove this option.
