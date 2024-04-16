@@ -120,7 +120,20 @@ jobs:
 
       - name: Install AWS Copilot
         run: |
-          curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot
+          # Create a temporary directory for downloading
+          mkdir -p ${{ runner.temp }}/copilot-download
+
+          # Download the Copilot binary to the temporary directory
+          curl -Lo ${{ runner.temp }}/copilot-download/copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
+
+          # Make the binary executable
+          chmod +x ${{ runner.temp }}/copilot-download/copilot
+
+          # Move the Copilot binary to a directory in PATH
+          sudo mv ${{ runner.temp }}/copilot-download/copilot /usr/local/bin/copilot
+
+          # Optional: Clean up the temporary directory
+          rm -rf ${{ runner.temp }}/copilot-download
 
       - name: Check and Create Environment
         run: |
