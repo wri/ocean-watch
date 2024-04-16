@@ -141,20 +141,12 @@ jobs:
 
       - name: Check and Create Environment
         run: |
-          aws copilot app ls
+          copilot app ls
           if ! copilot env show --name ${{ github.head_ref }} --json | jq -e .name; then
             copilot env init --name ${{ github.head_ref }} --profile default --app ocean-watch --region ${{ secrets.AWS_REGION }}
             copilot env deploy --name ${{ github.head_ref }} --app ocean-watch
           fi
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
 
       - name: Deploy to AWS using Copilot
         run: |
           copilot svc deploy --name nextjs-app --env ${{ github.head_ref }} --image ${{ steps.generate_ghcr_tag.outputs.image }}
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
