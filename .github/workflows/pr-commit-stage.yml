@@ -110,7 +110,7 @@ jobs:
             Image: ${{ steps.generate_ghcr_tag.outputs.image }}
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -141,6 +141,7 @@ jobs:
 
       - name: Check and Create Environment
         run: |
+          aws copilot app ls
           if ! copilot env show --name ${{ github.head_ref }} --json | jq -e .name; then
             copilot env init --name ${{ github.head_ref }} --profile default --app ocean-watch --region ${{ secrets.AWS_REGION }}
             copilot env deploy --name ${{ github.head_ref }} --app ocean-watch
