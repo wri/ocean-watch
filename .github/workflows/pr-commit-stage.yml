@@ -118,6 +118,10 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
           role-duration-seconds: 1800
 
+      - name: DEBUG - Test AWS CLI with assumed role
+        run: |
+          aws sts get-caller-identity
+
       - name: Install AWS Copilot
         run: |
           # Create a temporary directory for downloading
