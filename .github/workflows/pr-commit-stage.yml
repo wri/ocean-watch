@@ -116,6 +116,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
+          role-duration-seconds: 1800
 
       - name: Install AWS Copilot
         run: |
