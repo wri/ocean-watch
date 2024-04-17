@@ -170,7 +170,22 @@ jobs:
 
       - name: Check and Create Environment
         run: |
-          copilot env show --name ${{ github.head_ref }} --json
+          # Check if the environment exists
+          if ! copilot env show --name ${{ github.head_ref }} --json; then
+            echo "Environment does not exist, initializing..."
+            # Initialize environment if it doesn't exist
+            if ! copilot env init --name ${{ github.head_ref }} --profile default --app ocean-watch --region $AWS_REGION; then
+              echo "Failed to initialize environment."
+              exit 1
+            fi
+            # Deploy the new environment
+            if ! copilot env deploy --name ${{ github.head_ref }} --app ocean-watch; then
+              echo "Failed to deploy environment."
+              exit 1
+            fi
+          else
+            echo "Environment already exists."
+          fi
 
   build-and-deploy:
     needs: [test, create-copilot-environment]
