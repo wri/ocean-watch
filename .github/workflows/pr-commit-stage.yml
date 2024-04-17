@@ -174,7 +174,7 @@ jobs:
           if ! copilot env show --name ${{ github.head_ref }} --json; then
             echo "Environment does not exist, initializing..."
             # Initialize environment if it doesn't exist
-            if ! copilot env init --name ${{ github.head_ref }} --profile default --app ocean-watch --region $AWS_REGION; then
+            if ! copilot env init --name ${{ github.head_ref }} --app ocean-watch --default-config --region $AWS_REGION; then
               echo "Failed to initialize environment."
               exit 1
             fi
