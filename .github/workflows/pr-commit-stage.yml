@@ -170,7 +170,17 @@ jobs:
 
       - name: Check and Create Environment
         run: |
-          if ! copilot env show --name ${{ github.head_ref }} --json | jq -e .name > /dev/null; then
+          # First, capture the output of the copilot env show command
+          ENV_OUTPUT=$(copilot env show --name ${{ github.head_ref }} --json || true) # '|| true' ensures the script continues even if the command fails
+
+          # Print the output for debugging
+          echo "DEBUG: Output of copilot env show --json"
+          echo "$ENV_OUTPUT"
+
+          # Use jq to check if the .name field exists
+          if echo "$ENV_OUTPUT" | jq -e .name > /dev/null; then
+            echo "Environment already exists."
+          else
             echo "Environment does not exist, initializing..."
             if ! copilot env init --name ${{ github.head_ref }} --profile default --app ocean-watch --region $AWS_REGION; then
               echo "Failed to initialize environment."
@@ -180,8 +190,6 @@ jobs:
               echo "Failed to deploy environment."
               exit 1
             fi
-          else
-            echo "Environment already exists."
           fi
 
   build-and-deploy:
