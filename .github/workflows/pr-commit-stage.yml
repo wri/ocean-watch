@@ -178,6 +178,7 @@ jobs:
             # Initialize environment if it doesn't exist
             if ! copilot env init --name ${{ github.head_ref }} --app ocean-watch --default-config --region $AWS_REGION --aws-session-token ${{ steps.creds.outputs.aws-session-token }}; then
               echo "Failed to initialize environment."
+              cat copilot/environments/deployment-review-apps/manifest.yml
               exit 1
             fi
             # Deploy the new environment
