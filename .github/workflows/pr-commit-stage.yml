@@ -116,7 +116,7 @@ jobs:
 
       - name: Initialize Copilot application
         if: env.app_exists == 'false'
-        run: copilot app init ocean-watch # Add other initialization parameters as needed
+        run: copilot app init ocean-watch --permissions-boundary arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer # Add other initialization parameters as needed
 
       - name: Setup Git Config
         if: env.app_exists == 'false'
