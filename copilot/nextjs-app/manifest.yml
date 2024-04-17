@@ -2,6 +2,9 @@
 name: nextjs-app
 type: Load Balanced Web Service
 
+image:
+  location: ${IMAGE_LOCATION}
+
 http:
   path: '/'
 
