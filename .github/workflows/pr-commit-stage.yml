@@ -116,7 +116,7 @@ jobs:
 
       - name: Initialize Copilot application
         if: env.app_exists == 'false'
-        run: copilot app init ocean-watch --permissions-boundary arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:policy/ocean-watch-deployer-policy # Add other initialization parameters as needed
+        run: copilot app init ocean-watch # Add other initialization parameters as needed
 
       - name: Setup Git Config
         if: env.app_exists == 'false'
@@ -176,7 +176,7 @@ jobs:
           if ! copilot env show --name ${{ github.head_ref }} --json; then
             echo "Environment does not exist, initializing..."
             # Initialize environment if it doesn't exist
-            if ! copilot env init --name ${{ github.head_ref }} --app ocean-watch --default-config --region ${{ secrets.AWS_REGION }} --aws-access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }} --aws-secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }}; then
+            if ! copilot env init --name ${{ github.head_ref }} --app ocean-watch --default-config --region ${{ secrets.AWS_REGION }} --aws-session-token ${{ steps.creds.outputs.aws-session-token }}; then
               echo "Failed to initialize environment."
               cat copilot/environments/deployment-review-apps/manifest.yml
               exit 1
