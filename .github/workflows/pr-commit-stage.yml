@@ -116,7 +116,7 @@ jobs:
 
       - name: Initialize Copilot application
         if: env.app_exists == 'false'
-        run: copilot app init ocean-watch --resource-tags program=Oceans project=OceanWatch application=OceanWatch
+        run: copilot app init ocean-watch --resource-tags program=Oceans,project=OceanWatch,application=OceanWatch
 
       - name: Setup Git Config
         if: env.app_exists == 'false'
@@ -281,6 +281,7 @@ jobs:
       - name: Deploy App to AWS using Copilot
         run: |
           export IMAGE_LOCATION="${{ steps.generate_ghcr_tag.outputs.image }}"
+          export GHCR_ACCESS="${{ secrets.GHCR_ACCESS }}"
           # Check if the service exists
           if ! copilot svc show --name nextjs-app --json; then
             echo "Service does not exist, initializing..."
