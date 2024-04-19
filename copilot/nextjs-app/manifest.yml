@@ -4,6 +4,7 @@ type: Load Balanced Web Service
 
 image:
   location: ${IMAGE_LOCATION}
+  port: 3000
 
 http:
   path: '/'
