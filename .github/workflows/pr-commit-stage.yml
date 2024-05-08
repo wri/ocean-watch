@@ -286,6 +286,7 @@ jobs:
           SECRET_NAME="ocean-watch-env-${{ github.head_ref }}"
           SECRET_VALUE='{"username":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}","password":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}"}'
           TAGS='Key=project,Value=OceanWatch Key=program,Value=Oceans Key=application,Value=OceanWatch Key=copilot-application,Value=ocean-watch Key=copilot-environment,Value=${{ github.head_ref }}'
+          DESCRIPTION='Read-only access to github container registry'
           
           # Check if the AWS Secret already exists
           SECRET_INFO=$(aws secretsmanager describe-secret --secret-id $SECRET_NAME || echo "not_found")
@@ -293,7 +294,7 @@ jobs:
           if [[ "$SECRET_INFO" == "not_found" ]]; then
             echo "Secret does not exist, creating..."
             # Create the secret and extract the ARN
-            SECRET_OUTPUT=$(aws secretsmanager create-secret --name $SECRET_NAME --secret-string "$SECRET_VALUE" --tags $TAGS)
+            SECRET_OUTPUT=$(aws secretsmanager create-secret --name $SECRET_NAME --secret-string "$SECRET_VALUE" --tags $TAGS --description $DESCRIPTION)
             SECRET_ARN=$(echo $SECRET_OUTPUT | jq -r .ARN)
             echo "Secret created with ARN: $SECRET_ARN"
           else
