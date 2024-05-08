@@ -278,10 +278,37 @@ jobs:
           # Optional: Clean up the temporary directory
           rm -rf ${{ runner.temp }}/copilot-download
 
+      - name: Handle AWS Secret --> GHCR Access
+        run: |
+          # Install jq if it's not available
+          sudo apt-get update && sudo apt-get install -y jq
+          
+          SECRET_NAME="ocean-watch-env-${{ github.head_ref }}"
+          SECRET_VALUE='{"username":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}","password":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}"}'
+          TAGS='Key=project,Value=OceanWatch Key=program,Value=Oceans Key=application,Value=OceanWatch, Key=copilot-application,Value=ocean-watch, Key=copilot-environment,Value=${{ github.head_ref }}'
+          
+          # Check if the AWS Secret already exists
+          SECRET_INFO=$(aws secretsmanager describe-secret --secret-id $SECRET_NAME || echo "not_found")
+          
+          if [[ "$SECRET_INFO" == "not_found" ]]; then
+            echo "Secret does not exist, creating..."
+            # Create the secret and extract the ARN
+            SECRET_OUTPUT=$(aws secretsmanager create-secret --name $SECRET_NAME --secret-string "$SECRET_VALUE" --tags $TAGS)
+            SECRET_ARN=$(echo $SECRET_OUTPUT | jq -r .ARN)
+            echo "Secret created with ARN: $SECRET_ARN"
+          else
+            echo "Secret already exists."
+            # Extract the ARN from existing secret info
+            SECRET_ARN=$(echo $SECRET_INFO | jq -r .ARN)
+          fi
+
+          # Store the ARN for use in subsequent steps
+          echo "SECRET_ARN=$SECRET_ARN" >> $GITHUB_ENV
+
       - name: Deploy App to AWS using Copilot
         run: |
           export IMAGE_LOCATION="${{ steps.generate_ghcr_tag.outputs.image }}"
-          export GHCR_ACCESS="${{ secrets.GHCR_ACCESS }}"
+          export GHCR_ACCESS="${{ env.SECRET_ARN }}"
           # Check if the service exists
           if ! copilot svc show --name nextjs-app --json; then
             echo "Service does not exist, initializing..."
