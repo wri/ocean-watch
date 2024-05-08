@@ -323,6 +323,7 @@ jobs:
           # Deploy the new service
           if ! copilot svc deploy --force --name nextjs-app --env ${{ github.head_ref }}; then
             echo "Failed to deploy service."
+            copilot svc delete --name nextjs-app --env ${{ github.head_ref }} --yes
             exit 1
           fi
 
