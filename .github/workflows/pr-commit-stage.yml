@@ -321,7 +321,7 @@ jobs:
             echo "Service already exists."
           fi
           # Deploy the new service
-          if ! copilot svc deploy --name nextjs-app --env ${{ github.head_ref }}; then
+          if ! copilot svc deploy --force --name nextjs-app --env ${{ github.head_ref }}; then
             echo "Failed to deploy service."
             exit 1
           fi
