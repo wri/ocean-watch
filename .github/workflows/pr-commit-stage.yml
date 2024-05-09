@@ -227,7 +227,10 @@ jobs:
 
       - name: generate ghcr tag
         id: generate_ghcr_tag
-        run: echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:${{ github.sha.substring(0,7) }}"
+        run: |
+          SHORT_SHA=${{ github.sha }}
+          SHORT_SHA=${SHORT_SHA:0:7}  # Using Bash substring extraction
+          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:$SHORT_SHA"
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
