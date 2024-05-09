@@ -334,6 +334,31 @@ jobs:
           echo "$SERVICE_INFO" | jq .
           copilot svc status --app ocean-watch --env ${{ github.head_ref }} --name nextjs-app --json
 
+      - name: Show Service Information
+        id: service_info
+        run: |
+          ENV_NAME="${{ github.head_ref }}" # Capture the GitHub head reference
+          SERVICE_JSON=$(copilot svc show --app ocean-watch --name nextjs-app --json)
+          SERVICE_URL=$(echo "$SERVICE_JSON" | jq -r --arg ENV_NAME "$ENV_NAME" '.routes[] | select(.environment == $ENV_NAME) | .url')
+          
+          if [[ -z "$SERVICE_URL" || "$SERVICE_URL" == "null" ]]; then
+            echo "No URL found for the specified environment: $ENV_NAME"
+            echo "$SERVICE_JSON"
+            exit 1
+          fi
+          
+          echo "::set-output name=url::$SERVICE_URL"
+          echo "Service URL: $SERVICE_URL"
+
+      - name: Comment PR with Service URL
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            🚀 Deployment successful!
+            🌐 Your service in environment `${{ github.head_ref }}` is now available at: ${{ steps.service_info.outputs.url }}
+
       - name: Setup Git Config
         run: |
           git config --global user.email "action@github.com"
