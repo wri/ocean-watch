@@ -327,6 +327,7 @@ jobs:
             copilot svc delete --name nextjs-app --env ${{ github.head_ref }} --yes
             exit 1
           fi
+          copilot svc status --app ocean-watch --env ${{ github.head_ref }} --name nextjs-app
 
       - name: Setup Git Config
         run: |
