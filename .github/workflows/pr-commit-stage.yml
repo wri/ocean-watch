@@ -142,7 +142,7 @@ jobs:
     needs: setup-copilot
     steps:
       - name: Download Copilot CLI from Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: copilot-cli
           path: /usr/local/bin
@@ -196,7 +196,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Copilot CLI from Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: copilot-cli
           path: /usr/local/bin
@@ -256,7 +256,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Copilot CLI from Artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: copilot-cli
           path: /usr/local/bin
