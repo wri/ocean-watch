@@ -327,7 +327,7 @@ jobs:
             copilot svc delete --name nextjs-app --env ${{ github.head_ref }} --yes
             exit 1
           fi
-          SERVICE_INFO=$(copilot svc show --app ocean-watch --manifest ${{ github.head_ref}} --name nextjs-app --json)
+          SERVICE_INFO=$(copilot svc show --app ocean-watch --name nextjs-app --json)
           echo "$SERVICE_INFO" | jq .
           copilot svc status --app ocean-watch --env ${{ github.head_ref }} --name nextjs-app --json
 
