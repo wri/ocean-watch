@@ -228,7 +228,7 @@ jobs:
       - name: generate ghcr tag
         id: generate_ghcr_tag
         run: |
-          SHORT_SHA=${{ github.sha }}
+          SHORT_SHA=${{ github.event.pull_request.head.sha }}
           SHORT_SHA=${SHORT_SHA:0:7}  # Using Bash substring extraction
           echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:$SHORT_SHA"
 
