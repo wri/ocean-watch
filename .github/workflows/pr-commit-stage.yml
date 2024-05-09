@@ -113,10 +113,6 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
           role-duration-seconds: 1800
 
-      - name: DEBUG - Test AWS CLI with assumed role
-        run: |
-          aws sts get-caller-identity
-
       - name: Check for existing Copilot application
         id: check_app
         run: |
@@ -173,10 +169,6 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
           role-duration-seconds: 1800
           output-credentials: true
-
-      - name: DEBUG - Test AWS CLI with assumed role
-        run: |
-          aws sts get-caller-identity
 
       - name: Check and Create Environment
         run: |
@@ -274,10 +266,6 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
           role-duration-seconds: 1800
-
-      - name: DEBUG - Test AWS CLI with assumed role
-        run: |
-          aws sts get-caller-identity
 
       - name: Handle AWS Secret --> GHCR Access
         run: |
