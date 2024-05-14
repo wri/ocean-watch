@@ -95,7 +95,7 @@ jobs:
         run: |
           SHORT_SHA=${{ github.event.pull_request.head.sha }}
           SHORT_SHA=${SHORT_SHA:0:7}  # Using Bash substring extraction
-          echo "::set-output name=image::ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:$SHORT_SHA"
+          echo "image=ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:$SHORT_SHA" >> $GITHUB_OUTPUT
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
@@ -125,7 +125,7 @@ jobs:
         id: setup
         run: |
           mkdir -p ${{ runner.temp }}/copilot-download
-          echo "::set-output name=copilot-path::${{ runner.temp }}/copilot-download/copilot"
+          echo "copilot-path=${{ runner.temp }}/copilot-download/copilot" >> $GITHUB_OUTPUT
       - name: Download Copilot CLI
         run: |
           curl -Lo ${{ steps.setup.outputs.copilot-path }} https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
@@ -355,7 +355,7 @@ jobs:
             exit 1
           fi
           
-          echo "::set-output name=url::$SERVICE_URL"
+          echo "url=$SERVICE_URL" >> $GITHUB_OUTPUT
           echo "Service URL: $SERVICE_URL"
 
       - name: Comment PR with Service URL
