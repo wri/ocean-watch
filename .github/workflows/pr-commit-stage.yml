@@ -95,7 +95,7 @@ jobs:
         run: |
           SHORT_SHA=${{ github.event.pull_request.head.sha }}
           SHORT_SHA=${SHORT_SHA:0:7}  # Using Bash substring extraction
-          echo "image=ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:$SHORT_SHA" >> $GITHUB_OUTPUT
+          echo "image=ghcr.io/${{ github.repository }}/nextjs-app:${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}-$SHORT_SHA" >> $GITHUB_OUTPUT
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
@@ -106,7 +106,6 @@ jobs:
           push: true
           tags: |
             ${{ steps.generate_ghcr_tag.outputs.image }}
-            ghcr.io/${{ github.repository }}/${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}:latest
 
       - name: Comment PR with GHCR details
         uses: peter-evans/create-or-update-comment@v4
