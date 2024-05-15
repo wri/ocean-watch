@@ -1,0 +1,29 @@
+# This is the manifest file for a Load Balanced Web Service using AWS Copilot
+name: nextjs-app
+type: Load Balanced Web Service
+
+image:
+  credentials: ${GHCR_ACCESS}
+  location: ${IMAGE_LOCATION}
+  port: 3000
+
+http:
+  path: '/'
+
+cpu: 512        # CPU units used for the service
+memory: 1024    # Memory allocated in MB
+count: 1        # Number of tasks that should be running
+
+scaling:
+  min_count: 1
+  max_count: 1
+  target_cpu_percent: 70
+  target_memory_percent: 75
+
+# Environment-specific configurations can be specified here
+environments:
+  production:
+    count: 2  # Start with two instances in production
+    scaling:
+      min_count: 2
+      max_count: 6  # Allows scaling up to 6 instances based on demand

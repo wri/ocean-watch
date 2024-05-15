@@ -1,49 +1,53 @@
 # Stage 1: Building the code
-FROM node:14.17-alpine as builder
+FROM node:14.17-alpine as base
 
-WORKDIR /app
+# 1. Install dependencies only when needed
+FROM base AS deps
 
 # Install Git (required for npm dependencies hosted on Git repositories)
-RUN apk update && apk add git
-
-RUN adduser -D www
-RUN chown -R www /app
-USER www
-
-RUN mkdir -p .next/cache && chown -R www:www .next
-
-# Copy package.json and package-lock.json
-COPY --chown=www:www package*.json ./
-
-# Install dependencies
-RUN npm ci
-
-# Copy the rest of your app's source code from your host to your image filesystem.
-COPY --chown=www:www . .
-
-RUN ls -la /app/.next/cache
-
-# Build the Next.js app
-RUN npm run build
-
-# Stage 2: Run the Next.js app
-FROM node:14.17-alpine
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk update && apk add --no-cache git libc6-compat
 
 WORKDIR /app
 
-RUN adduser -D www
-RUN chown -R www /app
-USER www
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
 
-# Copy the build output to the new container
-COPY --from=builder --chown=www:www /app/.next ./.next
-COPY --from=builder --chown=www:www /app/node_modules ./node_modules
-COPY --from=builder --chown=www:www /app/public ./public
-COPY --from=builder --chown=www:www /app/package.json ./package.json
+# 2. Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+# This will do the trick, use the corresponding env file for each environment.
+# COPY .env.local .env.production
+RUN npm run build
 
-# Expose the port the app runs on
+# 3. Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+COPY --from=builder /app/public ./public
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+ENV PORT 3000
 
+CMD HOSTNAME=localhost node server.js

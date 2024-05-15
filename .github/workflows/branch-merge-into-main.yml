@@ -1,0 +1,115 @@
+name: Branch Merge onto Main
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  setup-copilot:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    outputs:
+      copilot-path: ${{ steps.setup.outputs.copilot-path }}
+    steps:
+      - name: Create a temporary directory for downloading
+        id: setup
+        run: |
+          mkdir -p ${{ runner.temp }}/copilot-download
+          echo "copilot-path=${{ runner.temp }}/copilot-download/copilot" >> $GITHUB_OUTPUT
+      - name: Download Copilot CLI
+        run: |
+          curl -Lo ${{ steps.setup.outputs.copilot-path }} https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
+      - name: Make binary executable
+        run: chmod +x ${{ steps.setup.outputs.copilot-path }}
+      - name: Upload Copilot CLI to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: copilot-cli
+          path: ${{ steps.setup.outputs.copilot-path }}
+
+  destroy-review-app-environment:
+    runs-on: ubuntu-latest
+    needs: setup-copilot
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Download Copilot CLI from Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: copilot-cli
+          path: /usr/local/bin
+
+      - name: Ensure Copilot is executable
+        run: chmod +x /usr/local/bin/copilot
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
+          role-duration-seconds: 1800
+
+      - name: Delete AWS Secret --> GHCR Access
+        run: |
+          # Install jq if it's not available
+          sudo apt-get update && sudo apt-get install -y jq
+
+          SECRET_NAME="ocean-watch-env-${{ github.event.pull_request.head.ref }}"
+
+          # Check if the AWS Secret exists
+          SECRET_INFO=$(aws secretsmanager describe-secret --secret-id $SECRET_NAME || echo "not_found")
+
+          if [[ "$SECRET_INFO" != "not_found" ]]; then
+            echo "Secret exists, deleting..."
+            # Delete the secret and schedule deletion without recovery period (immediate deletion)
+            aws secretsmanager delete-secret --secret-id $SECRET_NAME --force-delete-without-recovery
+            echo "Secret deleted successfully."
+          else
+            echo "Secret does not exist. No action needed."
+          fi
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check for existing Copilot service deployment
+        id: check_service_deployment
+        run: |
+          if copilot svc show --env "${{ github.event.pull_request.head.ref }}" --name nextjs-app --json; then
+            echo "Service exists."
+            echo "service_exists=true" >> $GITHUB_ENV
+          else
+            echo "Service does not exist."
+            echo "service_exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Destroy Review App Environment
+        if: env.service_exists == 'true'
+        run: |
+          copilot svc delete --name nextjs-app --env "${{ github.event.pull_request.head.ref }}" --yes
+          copilot env delete --name "${{ github.event.pull_request.head.ref }}" --yes
+
+  tag-branch-image-with-main-commit-sha:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: add-main-sha-to-image
+        run: |
+          BRANCH_SHORT_SHA=${{ github.event.pull_request.head.sha }}
+          BRANCH_SHORT_SHA=${BRANCH_SHORT_SHA:0:7}  # Using Bash substring extraction
+          MAIN_SHORT_SHA=${{ github.sha }}
+          MAIN_SHORT_SHA=${MAIN_SHORT_SHA:0:7}  # Using Bash substring extraction
+          docker pull ghcr.io/${{ github.repository }}/nextjs-app:${{ github.event.pull_request.head.ref }}-$BRANCH_SHORT_SHA
+          docker tag ghcr.io/${{ github.repository }}/nextjs-app:${{ github.event.pull_request.head.ref }}-$BRANCH_SHORT_SHA ghcr.io/${{ github.repository }}/nextjs-app:main-$MAIN_SHORT_SHA
+          docker tag ghcr.io/${{ github.repository }}/nextjs-app:${{ github.event.pull_request.head.ref }}-$BRANCH_SHORT_SHA ghcr.io/${{ github.repository }}/nextjs-app:latest
+          docker push --all-tags ghcr.io/${{ github.repository }}/nextjs-app
