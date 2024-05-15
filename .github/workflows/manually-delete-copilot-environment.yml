@@ -1,0 +1,91 @@
+name: Manual Cleanup of AWS Copilot Environments
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'Feature Branch Name'
+        required: true
+
+jobs:
+  setup-copilot:
+    runs-on: ubuntu-latest
+    outputs:
+      copilot-path: ${{ steps.setup.outputs.copilot-path }}
+    steps:
+      - name: Create a temporary directory for downloading
+        id: setup
+        run: |
+          mkdir -p ${{ runner.temp }}/copilot-download
+          echo "copilot-path=${{ runner.temp }}/copilot-download/copilot" >> $GITHUB_OUTPUT
+      - name: Download Copilot CLI
+        run: |
+          curl -Lo ${{ steps.setup.outputs.copilot-path }} https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
+      - name: Make binary executable
+        run: chmod +x ${{ steps.setup.outputs.copilot-path }}
+      - name: Upload Copilot CLI to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: copilot-cli
+          path: ${{ steps.setup.outputs.copilot-path }}
+
+  destroy-review-app-environment:
+    runs-on: ubuntu-latest
+    needs: setup-copilot
+    steps:
+      - name: Download Copilot CLI from Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: copilot-cli
+          path: /usr/local/bin
+
+      - name: Ensure Copilot is executable
+        run: chmod +x /usr/local/bin/copilot
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
+          role-duration-seconds: 1800
+
+      - name: Delete AWS Secret
+        run: |
+          # Install jq if it's not available
+          sudo apt-get update && sudo apt-get install -y jq
+
+          SECRET_NAME="ocean-watch-env-${{ github.event.inputs.branch_name }}"
+
+          # Check if the AWS Secret exists
+          SECRET_INFO=$(aws secretsmanager describe-secret --secret-id $SECRET_NAME || echo "not_found")
+
+          if [[ "$SECRET_INFO" != "not_found" ]]; then
+            echo "Secret exists, deleting..."
+            # Delete the secret and schedule deletion without recovery period (immediate deletion)
+            aws secretsmanager delete-secret --secret-id $SECRET_NAME --force-delete-without-recovery
+            echo "Secret deleted successfully."
+          else
+            echo "Secret does not exist. No action needed."
+          fi
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check for existing Copilot environment
+        id: check_environment
+        run: |
+          if copilot env show --name "${{ github.event.inputs.branch_name }}" --json; then
+            echo "Environment exists."
+            echo "environment_exists=true" >> $GITHUB_ENV
+          else
+            echo "Environment does not exist."
+            echo "environment_exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Destroy Review App Environment
+        if: env.environment_exists == 'true'
+        run: |
+          copilot svc delete --name nextjs-app --env "${{ github.event.inputs.branch_name }}" --yes
+          copilot env delete --name "${{ github.event.inputs.branch_name }}" --yes
