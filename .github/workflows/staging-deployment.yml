@@ -1,0 +1,249 @@
+name: Staging Deployment on Pre-Release
+
+on:
+  release:
+    types: [prereleased]
+
+jobs:
+  tag-image-with-pre-release-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add Pre-Release Tag to Image
+        run: |
+          TAG_SHORT_SHA=$(echo "${{ github.event.release.target_commitish }}" | cut -c1-7)
+          PRE_RELEASE_TAG=${{ github.event.release.tag_name }}
+          docker pull ghcr.io/${{ github.repository }}/nextjs-app:main-$TAG_SHORT_SHA
+          docker tag ghcr.io/${{ github.repository }}/nextjs-app:main-$TAG_SHORT_SHA ghcr.io/${{ github.repository }}/nextjs-app:$PRE_RELEASE_TAG
+          docker push ghcr.io/${{ github.repository }}/nextjs-app:$PRE_RELEASE_TAG
+        shell: bash
+
+  setup-copilot:
+    runs-on: ubuntu-latest
+    outputs:
+      copilot-path: ${{ steps.setup.outputs.copilot-path }}
+    steps:
+      - name: Create a temporary directory for downloading
+        id: setup
+        run: |
+          mkdir -p ${{ runner.temp }}/copilot-download
+          echo "copilot-path=${{ runner.temp }}/copilot-download/copilot" >> $GITHUB_OUTPUT
+      - name: Download Copilot CLI
+        run: |
+          curl -Lo ${{ steps.setup.outputs.copilot-path }} https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux
+      - name: Make binary executable
+        run: chmod +x ${{ steps.setup.outputs.copilot-path }}
+      - name: Upload Copilot CLI to Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: copilot-cli
+          path: ${{ steps.setup.outputs.copilot-path }}
+
+  init-copilot:
+    runs-on: ubuntu-latest
+    needs: setup-copilot
+    steps:
+      - name: Download Copilot CLI from Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: copilot-cli
+          path: /usr/local/bin
+
+      - name: Ensure Copilot is executable
+        run: chmod +x /usr/local/bin/copilot
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
+          role-duration-seconds: 1800
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check for existing Copilot application
+        id: check_app
+        run: |
+          if copilot app ls | grep -qw "ocean-watch"; then
+            echo "App exists."
+            echo "app_exists=true" >> $GITHUB_ENV
+          else
+            echo "App does not exist."
+            echo "app_exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Initialize Copilot application
+        if: env.app_exists == 'false'
+        run: copilot app init ocean-watch --resource-tags program=Oceans,project=OceanWatch,application=OceanWatch
+
+  create-copilot-staging-environment:
+    needs: [ init-copilot ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Copilot CLI from Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: copilot-cli
+          path: /usr/local/bin
+
+      - name: Ensure Copilot is executable
+        run: chmod +x /usr/local/bin/copilot
+
+      - name: Configure AWS Credentials
+        id: creds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
+          role-duration-seconds: 1800
+          output-credentials: true
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Check for existing Copilot Staging Environment
+        id: check_environment
+        run: |
+          if copilot env show --name staging --json; then
+            echo "Environment exists."
+            echo "environment_exists=true" >> $GITHUB_ENV
+          else
+            echo "Environment does not exist."
+            echo "environment_exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Initialize Staging Environment
+        id: init-environment
+        if: env.environment_exists == 'false'
+        run: |
+          if ! copilot env init --name staging --app ocean-watch --default-config --region ${{ secrets.AWS_REGION }} --aws-session-token ${{ steps.creds.outputs.aws-session-token }}; then
+            echo "Failed to initialize environment."
+            exit 1
+          fi
+
+      - name: Deploy Staging Environment
+        run: |
+          if ! copilot env deploy --name staging --app ocean-watch; then
+            echo "Failed to deploy environment."
+            exit 1
+          fi
+
+  deploy:
+    needs: [ tag-image-with-pre-release-version, create-copilot-staging-environment ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Copilot CLI from Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: copilot-cli
+          path: /usr/local/bin
+
+      - name: Ensure Copilot is executable
+        run: chmod +x /usr/local/bin/copilot
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
+          role-duration-seconds: 1800
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Handle AWS Secret --> GHCR Access
+        run: |
+          # Install jq if it's not available
+          sudo apt-get update && sudo apt-get install -y jq
+
+          SECRET_NAME="ocean-watch-env-staging"
+          SECRET_VALUE='{"username":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}","password":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}"}'
+          TAGS='Key=project,Value=OceanWatch Key=program,Value=Oceans Key=application,Value=OceanWatch Key=copilot-application,Value=ocean-watch Key=copilot-environment,Value=${{ github.head_ref }}'
+          DESCRIPTION='Read-only access to github container registry'
+
+          # Check if the AWS Secret already exists
+          SECRET_INFO=$(aws secretsmanager describe-secret --secret-id $SECRET_NAME || echo "not_found")
+
+          if [[ "$SECRET_INFO" == "not_found" ]]; then
+            echo "Secret does not exist, creating..."
+            # Create the secret and extract the ARN
+            SECRET_OUTPUT=$(aws secretsmanager create-secret --name $SECRET_NAME --secret-string "$SECRET_VALUE" --tags $TAGS --description "$DESCRIPTION")
+            SECRET_ARN=$(echo $SECRET_OUTPUT | jq -r .ARN)
+            echo "Secret created with ARN: $SECRET_ARN"
+          else
+            echo "Secret already exists."
+            # Extract the ARN from existing secret info
+            SECRET_ARN=$(echo $SECRET_INFO | jq -r .ARN)
+          fi
+
+          # Store the ARN for use in subsequent steps
+          echo "SECRET_ARN=$SECRET_ARN" >> $GITHUB_ENV
+
+      - name: Check for existing Copilot service deployment
+        id: check_service_deployment
+        run: |
+          if copilot svc show --name nextjs-app --json; then
+            echo "Service exists."
+            echo "service_exists=true" >> $GITHUB_ENV
+          else
+            echo "Service does not exist."
+            echo "service_exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Initialize Service
+        id: init-service
+        if: env.service_exists == 'false'
+        run: |
+          export IMAGE_LOCATION="ghcr.io/${{ github.repository }}/nextjs-app:${{ github.event.release.tag_name }}"
+          export GHCR_ACCESS="${{ env.SECRET_ARN }}"
+          if ! copilot svc init --app ocean-watch --name nextjs-app --svc-type "Load Balanced Web Service"; then
+            echo "Failed to initialize service."
+            exit 1
+          fi
+
+      - name: Deploy App to AWS using Copilot
+        run: |
+          export IMAGE_LOCATION="ghcr.io/${{ github.repository }}/nextjs-app:${{ github.event.release.tag_name }}"
+          export GHCR_ACCESS="${{ env.SECRET_ARN }}"
+          if ! copilot svc deploy --force --name nextjs-app --env staging; then
+            echo "Failed to deploy service to staging."
+            copilot svc delete --name nextjs-app --env staging --yes
+            exit 1
+          fi
+
+      - name: Show Service Information
+        id: service_info
+        run: |
+          ENV_NAME="staging"
+          SERVICE_JSON=$(copilot svc show --app ocean-watch --name nextjs-app --json)
+          SERVICE_URL=$(echo "$SERVICE_JSON" | jq -r --arg ENV_NAME "$ENV_NAME" '.routes[] | select(.environment == $ENV_NAME) | .url')
+
+          if [[ -z "$SERVICE_URL" || "$SERVICE_URL" == "null" ]]; then
+            echo "No URL found for the specified environment: $ENV_NAME"
+            echo "$SERVICE_JSON"
+            exit 1
+          fi
+
+          echo "url=$SERVICE_URL" >> $GITHUB_OUTPUT
+          echo "Service URL: $SERVICE_URL"
+
+      - name: Comment PR with Service URL
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.release.tag_name }}
+          body: |
+            🚀 Deployment successful!
+            🌐 Your service in environment `staging` is now available at: ${{ steps.service_info.outputs.url }}
