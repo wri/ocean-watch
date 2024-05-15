@@ -74,8 +74,6 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
 
       - name: Check for existing Copilot service deployment
         id: check_service_deployment
