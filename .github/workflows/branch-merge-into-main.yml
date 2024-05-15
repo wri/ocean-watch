@@ -53,6 +53,25 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/ocean-watch-deployer
           role-duration-seconds: 1800
 
+      - name: Delete AWS Secret --> GHCR Access
+        run: |
+          # Install jq if it's not available
+          sudo apt-get update && sudo apt-get install -y jq
+
+          SECRET_NAME="ocean-watch-env-${{ github.event.pull_request.head.ref }}"
+
+          # Check if the AWS Secret exists
+          SECRET_INFO=$(aws secretsmanager describe-secret --secret-id $SECRET_NAME || echo "not_found")
+
+          if [[ "$SECRET_INFO" != "not_found" ]]; then
+            echo "Secret exists, deleting..."
+            # Delete the secret and schedule deletion without recovery period (immediate deletion)
+            aws secretsmanager delete-secret --secret-id $SECRET_NAME --force-delete-without-recovery
+            echo "Secret deleted successfully."
+          else
+            echo "Secret does not exist. No action needed."
+          fi
+
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
