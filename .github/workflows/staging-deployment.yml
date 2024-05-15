@@ -171,7 +171,7 @@ jobs:
 
           SECRET_NAME="ocean-watch-env-staging"
           SECRET_VALUE='{"username":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}","password":"${{ secrets.AWS_GHCR_ACCESS_TOKEN }}"}'
-          TAGS='Key=project,Value=OceanWatch Key=program,Value=Oceans Key=application,Value=OceanWatch Key=copilot-application,Value=ocean-watch Key=copilot-environment,Value=${{ github.head_ref }}'
+          TAGS='Key=project,Value=OceanWatch Key=program,Value=Oceans Key=application,Value=OceanWatch Key=copilot-application,Value=ocean-watch Key=copilot-environment,Value=staging'
           DESCRIPTION='Read-only access to github container registry'
 
           # Check if the AWS Secret already exists
@@ -239,11 +239,3 @@ jobs:
 
           echo "url=$SERVICE_URL" >> $GITHUB_OUTPUT
           echo "Service URL: $SERVICE_URL"
-
-      - name: Comment PR with Service URL
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.release.tag_name }}
-          body: |
-            🚀 Deployment successful!
-            🌐 Your service in environment `staging` is now available at: ${{ steps.service_info.outputs.url }}
