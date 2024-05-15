@@ -75,19 +75,19 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Check for existing Copilot service deployment
-        id: check_service_deployment
+      - name: Check for existing Copilot environment
+        id: check_environment
         run: |
-          if copilot svc show --env "${{ github.event.pull_request.head.ref }}" --name nextjs-app --json; then
-            echo "Service exists."
-            echo "service_exists=true" >> $GITHUB_ENV
+          if copilot env show --name "${{ github.event.pull_request.head.ref }}" --json; then
+            echo "Environment exists."
+            echo "environment_exists=true" >> $GITHUB_ENV
           else
-            echo "Service does not exist."
-            echo "service_exists=false" >> $GITHUB_ENV
+            echo "Environment does not exist."
+            echo "environment_exists=false" >> $GITHUB_ENV
           fi
 
       - name: Destroy Review App Environment
-        if: env.service_exists == 'true'
+        if: env.environment_exists == 'true'
         run: |
           copilot svc delete --name nextjs-app --env "${{ github.event.pull_request.head.ref }}" --yes
           copilot env delete --name "${{ github.event.pull_request.head.ref }}" --yes
