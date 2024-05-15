@@ -103,7 +103,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: add-main-sha-to-image
+      - name: Add Main SHA to Image
         run: |
           BRANCH_SHORT_SHA=${{ github.event.pull_request.head.sha }}
           BRANCH_SHORT_SHA=${BRANCH_SHORT_SHA:0:7}  # Using Bash substring extraction
