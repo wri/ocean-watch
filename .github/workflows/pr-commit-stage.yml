@@ -297,7 +297,7 @@ jobs:
           if [[ "$SECRET_INFO" == "not_found" ]]; then
             echo "Secret does not exist, creating..."
             # Create the secret and extract the ARN
-            SECRET_OUTPUT=$(aws secretsmanager create-secret --name $SECRET_NAME --secret-string "$SECRET_VALUE" --tags $TAGS --description $DESCRIPTION)
+            SECRET_OUTPUT=$(aws secretsmanager create-secret --name $SECRET_NAME --secret-string "$SECRET_VALUE" --tags $TAGS --description "$DESCRIPTION")
             SECRET_ARN=$(echo $SECRET_OUTPUT | jq -r .ARN)
             echo "Secret created with ARN: $SECRET_ARN"
           else
