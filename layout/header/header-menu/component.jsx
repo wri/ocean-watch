@@ -16,7 +16,6 @@ const header = {
   menu: import('../header-menu'),
   'menu-mobile': import('../header-menu-mobile'),
   search: import('../header-search'),
-  user: import('../header-user'),
 };
 
 const HeaderMenu = () => {
