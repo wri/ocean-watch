@@ -30,7 +30,6 @@ export default function IndicatorVisualization({
   indicator: { widgets: _widgets, sections },
   params,
   theme,
-  isInACollection,
   RWAdapter,
 }) {
   const [isInfoVisible, setInfoVisibility] = useState(false);
@@ -202,7 +201,6 @@ export default function IndicatorVisualization({
                     params={params}
                     onToggleInfo={handleToggleInfo}
                     isInfoVisible={isInfoVisible}
-                    isInACollection={isInACollection}
                     onToggleShare={handleShareToggle}
                   />
                 </div>
@@ -285,7 +283,6 @@ export default function IndicatorVisualization({
 IndicatorVisualization.defaultProps = {
   theme: 'primary',
   params: {},
-  isInACollection: false,
 };
 
 IndicatorVisualization.propTypes = {
@@ -309,6 +306,5 @@ IndicatorVisualization.propTypes = {
   }).isRequired,
   theme: PropTypes.oneOf(['primary', 'secondary']),
   params: PropTypes.shape({}),
-  isInACollection: PropTypes.bool,
   RWAdapter: PropTypes.func.isRequired,
 };

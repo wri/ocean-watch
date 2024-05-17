@@ -10,7 +10,6 @@ export default function CardIndicatorSet({
   theme,
   RWAdapter,
   children,
-  isInACollection,
   handleClickCard,
 }) {
   return (
@@ -45,7 +44,6 @@ export default function CardIndicatorSet({
           indicator={indicator}
           theme={theme}
           params={params}
-          isInACollection={isInACollection}
           RWAdapter={RWAdapter}
         />
       )}
@@ -68,7 +66,6 @@ CardIndicatorSet.propTypes = {
     .isRequired,
   theme: PropTypes.oneOf(['primary', 'secondary']),
   params: PropTypes.shape({}),
-  isInACollection: PropTypes.bool.isRequired,
   handleClickCard: PropTypes.func.isRequired,
   RWAdapter: PropTypes.func.isRequired,
 };

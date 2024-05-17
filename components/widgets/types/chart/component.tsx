@@ -32,7 +32,6 @@ const ChartType = ({
   isWebshot,
   isFetching,
   isError,
-  isInACollection,
   onToggleShare,
 }: ChartTypeProps): JSX.Element => {
   const [isInfoWidgetVisible, setInfoWidgetVisibility] = useState(false);
@@ -56,7 +55,6 @@ const ChartType = ({
             params={params}
             onToggleInfo={handleInfoToggle}
             onToggleShare={handleShareToggle}
-            isInACollection={isInACollection}
             isInfoVisible={isInfoWidgetVisible}
           />
         </div>

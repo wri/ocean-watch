@@ -19,7 +19,6 @@ export interface EmbedTypeWidgetProps {
 const EmbedTypeWidget = ({
   widget,
   isFetching,
-  isInACollection,
   onToggleShare,
 }: EmbedTypeWidgetProps): JSX.Element => {
   const [isInfoWidgetVisible, setInfoWidgetVisibility] = useState(false);
@@ -44,7 +43,6 @@ const EmbedTypeWidget = ({
               widget={widget}
               onToggleInfo={handleInfoToggle}
               onToggleShare={handleShareToggle}
-              isInACollection={isInACollection}
               isInfoVisible={isInfoWidgetVisible}
             />
           </div>
