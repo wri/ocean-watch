@@ -14,7 +14,6 @@ import ExploreTopics from 'layout/explore/explore-topics';
 import ExploreAreasOfInterest from 'layout/explore/explore-areas-of-interest';
 import ExploreAreasOfInterestNewArea from 'layout/explore/explore-areas-of-interest-new-area';
 import ExploreCollections from 'layout/explore/explore-collections';
-import ExploreLogin from 'layout/explore/explore-login';
 import ExploreDiscover from 'layout/explore/explore-discover';
 import ExploreNearRealTime from 'layout/explore/explore-near-real-time';
 import ExploreFavorites from 'layout/explore/explore-favorites';
@@ -44,15 +43,6 @@ const Explore = (props) => {
   const handleClearPolygon = useCallback(() => {
     stopDrawing();
   }, [stopDrawing]);
-  const isAuthenticatedSection = useMemo(
-    () =>
-      [
-        EXPLORE_SECTIONS.COLLECTIONS,
-        EXPLORE_SECTIONS.FAVORITES,
-        EXPLORE_SECTIONS.AREAS_OF_INTEREST,
-      ].includes(section),
-    [section],
-  );
 
   const getSidebarLayout = () => (
     <>
@@ -64,7 +54,6 @@ const Explore = (props) => {
             {section === EXPLORE_SECTIONS.TOPICS && <ExploreTopics />}
             {section === EXPLORE_SECTIONS.COLLECTIONS && userIsLoggedIn && <ExploreCollections />}
             {section === EXPLORE_SECTIONS.FAVORITES && userIsLoggedIn && <ExploreFavorites />}
-            {isAuthenticatedSection && !userIsLoggedIn && <ExploreLogin />}
             {section === EXPLORE_SECTIONS.DISCOVER && <ExploreDiscover />}
             {section === EXPLORE_SECTIONS.NEAR_REAL_TIME && <ExploreNearRealTime />}
             {section === EXPLORE_SECTIONS.AREAS_OF_INTEREST && userIsLoggedIn && (

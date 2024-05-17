@@ -1,39 +1,9 @@
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Tooltip } from 'vizzuality-components';
-
-// Components
-import Icon from 'components/ui/icon';
-import LoginRequired from 'components/ui/login-required';
-import CollectionsPanel from 'components/collections-panel';
-
-// hooks
-import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
-import { useMe } from 'hooks/user';
 
 const MiniExploreDatasetsActions = (props) => {
   const { dataset, layer, handleAddMap } = props;
-  const { data: user } = useMe();
-  const { isInACollection, refetch } = useBelongsToCollection();
-
-  const handleToggleFavorite = useCallback(() => {
-    refetch();
-  }, [refetch]);
-
-  const handleToggleCollection = useCallback(() => {
-    refetch();
-  }, [refetch]);
-
-  const starIconName = classnames({
-    'icon-star-full': isInACollection,
-    'icon-star-empty': !isInACollection,
-  });
-  const starIconClass = classnames({
-    '-small': true,
-    '-filled': true,
-    '-empty': !isInACollection,
-  });
 
   const onHandleMap = useCallback(
     (evt) => {
@@ -61,28 +31,6 @@ const MiniExploreDatasetsActions = (props) => {
       >
         {dataset.active ? 'Active' : 'Add to map'}
       </button>
-      {/* Favorite dataset icon */}
-      <LoginRequired>
-        <Tooltip
-          overlay={
-            <CollectionsPanel
-              resource={dataset}
-              resourceType="dataset"
-              onClick={(e) => e.stopPropagation()}
-              onKeyPress={(e) => e.stopPropagation()}
-              onToggleFavorite={handleToggleFavorite}
-              onToggleCollection={handleToggleCollection}
-            />
-          }
-          overlayClassName="c-rc-tooltip"
-          placement="bottomRight"
-          trigger="click"
-        >
-          <button type="button" className="c-button -secondary -compressed" tabIndex={-1}>
-            <Icon name={starIconName} className={starIconClass} />
-          </button>
-        </Tooltip>
-      </LoginRequired>
     </div>
   );
 };
