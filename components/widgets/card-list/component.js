@@ -1,9 +1,6 @@
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-// hooks
-import { useFetchUserData } from 'hooks/user';
-
 // components
 import InView from 'components/in-view';
 import WidgetCard from 'components/widgets/card';
@@ -22,12 +19,6 @@ const WidgetCardList = (props) => {
     thumbnail,
     clickable,
   } = props;
-
-  const { data: userWidgetParametrization } = useFetchUserData({
-    select: (userData) =>
-      userData?.applicationData?.[process.env.NEXT_PUBLIC_APPLICATIONS]?.widgets,
-    placeholderData: {},
-  });
 
   return (
     <div
@@ -49,9 +40,6 @@ const WidgetCardList = (props) => {
                   {inView && (
                     <WidgetCard
                       widget={widget}
-                      {...(userWidgetParametrization?.[widget.id] && {
-                        params: userWidgetParametrization[widget.id],
-                      })}
                       onWidgetClick={onWidgetClick}
                       onWidgetRemove={onWidgetRemove}
                       showActions={showActions}

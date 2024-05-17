@@ -1,11 +1,11 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useSession } from 'next-auth/client';
 
 // services
-import { fetchUser, fetchUserData } from 'services/user';
+import { fetchUser } from 'services/user';
 
 import type { QueryObserverOptions } from 'react-query';
-import type { User, UserData, UserWithToken } from 'types/user';
+import type { User, UserWithToken } from 'types/user';
 
 const useFetchUser = (
   userToken: string,
@@ -23,18 +23,6 @@ export const useMe = (queryConfig?: QueryObserverOptions<User, Error, UserWithTo
         ...user,
         token: `Bearer ${session?.accessToken}`,
       },
-    ...queryConfig,
-  });
-};
-
-export const useFetchUserData = (queryConfig?: QueryObserverOptions<UserData, Error>) => {
-  const queryClient = useQueryClient();
-  const { data: user } = useMe();
-
-  return useQuery<UserData, Error>('user-data', () => fetchUserData(user.token), {
-    enabled: Boolean(user?.token),
-    refetchOnWindowFocus: false,
-    placeholderData: queryClient.getQueryData('user-data') || null,
     ...queryConfig,
   });
 };
