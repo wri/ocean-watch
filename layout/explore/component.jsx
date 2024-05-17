@@ -11,13 +11,9 @@ import ExploreDatasets from 'layout/explore/explore-datasets';
 import ExploreMap from 'layout/explore/explore-map';
 import ExploreDetail from 'layout/explore/explore-detail';
 import ExploreTopics from 'layout/explore/explore-topics';
-import ExploreAreasOfInterest from 'layout/explore/explore-areas-of-interest';
 import ExploreAreasOfInterestNewArea from 'layout/explore/explore-areas-of-interest-new-area';
-import ExploreCollections from 'layout/explore/explore-collections';
 import ExploreDiscover from 'layout/explore/explore-discover';
 import ExploreNearRealTime from 'layout/explore/explore-near-real-time';
-import ExploreFavorites from 'layout/explore/explore-favorites';
-import ExploreMyData from 'layout/explore/explore-my-data';
 
 // lib
 import { Media } from 'lib/media';
@@ -52,14 +48,8 @@ const Explore = (props) => {
           <div className="explore-sidebar-content" id="sidebar-content-container" key={section}>
             {section === EXPLORE_SECTIONS.ALL_DATA && <ExploreDatasets />}
             {section === EXPLORE_SECTIONS.TOPICS && <ExploreTopics />}
-            {section === EXPLORE_SECTIONS.COLLECTIONS && userIsLoggedIn && <ExploreCollections />}
-            {section === EXPLORE_SECTIONS.FAVORITES && userIsLoggedIn && <ExploreFavorites />}
             {section === EXPLORE_SECTIONS.DISCOVER && <ExploreDiscover />}
             {section === EXPLORE_SECTIONS.NEAR_REAL_TIME && <ExploreNearRealTime />}
-            {section === EXPLORE_SECTIONS.AREAS_OF_INTEREST && userIsLoggedIn && (
-              <ExploreAreasOfInterest />
-            )}
-            {section === EXPLORE_SECTIONS.MY_DATA && <ExploreMyData />}
           </div>
         </>
       )}

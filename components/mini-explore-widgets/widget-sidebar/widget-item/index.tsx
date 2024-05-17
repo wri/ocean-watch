@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // hooks
 import { useFetchWidget } from 'hooks/widget';
 import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
-import { useMe } from 'hooks/user';
 
 // utils
 import { getParametrizedWidget } from 'utils/widget';
@@ -26,7 +25,6 @@ export default function WidgetItemContainer({
   adapter: Adapter.Service;
 }): JSX.Element {
   const [isShareVisible, setShareVisibility] = useState(false);
-  const { data: user } = useMe();
   const { isInACollection } = useBelongsToCollection();
 
   const widgetState = useFetchWidget(

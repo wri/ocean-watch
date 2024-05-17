@@ -10,7 +10,6 @@ import { fetchLayer } from 'services/layer';
 import { useFetchWidget } from 'hooks/widget';
 import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
 import { useGeostore } from 'hooks/geostore';
-import { useMe } from 'hooks/user';
 
 // utils
 import { getAoiLayer, getMaskLayer, getLayerGroups } from 'utils/layers';
@@ -47,7 +46,6 @@ const SwipeTypeWidgetContainer = ({
   onToggleShare,
 }: SwipeTypeWidgetContainerProps): JSX.Element => {
   const [minZoom, setMinZoom] = useState<number>(null);
-  const { data: user } = useMe();
   const { isInACollection } = useBelongsToCollection();
 
   const onFitBoundsChange = useCallback((viewport: ViewportProps) => {
