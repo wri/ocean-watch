@@ -48,7 +48,7 @@ const SwipeTypeWidgetContainer = ({
 }: SwipeTypeWidgetContainerProps): JSX.Element => {
   const [minZoom, setMinZoom] = useState<number>(null);
   const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widgetId, user?.token);
+  const { isInACollection } = useBelongsToCollection();
 
   const onFitBoundsChange = useCallback((viewport: ViewportProps) => {
     const { zoom } = viewport;

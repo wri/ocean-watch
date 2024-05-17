@@ -25,7 +25,7 @@ const ExploreDatasetsActions = (props) => {
     toggleMapLayerGroup,
     resetMapLayerGroupsInteraction,
   } = props;
-  const { isInACollection } = useBelongsToCollection(dataset.id, user.token);
+  const { isInACollection } = useBelongsToCollection();
   const { refetch } = useFetchCollection(
     selectedCollection,
     user.token,

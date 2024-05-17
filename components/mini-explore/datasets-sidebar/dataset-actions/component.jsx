@@ -15,7 +15,7 @@ import { useMe } from 'hooks/user';
 const MiniExploreDatasetsActions = (props) => {
   const { dataset, layer, handleAddMap } = props;
   const { data: user } = useMe();
-  const { isInACollection, refetch } = useBelongsToCollection(dataset.id, user?.token);
+  const { isInACollection, refetch } = useBelongsToCollection();
 
   const handleToggleFavorite = useCallback(() => {
     refetch();

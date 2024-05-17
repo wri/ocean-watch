@@ -27,7 +27,7 @@ export default function WidgetItemContainer({
 }): JSX.Element {
   const [isShareVisible, setShareVisibility] = useState(false);
   const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widgetId, user?.token);
+  const { isInACollection } = useBelongsToCollection();
 
   const widgetState = useFetchWidget(
     widgetId,

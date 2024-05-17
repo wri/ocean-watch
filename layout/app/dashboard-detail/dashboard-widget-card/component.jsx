@@ -27,7 +27,7 @@ function DashboardWidgetCard(props) {
   const widgetConfig = widget && widget.widgetConfig;
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [infoCardOpen, setInfoCardOpen] = useState(false);
-  const { isInACollection } = useBelongsToCollection(widget.id, user.token);
+  const { isInACollection } = useBelongsToCollection();
   const widgetType = widget && widget.type;
   const metadataInfo =
     (widget && widget.metadata && widget.metadata.length > 0 && widget.metadata[0].info) || {};

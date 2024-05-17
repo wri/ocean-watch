@@ -75,7 +75,7 @@ const WidgetCard = ({
   const [state, dispatch] = useReducer(REDUCER, INITIAL_STATE);
   const { loading, layer, error, tooltip } = state;
   const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widget.id, user?.token);
+  const { isInACollection } = useBelongsToCollection();
   const widgetType = useMemo(() => getWidgetType(widget), [widget]);
 
   const handleRemoveVisualization = useCallback(() => {

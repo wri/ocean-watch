@@ -36,7 +36,7 @@ const EmbedTypeWidgetContainer = ({
     },
   );
   const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widgetId, user?.token);
+  const { isInACollection } = useBelongsToCollection();
 
   return (
     <ErrorBoundary
