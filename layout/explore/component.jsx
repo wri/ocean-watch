@@ -9,7 +9,6 @@ import ExploreSidebar from 'layout/explore/explore-sidebar';
 import ExploreMenu from 'layout/explore/explore-menu';
 import ExploreDatasets from 'layout/explore/explore-datasets';
 import ExploreMap from 'layout/explore/explore-map';
-import ExploreDetail from 'layout/explore/explore-detail';
 import ExploreTopics from 'layout/explore/explore-topics';
 import ExploreAreasOfInterestNewArea from 'layout/explore/explore-areas-of-interest-new-area';
 import ExploreDiscover from 'layout/explore/explore-discover';
@@ -52,9 +51,6 @@ const Explore = (props) => {
             {section === EXPLORE_SECTIONS.NEAR_REAL_TIME && <ExploreNearRealTime />}
           </div>
         </>
-      )}
-      {selected && (
-        <ExploreDetail key={selected} onDatasetLoaded={(_dataset) => setDataset(_dataset)} />
       )}
       {!selected && subsection === EXPLORE_SUBSECTIONS.NEW_AREA && (
         <ExploreAreasOfInterestNewArea />

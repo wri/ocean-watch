@@ -6,39 +6,35 @@ import wrapper from 'lib/store';
 
 const queryClient = new QueryClient();
 
-export const withRedux = (getServerSidePropsFunc) => wrapper.getServerSideProps(
-  (store) => async (context) => {
+export const withRedux = (getServerSidePropsFunc) =>
+  wrapper.getServerSideProps((store) => async (context) => {
     if (getServerSidePropsFunc) {
       const SSPF = await getServerSidePropsFunc({ ...context, store });
 
-      return ({
+      return {
         ...SSPF,
-      });
+      };
     }
 
-    return ({
-      props: ({}),
-    });
-  },
-);
+    return {
+      props: {},
+    };
+  });
 
 export function withUserServerSide(getServerSidePropsFunc) {
   return async (contextWithStore) => {
-      if (getServerSidePropsFunc) {
-        const SSPF = await getServerSidePropsFunc(contextWithStore);
+    if (getServerSidePropsFunc) {
+      const SSPF = await getServerSidePropsFunc(contextWithStore);
 
-        return ({
-          ...SSPF,
-        });
-      }
+      return {
+        ...SSPF,
+      };
+    }
 
     if (getServerSidePropsFunc) {
       const SSPF = await getServerSidePropsFunc(contextWithStore, contextWithStore.store);
 
-      const {
-        props: SSPFProps,
-        ...SSPFRest
-      } = SSPF;
+      const { props: SSPFProps, ...SSPFRest } = SSPF;
 
       return {
         props: {
