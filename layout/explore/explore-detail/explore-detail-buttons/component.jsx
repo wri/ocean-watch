@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import LoginRequired from 'components/ui/login-required';
 import Modal from 'components/modal/modal-component';
 import DatasetSubscriptionsModal from 'components/modal/subscriptions-modal/dataset';
 import ProminentButton from 'components/prominent-button';
@@ -11,13 +10,9 @@ import Icon from 'components/ui/icon';
 const ExploreDetailButtons = ({ dataset }) => {
   const [showSubscribeModal, setShowSubscribeModal] = useState(false);
 
-  const { metadata, subscribable } = dataset;
+  const { metadata } = dataset;
   const { info } = metadata[0];
-  const isSubscribable = subscribable && Object.keys(subscribable).length > 0;
 
-  const openSubscribeModal = useCallback(() => {
-    setShowSubscribeModal(true);
-  }, []);
   const closeSubscribeModal = useCallback(() => {
     setShowSubscribeModal(false);
   }, []);
@@ -48,14 +43,6 @@ const ExploreDetailButtons = ({ dataset }) => {
               <span>learn more from source</span>
             </a>
           </ProminentButton>
-        )}
-        {isSubscribable && (
-          <LoginRequired>
-            <ProminentButton onClick={openSubscribeModal}>
-              <Icon name="icon-subscription" />
-              <span>subscribe to alerts</span>
-            </ProminentButton>
-          </LoginRequired>
         )}
       </div>
       <Modal isOpen={showSubscribeModal} onRequestClose={closeSubscribeModal}>

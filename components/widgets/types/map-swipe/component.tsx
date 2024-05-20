@@ -54,7 +54,6 @@ const SwipeTypeWidget = ({
   style = {},
   isEmbed = false,
   isWebshot = false,
-  isInACollection = false,
   isFetching = false,
   isError = false,
   onToggleShare,
@@ -168,7 +167,6 @@ const SwipeTypeWidget = ({
             params={params}
             onToggleInfo={handleInfoToggle}
             onToggleShare={handleShareToggle}
-            isInACollection={isInACollection}
             isInfoVisible={isInfoWidgetVisible}
           />
         </div>

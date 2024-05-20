@@ -2,19 +2,6 @@ import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-// Components
-import Icon from 'components/ui/icon';
-import LoginRequired from 'components/ui/login-required';
-
-// Tooltip
-import { Tooltip } from 'vizzuality-components';
-import CollectionsPanel from 'components/collections-panel';
-import { getTooltipContainer } from 'utils/tooltip';
-
-// hooks
-import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
-import useFetchCollection from 'hooks/collection/fetch-collection';
-
 const ExploreDatasetsActions = (props) => {
   const {
     dataset,
@@ -25,15 +12,7 @@ const ExploreDatasetsActions = (props) => {
     toggleMapLayerGroup,
     resetMapLayerGroupsInteraction,
   } = props;
-  const { isInACollection } = useBelongsToCollection(dataset.id, user.token);
-  const { refetch } = useFetchCollection(
-    selectedCollection,
-    user.token,
-    {},
-    {
-      enabled: !!(selectedCollection && user.token),
-    },
-  );
+
   const isActive = useMemo(
     () => !!layerGroups.find((l) => l.dataset === dataset.id),
     [dataset, layerGroups],
@@ -48,27 +27,6 @@ const ExploreDatasetsActions = (props) => {
     },
     [isActive, dataset, toggleMapLayerGroup, resetMapLayerGroupsInteraction],
   );
-
-  const handleToggleFavorite = useCallback(() => {
-    if (selectedCollection) refetch();
-  }, [selectedCollection, refetch]);
-
-  const handleToggleCollection = useCallback(() => {
-    if (selectedCollection) refetch();
-  }, [selectedCollection, refetch]);
-
-  const userIsLoggedIn = user.token;
-  const datasetName = dataset?.metadata[0]?.info?.name;
-
-  const starIconName = classnames({
-    'icon-star-full': isInACollection,
-    'icon-star-empty': !isInACollection,
-  });
-  const starIconClass = classnames({
-    '-small': true,
-    '-filled': true,
-    '-empty': !isInACollection,
-  });
 
   return (
     <div className="c-explore-datasets-actions">
@@ -87,36 +45,6 @@ const ExploreDatasetsActions = (props) => {
       >
         {isActive ? 'Active' : 'Add to map'}
       </button>
-      <LoginRequired>
-        <Tooltip
-          overlay={
-            <CollectionsPanel
-              resource={dataset}
-              resourceType="dataset"
-              onClick={(e) => e.stopPropagation()}
-              onKeyPress={(e) => e.stopPropagation()}
-              onToggleFavorite={handleToggleFavorite}
-              onToggleCollection={handleToggleCollection}
-            />
-          }
-          overlayClassName="c-rc-tooltip"
-          placement="bottomRight"
-          trigger="click"
-          getTooltipContainer={getTooltipContainer}
-          monitorWindowResize
-        >
-          <button
-            type="button"
-            className="c-button -secondary -compressed"
-            tabIndex={-1}
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-          >
-            <Icon name={starIconName} className={starIconClass} />
-          </button>
-        </Tooltip>
-      </LoginRequired>
     </div>
   );
 };

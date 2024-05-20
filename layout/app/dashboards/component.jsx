@@ -1,13 +1,11 @@
 import { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 // components
 import Layout from 'layout/layout/layout-app';
 import DashboardThumbnailList from 'components/dashboards/thumbnail-list';
 import Banner from 'components/app/common/Banner';
-import LoginRequired from 'components/ui/login-required';
 
 // hooks
 import { useFeaturedDashboards, useHighlightedDashboards } from 'hooks/dashboard';
@@ -133,11 +131,6 @@ export default function LayoutDashboards({ dataPage }) {
                   Create and share <br />
                   custom visualizations.
                 </p>
-                <LoginRequired>
-                  <Link href="/myrw/dashboards">
-                    <a className="c-button -alt -primary">Create a dashboard</a>
-                  </Link>
-                </LoginRequired>
               </Banner>
             </div>
           </div>

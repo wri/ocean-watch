@@ -89,32 +89,6 @@ export const APP_HEADER_ITEMS = [
     id: 'search',
     label: 'Search',
   },
-  {
-    user: false,
-    id: 'user',
-    label: 'Log in',
-  },
-  {
-    user: true,
-    id: 'user',
-    href: '/myrw',
-    label: 'My Resource Watch',
-    children: [
-      {
-        label: 'Profile',
-        href: '/myrw/profile',
-      },
-      {
-        label: 'Admin',
-        href: '/admin',
-        admin: true,
-      },
-      {
-        label: 'Logout',
-        id: 'logout',
-      },
-    ],
-  },
 ];
 
 export default { APP_HEADER_ITEMS };

@@ -19,7 +19,6 @@ export default function WidgetItem({
   widgetState,
   adapter,
   params,
-  isInACollection,
   isInfoVisible,
   isShareVisible,
   handleInfoToggle,
@@ -47,7 +46,6 @@ export default function WidgetItem({
               params={params}
               onToggleInfo={handleInfoToggle}
               onToggleShare={handleShareToggle}
-              isInACollection={isInACollection}
               isInfoVisible={isInfoVisible}
             />
             <div className="widget-container">

@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Renderer from '@widget-editor/renderer';
-import { Tooltip } from 'vizzuality-components';
 
 // components
 import TextChart from 'components/widgets/charts/TextChart';
-import LoginRequired from 'components/ui/login-required';
 import Icon from 'components/ui/icon';
 import Title from 'components/ui/Title';
 import Spinner from 'components/ui/Spinner';
-import CollectionsPanel from 'components/collections-panel';
 import Modal from 'components/modal/modal-component';
 import ShareModal from 'components/modal/share-modal';
 import ErrorBoundary from 'components/ui/error-boundary';
@@ -27,7 +24,6 @@ function DashboardWidgetCard(props) {
   const widgetConfig = widget && widget.widgetConfig;
   const [shareModalOpen, setShareModalOpen] = useState(false);
   const [infoCardOpen, setInfoCardOpen] = useState(false);
-  const { isInACollection } = useBelongsToCollection(widget.id, user.token);
   const widgetType = widget && widget.type;
   const metadataInfo =
     (widget && widget.metadata && widget.metadata.length > 0 && widget.metadata[0].info) || {};
@@ -38,10 +34,7 @@ function DashboardWidgetCard(props) {
   const widgetIsRanking = widgetConfig && widgetConfig.type === 'ranking';
   const widgetIsMap = widgetConfig && widgetConfig.type === 'map';
   const widgetEmbedUrl = widgetIsEmbed && widgetConfig.url;
-  const starIconName = classnames({
-    'icon-star-full': isInACollection,
-    'icon-star-empty': !isInACollection,
-  });
+
   const modalIcon = classnames({
     'icon-cross': infoCardOpen,
     'icon-info': !infoCardOpen,
@@ -91,19 +84,6 @@ function DashboardWidgetCard(props) {
               </li>
 
               <li>
-                <LoginRequired>
-                  <Tooltip
-                    overlay={<CollectionsPanel resource={widget} resourceType="widget" />}
-                    overlayClassName="c-rc-tooltip"
-                    overlayStyle={{ color: '#fff' }}
-                    placement="bottomLeft"
-                    trigger="click"
-                  >
-                    <button className="c-btn favourite-button" tabIndex={-1}>
-                      <Icon name={starIconName} className="-star -small" />
-                    </button>
-                  </Tooltip>
-                </LoginRequired>
               </li>
               <li>
                 <button type="button" onClick={() => setInfoCardOpen(!infoCardOpen)}>

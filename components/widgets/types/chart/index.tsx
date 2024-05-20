@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 
 import { useFetchWidget } from 'hooks/widget';
 import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
-import { useMe } from 'hooks/user';
 
 // utils
 import { getParametrizedWidget } from 'utils/widget';
@@ -35,8 +34,7 @@ const ChartContainer = ({
   encodeParams = true,
 }: ChartContainerProps): JSX.Element => {
   const RWAdapter = useSelector((state) => getRWAdapter(state));
-  const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widgetId, user?.token);
+  const { isInACollection } = useBelongsToCollection();
 
   const {
     data: widget,

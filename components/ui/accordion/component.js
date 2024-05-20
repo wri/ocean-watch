@@ -15,7 +15,7 @@ class AccordionComponent extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     items: PropTypes.array.isRequired,
-  }
+  };
 
   static defaultProps = { className: null };
 
@@ -26,25 +26,15 @@ class AccordionComponent extends PureComponent {
       [className]: !!className,
     });
     return (
-      <Accordion
-        className={classNameValue}
-        {...accordionProps}
-      >
+      <Accordion className={classNameValue} {...accordionProps}>
         {items.map((item) => (
-          <div
-            className="row align-center"
-            key={item.id}
-          >
+          <div className="row align-center" key={item.id}>
             <div className="column small-12 medium-8">
               <AccordionItem>
                 <AccordionItemHeading>
-                  <AccordionItemButton>
-                    {item.title}
-                  </AccordionItemButton>
+                  <AccordionItemButton>{item.title}</AccordionItemButton>
                 </AccordionItemHeading>
-                <AccordionItemPanel>
-                  {renderHTML(item.content)}
-                </AccordionItemPanel>
+                <AccordionItemPanel>{renderHTML(item.content)}</AccordionItemPanel>
               </AccordionItem>
             </div>
           </div>

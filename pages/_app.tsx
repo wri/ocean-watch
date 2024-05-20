@@ -2,7 +2,6 @@ import { FC } from 'react';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
 
-import { Provider as AuthenticationProvider } from 'next-auth/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';
 
@@ -46,15 +45,7 @@ const OceanWatchApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <QueryClientProvider client={queryClient}>
         <MediaContextProvider>
           <Hydrate state={pageProps.dehydratedState}>
-            <AuthenticationProvider
-              session={pageProps.session}
-              options={{
-                clientMaxAge: 5 * 60, // Re-fetch session if cache is older than 60 seconds
-                keepAlive: 10 * 60, // Send keepAlive message every 10 minutes
-              }}
-            >
-              <Component {...pageProps} />
-            </AuthenticationProvider>
+            <Component {...pageProps} />
           </Hydrate>
         </MediaContextProvider>
       </QueryClientProvider>

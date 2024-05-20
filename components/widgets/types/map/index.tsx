@@ -9,7 +9,6 @@ import { fetchLayer } from 'services/layer';
 import { useFetchWidget } from 'hooks/widget';
 import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
 import { useGeostore } from 'hooks/geostore';
-import { useMe } from 'hooks/user';
 
 // utils
 import { getAoiLayer, getMaskLayer, getLayerGroups } from 'utils/layers';
@@ -47,8 +46,7 @@ const MapTypeWidgetContainer = ({
   onToggleShare,
 }: MapTypeWidgetContainerProps): JSX.Element => {
   const [minZoom, setMinZoom] = useState(null);
-  const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widgetId, user?.token);
+  const { isInACollection } = useBelongsToCollection();
 
   const {
     data: widget,

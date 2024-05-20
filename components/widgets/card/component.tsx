@@ -8,11 +8,7 @@ import dateFnsFormat from 'date-fns/format';
 import { replace } from '@vizzuality/layer-manager-utils';
 
 // services
-import { deleteWidget } from 'services/widget';
 import { fetchLayer } from 'services/layer';
-
-// hooks
-import useBelongsToCollection from 'hooks/collection/belongs-to-collection';
 
 // utils
 import { isMapWidget, isEmbedWidget, isTextualWidget, getWidgetType } from 'utils/widget';
@@ -23,10 +19,7 @@ import { INITIAL_STATE, REDUCER } from 'components/widgets/card/reducer';
 
 // components
 import Title from 'components/ui/Title';
-import Icon from 'components/ui/icon';
 import Spinner from 'components/ui/Spinner';
-import LoginRequired from 'components/ui/login-required';
-import CollectionsPanel from 'components/collections-panel';
 import WidgetChart from 'components/charts/widget-chart';
 import MapThumbnail from 'components/map/thumbnail';
 import ShareModal from 'components/modal/share-modal';
@@ -34,7 +27,6 @@ import TextChart from 'components/widgets/charts/TextChart';
 import WidgetActionsTooltip from 'components/widgets/card/tooltip';
 
 // hooks
-import { useMe } from 'hooks/user';
 import { useGeostore } from 'hooks/geostore';
 
 // types
@@ -74,25 +66,16 @@ const WidgetCard = ({
   const router = useRouter();
   const [state, dispatch] = useReducer(REDUCER, INITIAL_STATE);
   const { loading, layer, error, tooltip } = state;
-  const { data: user } = useMe();
-  const { isInACollection } = useBelongsToCollection(widget.id, user?.token);
   const widgetType = useMemo(() => getWidgetType(widget), [widget]);
 
   const handleRemoveVisualization = useCallback(() => {
     const { id, name, dataset } = widget;
 
     toastr.confirm(`Are you sure you want to remove the visualization: ${name}?`, {
-      onOk: () => {
-        deleteWidget(id, dataset, user?.token)
-          .then(() => {
-            onWidgetRemove();
-          })
-          .catch(({ message }) =>
-            toastr.error('Something went wrong deleting the widget', message),
-          );
-      },
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      onOk: () => {},
     });
-  }, [user, widget, onWidgetRemove]);
+  }, [widget]);
 
   const handleEmbed = useCallback(() => {
     const options = {
@@ -107,15 +90,8 @@ const WidgetCard = ({
     setModalOptions(options);
   }, [params, widget, toggleModal, setModalOptions]);
 
-  const handleEditWidget = useCallback(() => {
-    if (user?.role === 'ADMIN') {
-      router.push(`/admin/data/widgets/${widget.id}/edit?dataset=${widget.dataset}`);
-    } else if (widget.userId === user?.id) {
-      router.push(`/myrw-detail/widgets/${widget.id}/edit`);
-    } else {
-      router.push(`/data/widget/${widget.id}`);
-    }
-  }, [router, user, widget]);
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const handleEditWidget = useCallback(() => {}, []);
 
   const handleGoToDataset = useCallback(() => {
     const { dataset } = widget;
@@ -233,7 +209,7 @@ const WidgetCard = ({
   }, [widget]);
 
   const widgetLinks = useMemo(() => widget?.metadata?.[0]?.info?.widgetLinks || [], [widget]);
-  const isWidgetOwner = useMemo(() => widget.userId === user?.id, [widget, user]);
+  const isWidgetOwner = false;
 
   const { data: geostoreProperties } = useGeostore(
     params?.geostore_id || params?.aoi,
@@ -263,7 +239,6 @@ const WidgetCard = ({
         tabIndex: -1,
         role: 'button',
         onClick: () => onWidgetClick && onWidgetClick(widget),
-        onKeyPress: () => onWidgetClick && onWidgetClick(widget),
       })}
     >
       <div className="widget-preview">{getWidgetPreview()}</div>
@@ -271,27 +246,6 @@ const WidgetCard = ({
         <div className="detail">
           <Title className="-default -primary line-clamp-3">{widgetName}</Title>
           <p className="line-clamp-4">{widget.description}</p>
-          {showFavorite && (
-            <LoginRequired>
-              <Tooltip
-                overlay={<CollectionsPanel resource={widget} resourceType="widget" />}
-                overlayClassName="c-rc-tooltip"
-                overlayStyle={{ color: '#fff' }}
-                placement="bottomLeft"
-                trigger="click"
-              >
-                <button type="button" className="c-btn favourite-button" tabIndex={-1}>
-                  <Icon
-                    name={classnames({
-                      'icon-star-full': isInACollection,
-                      'icon-star-empty': !isInACollection,
-                    })}
-                    className="-star -small"
-                  />
-                </button>
-              </Tooltip>
-            </LoginRequired>
-          )}
         </div>
 
         {(showActions || showRemove || showEmbed) && (

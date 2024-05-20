@@ -4,12 +4,8 @@ import { useRouter } from 'next/router';
 
 // components
 import Icon from 'components/ui/icon';
-import LoginRequired from 'components/ui/login-required';
 import Modal from 'components/modal/modal-component';
 import ShareModal from 'components/modal/share-modal';
-import { Tooltip } from 'vizzuality-components';
-import CollectionsPanel from 'components/collections-panel';
-import { getTooltipContainer } from 'utils/tooltip';
 
 export default function ExploreDetailHeader({
   dataset,
@@ -36,12 +32,6 @@ export default function ExploreDetailHeader({
   }, [query, setSelectedDataset, setSidebarSection, setFiltersSelected, setFiltersSearch]);
 
   const location = typeof window !== 'undefined' && window.location;
-  const datasetName =
-    dataset &&
-    dataset.metadata &&
-    dataset.metadata[0] &&
-    dataset.metadata[0].info &&
-    dataset.metadata[0].info.name;
 
   return (
     <div
@@ -59,23 +49,6 @@ export default function ExploreDetailHeader({
         <span>ALL DATASETS</span>
       </button>
       <div className="right-buttons">
-        {/* Collections tooltip */}
-        <LoginRequired>
-          <Tooltip
-            overlay={<CollectionsPanel resource={dataset} resourceType="dataset" />}
-            overlayClassName="c-rc-tooltip"
-            placement="bottomRight"
-            trigger="click"
-            getTooltipContainer={getTooltipContainer}
-            monitorWindowResize
-          >
-            <button className="c-btn -quaternary -compressed -fs-tiny" type="button">
-              <Icon className="-small" name="icon-star-full" />
-              <span>SAVE</span>
-            </button>
-          </Tooltip>
-        </LoginRequired>
-
         <button
           className="c-btn -quaternary -compressed -fs-tiny share-button"
           onClick={() => setShowShareModal(true)}

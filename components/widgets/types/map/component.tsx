@@ -70,7 +70,6 @@ const MapTypeWidget = ({
   isWebshot = false,
   isFetching = false,
   isError = false,
-  isInACollection = false,
   bounds,
   onToggleShare,
   onFitBoundsChange,
@@ -215,7 +214,6 @@ const MapTypeWidget = ({
             params={shareableParams}
             onToggleInfo={handleInfoToggle}
             onToggleShare={handleShareToggle}
-            isInACollection={isInACollection}
             isInfoVisible={isInfoWidgetVisible}
           />
         </div>
