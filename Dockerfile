@@ -21,6 +21,9 @@ RUN \
 
 # 2. Rebuild the source code only when needed
 FROM base AS builder
+ARG MAPBOX_API_TOKEN
+ENV MAPBOX_API_TOKEN=${MAPBOX_API_TOKEN}
+
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
