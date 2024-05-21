@@ -9,6 +9,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * */
 
 module.exports = withBundleAnalyzer({
+  env: {
+    NEXT_PUBLIC_RW_MAPBOX_API_TOKEN: process.env.MAPBOX_API_TOKEN,
+  },
   poweredByHeader: false,
   experimental: {
     outputStandalone: true,
