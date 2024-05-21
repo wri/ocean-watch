@@ -20,6 +20,9 @@ scaling:
   target_cpu_percent: 70
   target_memory_percent: 75
 
+variables:
+  NEXT_PUBLIC_RW_MAPBOX_API_TOKEN: ${MAPBOX_API_TOKEN}
+
 # Environment-specific configurations can be specified here
 environments:
   production:

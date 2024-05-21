@@ -325,6 +325,7 @@ jobs:
         run: |
           export IMAGE_LOCATION="${{ needs.build-image.outputs.imageURL }}"
           export GHCR_ACCESS="${{ env.SECRET_ARN }}"
+          export MAPBOX_API_TOKEN="${{ secrets.MAPBOX_API_TOKEN }}"
           if ! copilot svc deploy --force --name nextjs-app --env ${{ github.head_ref }}; then
             echo "Failed to deploy service."
             copilot svc delete --name nextjs-app --env ${{ github.head_ref }} --yes
