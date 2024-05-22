@@ -15,10 +15,9 @@ import Banner from 'components/app/common/Banner';
 // services
 import { fetchConfigFile, fetchOceanWatchAreas } from 'services/ocean-watch';
 
-const OceanWatchStoryTelling = dynamic(
-  () => import('../../../layout/layout/ocean-watch/storytelling'),
-  { ssr: false },
-);
+const OceanWatchStoryTelling = dynamic(() => import('../layout/layout/ocean-watch/storytelling'), {
+  ssr: false,
+});
 
 export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
   return (
