@@ -21,14 +21,13 @@ export default function Footer() {
       <div className="footer-main">
         <div className="l-container">
           <div className="row">
-            <div className="column small-12">
-              <img
-                className="footer-logo"
-                height={21}
-                width={129}
-                src="/static/images/logo-embed.png"
-                alt="Resource Watch"
-              />
+            <div className="column small-12 footer-logo">
+              <Link href="/">
+                <a>
+                  <Icon name="icon-ow-logo-dark" className="brand-logo" />
+                  <h1 className="brand-title">Ocean Watch</h1>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
