@@ -19,7 +19,7 @@ export default function LayoutDashboards({ dataPage }) {
 
   const onSelectDashboard = useCallback(
     ({ slug }) => {
-      router.push(`/dashboards/${slug}`);
+      router.push(slug === 'ocean-watch' ? `/` : `/dashboards/${slug}`);
     },
     [router],
   );

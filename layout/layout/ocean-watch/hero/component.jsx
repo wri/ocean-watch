@@ -14,8 +14,8 @@ import ShareModal from 'components/modal/share-modal';
 const OCEAN_WATCH_TABS = [
   {
     label: 'Introduction',
-    value: '/dashboards/ocean-watch',
-    route: '/dashboards/ocean-watch',
+    value: '/',
+    route: '/',
     params: {},
   },
   {

@@ -19,7 +19,7 @@ export default function HeaderDashboards() {
         _dashboards.map(({ id, name, slug }) => ({
           id: slug === 'ocean' ? 'ocean-watch' : id,
           label: slug === 'ocean' ? 'Ocean Watch' : name,
-          href: slug === 'ocean' ? '/dashboards/ocean-watch' : `/dashboards/${slug}`,
+          href: slug === 'ocean' ? '/' : `/dashboards/${slug}`,
         })),
       placeholderData: [],
       refetchOnWindowFocus: false,
