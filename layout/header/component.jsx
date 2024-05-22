@@ -27,8 +27,8 @@ export default function Header({ className, header, pageHeader }) {
               <div className="header-logo">
                 <Link href="/">
                   <a>
-                    <Icon name="icon-rw-logo" className="brand-logo" />
-                    <h1 className="brand-title">Resource Watch</h1>
+                    <Icon name="icon-ow-logo" className="brand-logo" />
+                    <h1 className="brand-title">Ocean Watch</h1>
                   </a>
                 </Link>
               </div>
