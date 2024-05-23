@@ -23,26 +23,9 @@ export const APP_HEADER_ITEMS = [
   {
     id: 'about',
     label: 'About',
-    href: '/about',
-    root: '/about',
-    children: [
-      {
-        label: 'Partners',
-        href: '/about/partners',
-      },
-      {
-        label: 'FAQs',
-        href: '/about/faqs',
-      },
-      {
-        label: 'How to',
-        href: '/about/howto',
-      },
-      {
-        label: 'Contact us',
-        href: '/about/contact-us',
-      },
-    ],
+    href: '/dashboards/ocean-watch/about',
+    root: '/dashboards/ocean-watch/about',
+    children: [],
   },
   {
     id: 'get-involved',
