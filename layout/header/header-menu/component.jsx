@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { APP_HEADER_ITEMS } from 'layout/header/constants';
 
 const header = {
-  'get-involved': import('../header-get-involved'),
   menu: import('../header-menu'),
   'menu-mobile': import('../header-menu-mobile'),
   search: import('../header-search'),
@@ -22,7 +21,7 @@ const HeaderMenu = () => {
       <ul>
         {APP_HEADER_ITEMS.map((item) => {
           let DropdownMenu;
-          if (!['home', 'coastal-profiles', 'coral-reef-dashboards', 'about'].includes(item.id)) {
+          if (!['home', 'coastal-profiles', 'coral-reef-dashboards', 'about', 'partners'].includes(item.id)) {
             DropdownMenu = dynamic(() => header[item.id]);
           }
 

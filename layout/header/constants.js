@@ -28,32 +28,11 @@ export const APP_HEADER_ITEMS = [
     children: [],
   },
   {
-    id: 'get-involved',
-    label: 'Get Involved',
-    href: '/get-involved',
-    root: '/get-involved',
-    children: [
-      {
-        label: 'Suggest a story',
-        href: '/get-involved/suggest-a-story',
-      },
-      {
-        label: 'Contribute data',
-        href: '/get-involved/contribute-data',
-      },
-      {
-        label: 'Join the community',
-        href: '/get-involved/join-the-community',
-      },
-      {
-        label: 'Develop your app',
-        href: '/get-involved/develop-your-app',
-      },
-      {
-        label: 'Sign up',
-        href: '/sign-in',
-      },
-    ],
+    id: 'partners',
+    label: 'Partners',
+    href: '/dashboards/ocean-watch/partners',
+    root: '/dashboards/ocean-watch/partners',
+    children: [],
   },
   {
     id: 'search',
