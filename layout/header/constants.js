@@ -14,10 +14,11 @@ export const APP_HEADER_ITEMS = [
     children: [],
   },
   {
-    id: 'blog',
-    label: 'Blog',
-    href: 'https://blog.resourcewatch.org',
-    external: true,
+    id: 'coral-reef-dashboards',
+    label: 'Coral Reef Dashboards',
+    href: '/dashboards/coral-reef-dashboards',
+    root: '/dashboards/coral-reef-dashboards',
+    children: [],
   },
   {
     id: 'about',

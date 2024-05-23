@@ -23,7 +23,8 @@ const HeaderMenu = () => {
       <ul>
         {APP_HEADER_ITEMS.map((item) => {
           let DropdownMenu;
-          if (item.id !== 'blog' && item.id !== 'home' && item.id !== 'coastal-profiles') {
+          //if (![].includes(item.id))
+          if (item.id !== 'home' && item.id !== 'coastal-profiles' && item.id !== 'coral-reef-dashboards') {
             DropdownMenu = dynamic(() => header[item.id]);
           }
 
