@@ -43,11 +43,16 @@ export default function Footer() {
                 <div className="footer-item">
                   <p className="-bold">World Resources Institute</p>
                   <p>10 G Street NE Suite 800, Washington, DC 20002, USA</p>
-                  <p>Phone +1 (202) 729-7600    |    Fax: +1 (202) 720 7610</p>
+                  <p>Phone +1 (202) 729-7600 | Fax: +1 (202) 720 7610</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="footer-copyright">
+        <div className="l-container">
+          <p>&copy; World Resources Institute 2023</p>
         </div>
       </div>
     </footer>
