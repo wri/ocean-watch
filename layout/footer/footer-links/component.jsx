@@ -9,28 +9,14 @@ import { useFeaturedDashboards } from 'hooks/dashboard';
 import { FOOTER_LINKS } from './constants';
 
 export default function FooterLinks() {
-  const { data: featuredDashboards, isError } = useFeaturedDashboards(
-    { env: process.env.NEXT_PUBLIC_ENVS_SHOW },
-    {
-      select: (_dashboards) =>
-        _dashboards.map(({ id, name, slug }) => ({
-          id: slug === 'ocean' ? 'ocean-watch' : id,
-          label: slug === 'ocean' ? 'Ocean Watch' : name,
-          href: slug === 'ocean' ? '/' : `/dashboards/${slug}`,
-        })),
-      placeholderData: [],
-      refetchOnWindowFocus: false,
-      retry: false,
-    },
-  );
 
   const footerMenu = useMemo(
     () =>
       FOOTER_LINKS.map((i) => {
-        const children = i.id === 'dashboards' && !isError ? featuredDashboards : i.children || [];
+        const children = i.children || [];
         return [...[i], ...children];
       }),
-    [featuredDashboards, isError],
+    [],
   );
 
   const getMenuItems = useCallback(
@@ -63,7 +49,7 @@ export default function FooterLinks() {
                     title: index === 0,
                   })}
                 >
-                  {index === 0 ? <h3>{link}</h3> : link}
+                  {index === 0 ? <h3>{item.label}</h3> : link}
                 </li>
               );
             })}

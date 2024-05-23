@@ -1,95 +1,91 @@
 export const FOOTER_LINKS = [
   {
-    id: 'data',
-    label: 'Data',
-    href: '/data/explore',
+    id: 'sitemap',
+    label: 'Sitemap',
     children: [
       {
-        label: 'Explore Datasets',
-        href: '/data/explore',
+        label: 'Home',
+        href: '/',
       },
       {
-        label: 'Near Real-Time Data',
-        href: '/data/explore?section=Near%20Real-Time',
+        label: 'Coastal Profiles',
+        href: '/dashboards/ocean-watch/country',
       },
       {
-        label: 'App Gallery',
-        href: '/get-involved/apps',
+        label: 'Coral Reef Dashboards',
+        href: '/dashboards/coral-reef-dashboards',
+      },
+      {
+        label: 'About Ocean Watch',
+        href: '/dashboards/ocean-watch/about',
+      },
+      {
+        label: 'Our Partners',
+        href: '/dashboards/ocean-watch/partners',
       },
     ],
   },
   {
-    id: 'dashboards',
-    label: 'Dashboards',
-    href: '/dashboards',
-    children: [],
-  },
-  {
-    id: 'blog',
-    label: 'Blog',
-    href: 'https://blog.resourcewatch.org',
-    isExternalLink: true,
-  },
-  {
-    id: 'about',
-    label: 'About',
-    href: '/about',
+    id: 'coral-reef-dashboards',
+    label: 'Coral Reef Dashboards',
     children: [
       {
-        label: 'Partners',
-        href: '/about/partners',
+        label: 'Global Outlook',
+        href: '/dashboards/coral-reefs',
       },
       {
-        label: 'FAQs',
-        href: '/about/faqs',
+        label: 'Red Sea and Gulf of Aden (RSGA)',
+        href: '/dashboards/coral-reefs-red-sea-and-gulf-of-aden',
       },
       {
-        label: 'How to',
-        href: '/about/howto',
+        label: 'Western Indian Ocean (WIO)',
+        href: '/dashboards/coral-reefs-western-indian-ocean',
       },
       {
-        label: 'Contact us',
-        href: '/about/contact-us',
+        label: 'Persian Gulf and Gulf of Oman (ROPME)',
+        href: '/dashboards/coral-reefs-persian-gulf-and-gulf-of-oman',
       },
       {
-        label: 'Terms of service',
+        label: 'South Asia',
+        href: '/dashboards/coral-reefs-south-asia',
+      },
+      {
+        label: 'East Asia',
+        href: '/dashboards/coral-reefs-east-asia',
+      },
+      {
+        label: 'Australia',
+        href: '/dashboards/coral-reefs-australia',
+      },
+      {
+        label: 'Pacific',
+        href: '/dashboards/coral-reefs-pacific',
+      },
+      {
+        label: 'Eastern Tropical Pacific (ETP)',
+        href: '/dashboards/coral-reefs-eastern-tropical-pacific',
+      },
+      {
+        label: 'Caribbean',
+        href: '/dashboards/coral-reefs-caribbean',
+      },
+      {
+        label: 'Brazil',
+        href: '/dashboards/coral-reefs-brazil',
+      },
+    ],
+  },
+  {
+    id: 'legal',
+    label: 'Legal',
+    children: [
+      {
+        label: 'Terms of Service',
         href: '/terms-of-service',
       },
       {
         label: 'Privacy Policy',
         href: '/privacy-policy',
-      },
-      {
-        label: 'Attribution requirements',
-        href: '/api-attribution-requirements',
-      },
-    ],
-  },
-  {
-    id: 'get_involved',
-    label: 'Get Involved',
-    href: '/get-involved',
-    children: [
-      {
-        label: 'Suggest a story',
-        href: '/get-involved/suggest-a-story',
-      },
-      {
-        label: 'Contribute data',
-        href: '/get-involved/contribute-data',
-      },
-      {
-        label: 'Join the community',
-        href: '/get-involved/join-the-community',
-      },
-      {
-        label: 'Develop your app',
-        route: 'get_involved_detail',
-        href: '/get-involved/develop-your-app',
-      },
-      {
-        label: 'Sign up',
-        href: '/sign-in',
       },
     ],
   },
