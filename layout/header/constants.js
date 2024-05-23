@@ -7,10 +7,10 @@ export const APP_HEADER_ITEMS = [
     children: [],
   },
   {
-    id: 'dashboards',
-    label: 'Dashboards',
-    href: '/dashboards',
-    root: '/dashboards',
+    id: 'coastal-profiles',
+    label: 'Coastal Profiles',
+    href: '/dashboards/ocean-watch/country',
+    root: '/dashboards/ocean-watch/country',
     children: [],
   },
   {

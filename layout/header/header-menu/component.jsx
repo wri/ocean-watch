@@ -9,7 +9,6 @@ import { APP_HEADER_ITEMS } from 'layout/header/constants';
 
 const header = {
   about: import('../header-about'),
-  dashboards: import('../header-dashboards'),
   'get-involved': import('../header-get-involved'),
   menu: import('../header-menu'),
   'menu-mobile': import('../header-menu-mobile'),
@@ -24,7 +23,7 @@ const HeaderMenu = () => {
       <ul>
         {APP_HEADER_ITEMS.map((item) => {
           let DropdownMenu;
-          if (item.id !== 'blog' && item.id !== 'home') {
+          if (item.id !== 'blog' && item.id !== 'home' && item.id !== 'coastal-profiles') {
             DropdownMenu = dynamic(() => header[item.id]);
           }
 
