@@ -41,7 +41,7 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
             <div className="row">
               <div className="column small-12 medium-8">
                 <p className="text-white">
-                  This is a Beta version of Ocean Watch - We&apos;re still tweaking things and
+                  Welcome to the Beta version of Ocean Watch! We are still tweaking things and
                   making improvements. Please use the feedback button on the right to let us know if
                   there is anything we can change to make your experience better!
                 </p>
