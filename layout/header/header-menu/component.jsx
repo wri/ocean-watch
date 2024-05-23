@@ -8,13 +8,8 @@ import Link from 'next/link';
 import { APP_HEADER_ITEMS } from 'layout/header/constants';
 
 const header = {
-  about: import('../header-about'),
-  dashboards: import('../header-dashboards'),
-  data: import('../header-data'),
-  'get-involved': import('../header-get-involved'),
   menu: import('../header-menu'),
   'menu-mobile': import('../header-menu-mobile'),
-  search: import('../header-search'),
 };
 
 const HeaderMenu = () => {
@@ -25,7 +20,7 @@ const HeaderMenu = () => {
       <ul>
         {APP_HEADER_ITEMS.map((item) => {
           let DropdownMenu;
-          if (item.id !== 'blog') {
+          if (!['home', 'coastal-profiles', 'coral-reef-dashboards', 'about', 'partners'].includes(item.id)) {
             DropdownMenu = dynamic(() => header[item.id]);
           }
 

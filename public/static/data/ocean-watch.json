@@ -4,17 +4,17 @@
       "indicators": [
         {
           "id": "land-sea-interface",
-          "title": "Land-Based Pollution",
+          "title": "Land/ Sea Interface",
           "icon": "land-sea"
         },
         {
           "id": "oceans-climate",
-          "title": "Ocean and Climate Change",
+          "title": "Oceans and Climate",
           "icon": "climate"
         },
         {
           "id": "biodiversity",
-          "title": "Ocean Biodiversity",
+          "title": "Biodiversity",
           "icon": "biodiversity"
         },
         {
@@ -24,7 +24,7 @@
         },
         {
           "id": "ocean-dependence",
-          "title": "Dependence on the Ocean",
+          "title": "Ocean Dependence",
           "icon": "dependence"
         },
         {
@@ -47,7 +47,7 @@
           "id": "land-sea-interface-1",
           "indicator": "land-sea-interface",
           "content": {
-            "title": "Land-Based Pollution",
+            "title": "Land/ Sea Interface",
             "subtitle": "Addressing threats to the ocean often begins on land",
             "intro": "The land and the ocean are strongly connected by a series of human and natural processes, fueling ocean life cycles. Human activities on land have introduced higher levels of sediment and toxic chemicals into the ocean, threatening the health of the coast, ocean resources and billions of people"
           }
@@ -104,7 +104,7 @@
           "id": "oceans-climate-1",
           "indicator": "oceans-climate",
           "content": {
-            "title": "Ocean and Climate Change",
+            "title": "Oceans and Climate",
             "subtitle": "The ocean is central to regulating the global climate.",
             "widget": [
               {
@@ -146,7 +146,7 @@
           "id": "biodiversity-1",
           "indicator": "biodiversity",
           "content": {
-            "title": "Ocean Biodiversity",
+            "title": "Biodiversity",
             "subtitle": "Biodiversity — the variety and variability of life on Earth — is the natural capital people depend on for survival",
             "widget": [
               {
@@ -225,7 +225,7 @@
           "id": "ocean-dependence-1",
           "indicator": "ocean-dependence",
           "content": {
-            "title": "Dependence on the Ocean",
+            "title": "Ocean Dependence",
             "subtitle": "Humans rely on the ocean for sufficient, safe and nutritious food",
             "widget": [
               {
@@ -356,7 +356,7 @@
                   "indicators": [
                     {
                       "id": "land-sea-interface",
-                      "title": "Land-Based Pollution",
+                      "title": "Land/ Sea Interface",
                       "icon": "land-sea",
                       "widgets": [
                         {
@@ -373,7 +373,7 @@
                     },
                     {
                       "id": "oceans-climate",
-                      "title": "Ocean and Climate Change",
+                      "title": "Oceans and Climate",
                       "icon": "climate",
                       "widgets": [
                         {
@@ -386,7 +386,7 @@
                     },
                     {
                       "id": "biodiversity",
-                      "title": "Ocean Biodiversity",
+                      "title": "Biodiversity",
                       "icon": "biodiversity",
                       "widgets": [
                         {
@@ -416,7 +416,7 @@
                     },
                     {
                       "id": "ocean-dependence",
-                      "title": "Dependence on the Ocean",
+                      "title": "Ocean Dependence",
                       "icon": "dependence",
                       "widgets": [
                         {
@@ -491,7 +491,7 @@
         {
           "title": "How is land based pollution generated?",
           "anchor": "how-is-land-based-pollution-generated",
-          "anchorTitle": "Land-Based Pollution",
+          "anchorTitle": "Land/ Sea Interface",
           "content": [
             [
               {
@@ -1012,17 +1012,17 @@
       "indicators": [
         {
           "id": "land-sea-interface",
-          "title": "Land-Based Pollution",
+          "title": "Land/ Sea Interface",
           "icon": "land-sea"
         },
         {
           "id": "oceans-climate",
-          "title": "Ocean and Climate Change",
+          "title": "Oceans and Climate",
           "icon": "climate"
         },
         {
           "id": "biodiversity",
-          "title": "Ocean Biodiversity",
+          "title": "Biodiversity",
           "icon": "biodiversity"
         },
         {
@@ -1032,7 +1032,7 @@
         },
         {
           "id": "ocean-dependence",
-          "title": "Dependence on the Ocean",
+          "title": "Ocean Dependence",
           "icon": "dependence"
         },
         {
@@ -1055,7 +1055,7 @@
           "id": "land-sea-interface-1",
           "indicator": "land-sea-interface",
           "content": {
-            "title": "Land-Based Pollution",
+            "title": "Land/ Sea Interface",
             "subtitle": "Addressing threats to the ocean often begins on land",
             "intro": "The land and the ocean are strongly connected by a series of human and natural processes, fueling ocean life cycles. Human activities on land have introduced higher levels of sediment and toxic chemicals into the ocean, threatening the health of the coast, ocean resources and billions of people"
           }
@@ -1112,7 +1112,7 @@
           "id": "oceans-climate-1",
           "indicator": "oceans-climate",
           "content": {
-            "title": "Ocean and Climate Change",
+            "title": "Oceans and Climate",
             "subtitle": "The ocean is central to regulating the global climate.",
             "widget": [
               {
@@ -1154,7 +1154,7 @@
           "id": "biodiversity-1",
           "indicator": "biodiversity",
           "content": {
-            "title": "Ocean Biodiversity",
+            "title": "Biodiversity",
             "subtitle": "Biodiversity — the variety and variability of life on Earth — is the natural capital people depend on for survival",
             "widget": [
               {
@@ -1233,7 +1233,7 @@
           "id": "ocean-dependence-1",
           "indicator": "ocean-dependence",
           "content": {
-            "title": "Dependence on the Ocean",
+            "title": "Ocean Dependence",
             "subtitle": "Humans rely on the ocean for sufficient, safe and nutritious food",
             "widget": [
               {
@@ -1364,7 +1364,7 @@
                   "indicators": [
                     {
                       "id": "land-sea-interface",
-                      "title": "Land-Based Pollution",
+                      "title": "Land/ Sea Interface",
                       "icon": "land-sea",
                       "widgets": [
                         {
@@ -1381,7 +1381,7 @@
                     },
                     {
                       "id": "oceans-climate",
-                      "title": "Ocean and Climate Change",
+                      "title": "Oceans and Climate",
                       "icon": "climate",
                       "widgets": [
                         {
@@ -1394,7 +1394,7 @@
                     },
                     {
                       "id": "biodiversity",
-                      "title": "Ocean Biodiversity",
+                      "title": "Biodiversity",
                       "icon": "biodiversity",
                       "widgets": [
                         {
@@ -1424,7 +1424,7 @@
                     },
                     {
                       "id": "ocean-dependence",
-                      "title": "Dependence on the Ocean",
+                      "title": "Ocean Dependence",
                       "icon": "dependence",
                       "widgets": [
                         {
@@ -1499,7 +1499,7 @@
         {
           "title": "How is land based pollution generated?",
           "anchor": "how-is-land-based-pollution-generated",
-          "anchorTitle": "Land-Based Pollution",
+          "anchorTitle": "Land/ Sea Interface",
           "content": [
             [
               {

@@ -378,7 +378,7 @@ export default function MapSelection() {
                   setVisibility(true);
                 }}
               >
-                Select a coastline
+                Select a country
               </button>
             </Tooltip>
           </div>
@@ -393,7 +393,7 @@ export default function MapSelection() {
               defaultValue="none"
             >
               <option value="none" disabled hidden>
-                Select a coastline
+                Select a country
               </option>
               {areas.map(({ label, value }) => (
                 <option key={value} value={value}>

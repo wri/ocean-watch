@@ -1,6 +1,23 @@
 .l-footer {
   .footer-logo {
     margin-bottom: 20px;
+
+    .brand-logo {
+      width: 200px;
+      height: 35px;
+      display: block;
+      fill: $white;
+    }
+
+    .brand-title {
+      display: block;
+      height: 0;
+      width: 0;
+      color: transparent;
+      text-indent: -9999px;
+      visibility: hidden;
+      margin: 0;
+    }
   }
 
   .footer-intro {
@@ -107,4 +124,10 @@
     }
   }
 
+  .footer-copyright {
+    background-color: #4C88D7;
+    color: white;
+    padding: 10px 0;
+    text-align: left;
+  }
 }

@@ -3,33 +3,16 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { toastr } from 'react-redux-toastr';
 
 // components
 import Icon from 'components/ui/icon';
-import SearchMobile from 'layout/header/search-mobile';
 
 // constants
 import { APP_HEADER_ITEMS } from 'layout/header/constants';
 
 const HeaderMenuMobile = ({ header, user, setMobileOpened }) => {
   const { pathname } = useRouter();
-
-  const logout = (e) => {
-    if (e) e.preventDefault();
-
-    // Get to logout
-    fetch(`${process.env.NEXT_PUBLIC_WRI_API_URL}/auth/logout`, { credentials: 'include' })
-      .then(() => {
-        window.location.href = `/logout?callbackUrl=${window.location.href}`;
-      })
-      .catch((err) => {
-        toastr.error('Error', err);
-      });
-  };
-
   const { mobileOpened } = header;
-  const { role, token } = user;
   const classNames = classnames({ '-opened': mobileOpened });
 
   useEffect(() => {
@@ -62,19 +45,8 @@ const HeaderMenuMobile = ({ header, user, setMobileOpened }) => {
             <Icon name="icon-cross" className="-smaller" />
           </button>
 
-          <SearchMobile />
-
           <ul>
             {APP_HEADER_ITEMS.map((item) => {
-              const isUserLogged = !!token;
-              const isUserAdmin = isUserLogged && role === 'ADMIN';
-
-              // If user is defined and is not equal to the current token
-              if (typeof item.user !== 'undefined' && item.user !== isUserLogged) return null;
-
-              // If admin user is defined and is not equal to the current token
-              if (typeof item.admin !== 'undefined' && item.admin !== isUserAdmin) return null;
-
               return (
                 <li
                   key={item.label}
@@ -99,35 +71,14 @@ const HeaderMenuMobile = ({ header, user, setMobileOpened }) => {
                   {item.children && (
                     <ul>
                       {item.children.map((c) => {
-                        // If user is defined and is not equal to the current token
-                        if (typeof c.user !== 'undefined' && c.user !== isUserLogged) {
-                          return null;
-                        }
-
-                        // If admin user is defined and is not equal to the current token
-                        if (typeof c.admin !== 'undefined' && c.admin !== isUserAdmin) {
-                          return null;
-                        }
-
                         return (
                           <li key={c.label}>
                             {c.href && (
-                              <Link
-                                href={c.href}
-                                // route={c.route}
-                                // params={c.params}
-                              >
+                              <Link href={c.href}>
                                 <a>{c.label}</a>
                               </Link>
                             )}
-
                             {c.href && c.external && <a href={c.href}>{c.label}</a>}
-
-                            {c.id === 'logout' && (
-                              <a href={c.href} onClick={logout}>
-                                {c.label}
-                              </a>
-                            )}
                           </li>
                         );
                       })}
