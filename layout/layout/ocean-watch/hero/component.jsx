@@ -77,7 +77,7 @@ export default function OceanWatchHero({ className }) {
                 </button>
               </div>
               <h1 className="mb-2 page-header-title md:mb-8">
-                Ocean Watch <sup>Beta</sup>
+                Ocean Watch
               </h1>
               <Tabs
                 options={OCEAN_WATCH_TABS}
