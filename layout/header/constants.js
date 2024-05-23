@@ -1,24 +1,10 @@
 export const APP_HEADER_ITEMS = [
   {
-    id: 'data',
-    label: 'Data',
-    href: '/data/explore',
+    id: 'home',
+    label: 'Home',
+    href: '/',
     // used to determine if the menu should be highlighted based on the current page
-    root: '/data',
-    children: [
-      {
-        label: 'Explore Datasets',
-        href: '/data/explore',
-      },
-      {
-        label: 'Near Real-Time Data',
-        href: '/data/explore?section=Near%20Real-Time',
-      },
-      {
-        label: 'App Gallery',
-        href: '/get-involved/apps',
-      },
-    ],
+    children: [],
   },
   {
     id: 'dashboards',
