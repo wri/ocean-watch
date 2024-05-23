@@ -122,47 +122,6 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
                   </div>
                 </Banner>
               </div>
-              <div className="mt-5 column small-12 medium-6">
-                <Banner
-                  bgImage="/static/images/homepage/home-data-bg1.png"
-                  className="h-full !p-10"
-                >
-                  <div className="h-full">
-                    <h4 className="text-lg font-light text-white md:text-xl md:leading-10">
-                      Did you miss something?
-                    </h4>
-                    <p>
-                      Know of a data set that you&apos;d like to see on Resource Watch or have a
-                      specific area of interest you&apos;d like us to cover?
-                    </p>
-                  </div>
-                  <div className="flex justify-center w-full mt-3 md:justify-start">
-                    <Link href="/get-involved/contribute-data">
-                      <a className="w-full md:w-auto c-button -alt -primary">Request data</a>
-                    </Link>
-                  </div>
-                </Banner>
-              </div>
-              <div className="mt-5 column small-12 medium-6 ">
-                <Banner bgImage="/static/images/backgrounds/jellyfish.jpg" className="h-full !p-10">
-                  <div className="h-full">
-                    <h4 className="text-lg font-light text-white md:text-xl md:leading-10">
-                      What&apos;s Your Ocean Watch Story?
-                    </h4>
-                    <p>How have you used Ocean Watch data to drive impact?</p>
-                  </div>
-                  <div className="flex justify-center w-full mt-3 md:justify-start">
-                    <a
-                      className="w-full c-button -alt -primary md:w-auto"
-                      href="https://docs.google.com/forms/d/e/1FAIpQLSc0KvLPwuCyMwXMQ3sO9gerN_HFECBHHBVnzq2uyROP-cbAOg/viewform"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Tell Your Story
-                    </a>
-                  </div>
-                </Banner>
-              </div>
               <div
                 className="column small-12"
                 style={{
@@ -175,12 +134,12 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
                   bgImage="/static/images/pages/app/banner-ocean-watch.jpg"
                 >
                   <h4 className="m-0 text-lg font-light text-white md:leading-10 md:text-xl">
-                    Check out the Ocean Watch data
+                    View Ocean Watch Data
                     <br />
-                    on the Explore page
+                    on WRI Data Explorer
                   </h4>
-                  <Link href='/data/explore?section=All data&topics=["ocean"]'>
-                    <a className="w-full mt-4 c-button -alt -primary md:w-auto">Go to explore</a>
+                  <Link href='https://datasets.wri.org/dataset?q=Ocean'>
+                    <a className="w-full mt-4 c-button -alt -primary md:w-auto">Explore</a>
                   </Link>
                 </Banner>
               </div>
