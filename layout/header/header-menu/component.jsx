@@ -10,7 +10,6 @@ import { APP_HEADER_ITEMS } from 'layout/header/constants';
 const header = {
   menu: import('../header-menu'),
   'menu-mobile': import('../header-menu-mobile'),
-  search: import('../header-search'),
 };
 
 const HeaderMenu = () => {

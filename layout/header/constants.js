@@ -34,10 +34,6 @@ export const APP_HEADER_ITEMS = [
     root: '/dashboards/ocean-watch/partners',
     children: [],
   },
-  {
-    id: 'search',
-    label: 'Search',
-  },
 ];
 
 export default { APP_HEADER_ITEMS };
