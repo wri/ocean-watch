@@ -5,7 +5,6 @@ import { useQueryClient } from 'react-query';
 // components
 import LayoutOceanWatch from 'layout/layout/ocean-watch';
 import Header from 'layout/header';
-import OceanWatchHero from 'layout/layout/ocean-watch/hero';
 import PartnerBlock from 'components/partner-block';
 import BannerCountries from 'components/banners/countries';
 
@@ -70,7 +69,7 @@ export default function OceanWatchPartnersPage() {
   const partners = useMemo(
     () => [
       {
-        title: 'Collaborating partners',
+        title: 'Collaborating Partners',
         children: collaboratingPartners,
       },
       {
@@ -88,7 +87,6 @@ export default function OceanWatchPartnersPage() {
   return (
     <LayoutOceanWatch title="Ocean Watch – Partners" description={PARTNERS_PAGE_DESCRIPTION}>
       <Header className="-transparent" />
-      <OceanWatchHero className="-ocean-watch" />
       <section className="l-section -secondary -medium">
         <div className="l-container">
           <div className="row">
