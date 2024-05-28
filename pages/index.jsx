@@ -138,7 +138,7 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
                     <br />
                     on WRI Data Explorer
                   </h4>
-                  <Link href='https://datasets.wri.org/dataset?q=Ocean'>
+                  <Link href="https://datasets.wri.org/dataset?q=Ocean">
                     <a className="w-full mt-4 c-button -alt -primary md:w-auto">Explore</a>
                   </Link>
                 </Banner>

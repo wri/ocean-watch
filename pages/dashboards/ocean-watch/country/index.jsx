@@ -9,7 +9,6 @@ import { useOceanWatchAreas } from 'hooks/ocean-watch';
 // components
 import LayoutOceanWatch from 'layout/layout/ocean-watch';
 import Header from 'layout/header';
-import OceanWatchHero from 'layout/layout/ocean-watch/hero';
 import OceanWatchPartners from 'layout/layout/ocean-watch/partners';
 import Modal from 'components/modal/modal-component';
 
@@ -57,7 +56,6 @@ export default function OceanWatchCountryProfiles() {
       description="Ocean Watch description" // todo: replace description
     >
       <Header className="-transparent" />
-      <OceanWatchHero className="-ocean-watch" />
       <section className="l-section -secondary -small">
         <div className="l-container">
           <div className="row">
@@ -69,7 +67,7 @@ export default function OceanWatchCountryProfiles() {
                 onChange={handleAreaChange}
                 clearable={false}
                 value={countryValue}
-                placeholder="Select a coastline"
+                placeholder="Select a country"
               />
               <div
                 style={{

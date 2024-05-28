@@ -186,7 +186,6 @@ export default function OceanWatchCountryProfilePage({ iso }) {
         <meta name="viewport" content="width=1024" />
       </Head>
       <Header className="-transparent" />
-      <OceanWatchHero className="-ocean-watch" />
       <section
         className="l-section -small -secondary"
         style={{
