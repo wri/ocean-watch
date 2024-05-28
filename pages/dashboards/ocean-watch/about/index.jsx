@@ -7,7 +7,6 @@ import renderHTML from 'react-render-html';
 // components
 import LayoutOceanWatch from 'layout/layout/ocean-watch';
 import Header from 'layout/header';
-import OceanWatchHero from 'layout/layout/ocean-watch/hero';
 import BannerCountries from 'components/banners/countries';
 import OceanWatchPartners from 'layout/layout/ocean-watch/partners';
 
@@ -47,7 +46,6 @@ export default function OceanWatchAboutPage({ content }) {
   return (
     <LayoutOceanWatch title="About | Ocean Watch" description={content.summary}>
       <Header className="-transparent" />
-      <OceanWatchHero className="-ocean-watch" />
       <section className="l-section -secondary -medium">
         <div className="l-container">
           <div className="row">
