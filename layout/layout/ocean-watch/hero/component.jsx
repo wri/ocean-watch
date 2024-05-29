@@ -25,6 +25,7 @@ export default function OceanWatchHero({ className }) {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
+                  'flex-direction': 'row-reverse',
                 }}
               >
                 <button
