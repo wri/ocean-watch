@@ -80,7 +80,7 @@ $btn-hover-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.2);
   &.-primary {
     color: $white;
     fill: $white;
-    background-color: $dark-pink;
+    background-color: $ow-blue;
 
     &:hover {
       box-shadow: $btn-hover-shadow;
@@ -98,15 +98,15 @@ $btn-hover-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.2);
     }
 
     &[disabled] {
-      background: rgba($dark-pink, .3);
+      background: rgba($ow-blue, .3);
       border-color: transparent;
     }
   }
 
   &.-b,
   &.-secondary {
-    color: $dark-pink;
-    fill: $dark-pink;
+    color: $ow-blue;
+    fill: $ow-blue;
     background-color: $white;
     border-color: $btn-border-color;
 

@@ -45,7 +45,7 @@ export default function OceanWatchAboutPage({ content }) {
 
   return (
     <LayoutOceanWatch title="About | Ocean Watch" description={content.summary}>
-      <Header className="-transparent" />
+      <Header />
       <section className="l-section -secondary -medium">
         <div className="l-container">
           <div className="row">
