@@ -141,5 +141,3 @@ Our project's Docker images are hosted on GitHub Container Registry (GHCR), allo
 4. **Accessing the Application**: With the container running, access the application by navigating to `http://localhost:3000` in your web browser.
 
 Ensure you replace `REPOSITORY_NAME`, and `IMAGE_TAG` with the actual values for your project.
-
-
