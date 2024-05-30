@@ -1,7 +1,7 @@
 @import 'css/settings';
 
 .l-header {
-  background-color: $dark-pink;
+  background-color: $ow-blue;
   background-image: $header-bg-image,
     linear-gradient(
       86deg,
@@ -72,16 +72,16 @@
           cursor: pointer;
 
           &:hover {
-            color: $yellow;
-            fill: $yellow;
+            color: $ow-secondary;
+            fill: $ow-secondary;
             text-decoration: none;
           }
         }
 
         &.-active > a {
           position: relative;
-          color: $yellow;
-          fill: $yellow;
+          color: $white;
+          fill: $white;
           font-weight: bold;
           text-decoration: none;
 
@@ -93,7 +93,7 @@
             transform: translate(-50%, 0);
             width: calc(100% - 20px);
             height: 2px;
-            background: $yellow;
+            background: $ow-secondary;
           }
         }
       }

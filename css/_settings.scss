@@ -25,6 +25,7 @@ $color-12: #f0f1f2;
 $color-13: #d0021b;
 $color-14: #65b60d;
 $ow-blue: #0F4573;
+$ow-secondary: #4C88D7;
 
 $border-color-1: rgba(26, 28, 34, 0.1);
 $border-color-2: rgba(202, 204,208, 0.85); // For inputs
@@ -63,8 +64,8 @@ $header-main-height: 75px;
 $header-main-height-mobile: 50px;
 $header-secondary-height: 0;
 $header-bg-image: url("/static/images/components/layout/header-bg-texture.png");
-$header-gradient-color-1: rgba(#c32d7b, 0.8);
-$header-gradient-color-2: rgba(#c90e39, 0.7);
+$header-gradient-color-1: rgba(#4C88D7, 1.0);
+$header-gradient-color-2: rgba(#0F4573, 1.0);
 
 
 // Transitions – timings
