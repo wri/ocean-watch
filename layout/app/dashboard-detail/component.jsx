@@ -10,7 +10,6 @@ import compact from 'lodash/compact';
 // components
 import Layout from 'layout/layout/layout-app';
 import Tabs from 'components/ui/Tabs';
-import Breadcrumbs from 'components/ui/Breadcrumbs';
 import Title from 'components/ui/Title';
 import Icon from 'components/ui/icon';
 import DashboardDetail from 'components/dashboards/detail';
@@ -137,14 +136,6 @@ const LayoutDashboardDetail = ({ dashboard }) => {
           <div className="row">
             <div className="column small-12">
               <div className={headerClassName}>
-                <Breadcrumbs
-                  items={[
-                    {
-                      name: 'Dashboards',
-                      route: '/dashboards',
-                    },
-                  ]}
-                />
                 <h1>{name}</h1>
                 {headerText && <h3>{headerText}</h3>}
                 <div className="page-header-info">
