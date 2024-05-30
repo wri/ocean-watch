@@ -86,7 +86,7 @@ export default function OceanWatchPartnersPage() {
 
   return (
     <LayoutOceanWatch title="Ocean Watch – Partners" description={PARTNERS_PAGE_DESCRIPTION}>
-      <Header className="-transparent" />
+      <Header />
       <section className="l-section -secondary -medium">
         <div className="l-container">
           <div className="row">
