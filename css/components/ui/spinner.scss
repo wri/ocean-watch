@@ -24,7 +24,7 @@
       margin: 0 auto;
       border-radius: 50%;
       border: 3px solid transparent;
-      border-top-color: $dark-pink;
+      border-top-color: $ow-secondary;
       animation: rotate $animation-time-4 infinite $ease-in-out-sine;
     }
 
@@ -55,7 +55,7 @@
   &.-pink-icon {
     .spinner-box {
       .icon {
-        border-top-color: $dark-pink;
+        border-top-color: $ow-secondary;
       }
     }
   }
