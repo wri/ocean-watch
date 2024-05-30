@@ -55,7 +55,7 @@ export default function OceanWatchCountryProfiles() {
       title="Ocean Watch – Country Profiles Index"
       description="Ocean Watch description" // todo: replace description
     >
-      <Header className="-transparent" />
+      <Header />
       <section className="l-section -secondary -small">
         <div className="l-container">
           <div className="row">

@@ -18,7 +18,6 @@ import { useMediaMatch } from 'rooks';
 // components
 import LayoutOceanWatch from 'layout/layout/ocean-watch';
 import Header from 'layout/header';
-import OceanWatchHero from 'layout/layout/ocean-watch/hero';
 import OceanWatchPartners from 'layout/layout/ocean-watch/partners';
 import InView from 'components/in-view';
 import MiniExplore from 'components/mini-explore';
@@ -185,7 +184,7 @@ export default function OceanWatchCountryProfilePage({ iso }) {
       <Head>
         <meta name="viewport" content="width=1024" />
       </Head>
-      <Header className="-transparent" />
+      <Header />
       <section
         className="l-section -small -secondary"
         style={{
@@ -498,108 +497,44 @@ export default function OceanWatchCountryProfilePage({ iso }) {
           ))}
         </div>
         <section className="l-section -medium">
-          <div className="row">
-            <div className="column small-12">
-              <Banner
-                useDim
-                className="-text-center"
-                bgImage="/static/images/pages/app/banner-coral.jpg"
-              >
-                <p className="-claim">Check out the Coral Reefs dashboards</p>
-                <Link href="/dashboards/coral-reef-dashboards">
-                  <a className="c-button -alt -primary">Coral Reefs</a>
-                </Link>
-              </Banner>
-            </div>
-            <div
-              className="column small-6"
-              style={{
-                margin: '20px 0 0',
-              }}
-            >
-              <Banner
-                bgImage="/static/images/homepage/home-data-bg1.png"
-                styles={{
-                  padding: 40,
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                  }}
+          <div className="l-container">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="h-full">
+                <Banner
+                  useDim
+                  className="h-full !p-10 md:!p-16"
+                  bgImage="/static/images/pages/app/banner-coral.jpg"
                 >
-                  <div>
-                    <p className="-claim">Did you miss something?</p>
-                    <p>
-                      Know of a data set that you&apos;d like to see on Resource Watch or have a
-                      specific area of interest you&apos;d like us to cover?
-                    </p>
+                  <div className="flex flex-col h-full justify-center md:items-center">
+                    <h4 className="text-lg font-light text-center text-white md:text-xl md:leading-10">
+                      Check out the Coral Reefs dashboards
+                    </h4>
+                    <Link href="/dashboards/coral-reef-dashboards">
+                      <a className="c-button -alt -primary w-full md:w-40 text-center py-2 px-4 mt-4 md:mt-0">
+                        Coral Reefs
+                      </a>
+                    </Link>
                   </div>
-                  <Link href="/get-involved/contribute-data">
-                    <a className="c-button -alt -primary">Request data</a>
-                  </Link>
-                </div>
-              </Banner>
-            </div>
-            <div
-              className="column small-6"
-              style={{
-                margin: '20px 0 0',
-              }}
-            >
-              <Banner
-                bgImage="/static/images/backgrounds/jellyfish.jpg"
-                styles={{
-                  padding: 40,
-                  height: '100%',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    height: '100%',
-                    justifyContent: 'space-between',
-                  }}
+                </Banner>
+              </div>
+              <div className="h-full">
+                <Banner
+                  useDim
+                  className="h-full !p-10 md:!p-16"
+                  bgImage="/static/images/pages/app/banner-ocean-watch.jpg"
                 >
-                  <div>
-                    <p className="-claim">What&apos;s Your Ocean Watch Story?</p>
-                    <p>How have you used Ocean Watch data to drive impact?</p>
+                  <div className="flex flex-col h-full justify-center md:items-center">
+                    <h4 className="text-lg font-light text-center text-white md:text-xl md:leading-10">
+                      View Ocean Watch Data on WRI Data Explorer
+                    </h4>
+                    <Link href="https://datasets.wri.org/dataset?q=Ocean">
+                      <a className="c-button -alt -primary w-full md:w-40 text-center py-2 px-4 mt-4 md:mt-0">
+                        Explore
+                      </a>
+                    </Link>
                   </div>
-                  <a
-                    className="c-button -alt -primary"
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSc0KvLPwuCyMwXMQ3sO9gerN_HFECBHHBVnzq2uyROP-cbAOg/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Tell Your Story
-                  </a>
-                </div>
-              </Banner>
-            </div>
-            <div
-              className="column small-12"
-              style={{
-                margin: '20px 0 0',
-              }}
-            >
-              <Banner
-                useDim
-                className="-text-center"
-                bgImage="/static/images/pages/app/banner-ocean-watch.jpg"
-              >
-                <p className="-claim">
-                  Check out the Ocean Watch data
-                  <br />
-                  on the Explore page
-                </p>
-                <Link href='https://resourcewatch.org/data/explore?section=All data&topics=["ocean"]'>
-                  <a className="c-button -alt -primary">Go to explore</a>
-                </Link>
-              </Banner>
+                </Banner>
+              </div>
             </div>
           </div>
         </section>
