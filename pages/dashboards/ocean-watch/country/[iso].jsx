@@ -18,7 +18,6 @@ import { useMediaMatch } from 'rooks';
 // components
 import LayoutOceanWatch from 'layout/layout/ocean-watch';
 import Header from 'layout/header';
-import OceanWatchHero from 'layout/layout/ocean-watch/hero';
 import OceanWatchPartners from 'layout/layout/ocean-watch/partners';
 import InView from 'components/in-view';
 import MiniExplore from 'components/mini-explore';
@@ -185,7 +184,7 @@ export default function OceanWatchCountryProfilePage({ iso }) {
       <Head>
         <meta name="viewport" content="width=1024" />
       </Head>
-      <Header className="-transparent" />
+      <Header />
       <section
         className="l-section -small -secondary"
         style={{
