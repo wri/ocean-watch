@@ -22,49 +22,23 @@ class LayoutPartnerDetail extends PureComponent {
   };
 
   handleTagSelected(tag) {
-    const {
-      router,
-    } = this.props;
+    const { router } = this.props;
 
     router.push('/data/explore', { topics: `["${tag.id}"]` });
   }
 
   render() {
-    const {
-      partner,
-      datasets,
-    } = this.props;
-    const {
-      name,
-      summary,
-      website,
-      'white-logo': whiteLogo,
-      cover,
-      body,
-    } = partner;
+    const { partner, datasets } = this.props;
+    const { name, summary, website, 'white-logo': whiteLogo, cover, body } = partner;
     const logoPath = whiteLogo ? whiteLogo.medium : '';
     const coverPath = cover && cover.cover;
-    const logo = website !== '' ? (
-      <a
-        href={website}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          title={name}
-          alt={name}
-          className="logo"
-          src={`${logoPath}`}
-        />
-      </a>
-    )
-      : (
-        <img
-          title={name}
-          alt={name}
-          className="logo"
-          src={`${logoPath}`}
-        />
+    const logo =
+      website !== '' ? (
+        <a href={website} target="_blank" rel="noopener noreferrer">
+          <img title={name} alt={name} className="logo" src={`${logoPath}`} />
+        </a>
+      ) : (
+        <img title={name} alt={name} className="logo" src={`${logoPath}`} />
       );
     const bannerStyles = { backgroundImage: `url(${coverPath})` };
 
@@ -75,21 +49,15 @@ class LayoutPartnerDetail extends PureComponent {
         description="Partner detail description"
       >
         <div className="c-page partner-detail">
-          <Banner
-            className="intro -text-center"
-            styles={bannerStyles}
-            useBackground={false}
-          >
+          <Banner className="intro -text-center" styles={bannerStyles} useBackground={false}>
             <div className="row">
               <div className="column small-12 partner-header">
                 <h4 className="title c-text -default -bold -uppercase">RESOURCE WATCH PARTNER</h4>
-                <div className="logo-container">
-                  {logo}
-                </div>
+                <div className="logo-container">{logo}</div>
                 <div className="description">
                   <div className="row">
                     <div className="column small-12 medium-12">
-                      {summary && (<p className="c-text -extra-big">{summary}</p>)}
+                      {summary && <p className="c-text -extra-big">{summary}</p>}
                     </div>
                   </div>
                 </div>
@@ -103,8 +71,7 @@ class LayoutPartnerDetail extends PureComponent {
                   <p>{body}</p>
                 </div>
               </div>
-              {!!datasets.length
-                && (
+              {!!datasets.length && (
                 <div className="row align-center">
                   <div className="column small-12 datasets-container">
                     <div>
@@ -119,7 +86,7 @@ class LayoutPartnerDetail extends PureComponent {
                     </div>
                   </div>
                 </div>
-                )}
+              )}
             </div>
           </section>
 
@@ -128,9 +95,7 @@ class LayoutPartnerDetail extends PureComponent {
               <div className="column small-12">
                 <Banner className="-text-center">
                   <p className="-claim">
-                    Learn more about
-                    {' '}
-                    <br />
+                    Learn more about <br />
                     {name}
                   </p>
                   <a

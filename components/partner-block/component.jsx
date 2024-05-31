@@ -14,7 +14,7 @@ export default function PartnerBlock({ item, isExternal }) {
             {PartnerLogo}
           </a>
         )}
-        {!isExternal && <Link href={`/about/partners/${item.slug}`}>{PartnerLogo}</Link>}
+        {!isExternal && <Link href={`/partners/${item.slug}`}>{PartnerLogo}</Link>}
       </div>
       <p>{item.summary}</p>
       <div className="buttons -align-center">
@@ -29,7 +29,7 @@ export default function PartnerBlock({ item, isExternal }) {
           </a>
         )}
         {!isExternal && (
-          <Link href={`/about/partners/${item.slug}`}>
+          <Link href={`/partners/${item.slug}`}>
             <a className="c-btn -secondary">Read more</a>
           </Link>
         )}

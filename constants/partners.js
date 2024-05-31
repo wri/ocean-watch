@@ -55,10 +55,7 @@ export const PARTNERS_CONNECTIONS = {
     '37d5db2e-8ab8-4870-bfcc-534cdd5bdb76',
     '8ab2606d-1b1c-4b71-ab29-c6e0a687e9fd',
   ],
-  vaisala: [
-    'cefd2836-3cc1-43dc-a9d1-bfecf79a6252',
-    '9ea634db-53af-445e-a767-60ec9efc321e',
-  ],
+  vaisala: ['cefd2836-3cc1-43dc-a9d1-bfecf79a6252', '9ea634db-53af-445e-a767-60ec9efc321e'],
 };
 
 export default { PARTNERS_CONNECTIONS };

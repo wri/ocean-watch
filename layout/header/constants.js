@@ -30,8 +30,8 @@ export const APP_HEADER_ITEMS = [
   {
     id: 'partners',
     label: 'Partners',
-    href: '/dashboards/ocean-watch/partners',
-    root: '/dashboards/ocean-watch/partners',
+    href: '/partners',
+    root: '/partners',
     children: [],
   },
 ];
