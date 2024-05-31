@@ -72,9 +72,6 @@ export default function LayoutNewsletterThankYou() {
                   {' '}
                   world together.
                 </p>
-                <Link href="/about/partners">
-                  <a className="c-btn -primary">Partners</a>
-                </Link>
               </Banner>
             </div>
           </div>

@@ -50,17 +50,6 @@ class AboutPage extends PureComponent {
         title: 'Citizens',
         description: 'Understand the issues affecting your community, identify sustainable options, and share your findings to inspire action and hold decision-makers accountable.',
       },
-      {
-        id: 'more',
-        title: 'More',
-        description: 'Learn what you can do with Resource Watch.',
-        link: {
-          route: '/about/howto',
-          label: 'Learn more',
-          className: '-primary',
-          external: false,
-        },
-      },
     ];
 
     const valuesCards = [
@@ -186,9 +175,6 @@ class AboutPage extends PureComponent {
                   Resource Watch would not be possible without the generous contributions of our partners.
                 </p>
                 <div className="-text-center">
-                  <Link href="/about/partners">
-                    <a className="c-button -primary">Partners</a>
-                  </Link>
                 </div>
               </div>
             </div>

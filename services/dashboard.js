@@ -56,7 +56,7 @@ export const fetchDashboards = (params = {}, headers = {}, _meta = false) => {
  * @returns {Object} serialized specified dashboard.
  */
 export const fetchDashboard = (id, params = {}) => {
-  logger.info(`Fetch dashboard ${id}`);
+  console.info(`Fetch dashboard ${id}`);
   return WRIAPI.get(`/v1/dashboard/${id}`, {
     headers: {
       ...WRIAPI.defaults.headers,

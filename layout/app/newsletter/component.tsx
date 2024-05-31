@@ -244,9 +244,6 @@ const LayoutNewsletter = ({ isOceanWatch }: LayoutNewsletterProps): JSX.Element 
                   Let&rsquo;s build a more sustainable
                   <br /> world together.
                 </p>
-                <Link href="/about/partners">
-                  <a className="c-btn -primary">Partners</a>
-                </Link>
               </Banner>
             </div>
           </div>

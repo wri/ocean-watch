@@ -9,16 +9,6 @@ class JoinCommunity extends PureComponent {
   render() {
     const cards = [
       {
-        id: 'contact-us',
-        title: '',
-        description: 'Reach out with comments, questions, or suggestions.',
-        link: {
-          route: '/about/contact-us',
-          label: 'Contact us',
-          external: false,
-        },
-      },
-      {
         id: 'twitter',
         title: '',
         description: 'Follow us on twitter and join in the conversation.',
@@ -26,15 +16,6 @@ class JoinCommunity extends PureComponent {
           route: 'https://twitter.com/resource_watch',
           label: '@resource_watch',
           external: true,
-        },
-      },
-      {
-        id: 'newsletter',
-        title: '',
-        description: 'Sign up for our newsletter to receive highlights and updates.',
-        link: {
-          route: '/about/newsletter',
-          label: 'Subscribe',
         },
       },
     ];
@@ -71,9 +52,6 @@ class JoinCommunity extends PureComponent {
                     Let&rsquo;s build a more sustainable
                     <br /> world together.
                   </p>
-                  <Link href="/about/partners">
-                    <a className="c-btn -primary -alt">Partners</a>
-                  </Link>
                 </Banner>
               </div>
             </div>
