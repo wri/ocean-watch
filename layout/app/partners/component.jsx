@@ -224,11 +224,6 @@ export default function LayoutPartners() {
                   <br />
                   Help us improve Resource Watch.
                 </p>
-                <Link
-                  href="/about/contact-us"
-                >
-                  <a className="c-button -alt -primary">Contact us</a>
-                </Link>
               </Banner>
             </div>
           </div>
