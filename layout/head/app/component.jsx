@@ -28,7 +28,7 @@ export default function HeadApp({ title, description, thumbnail }) {
   return (
     <>
       <HeadNext>
-        <title>{title ? `${title} | Resource Watch` : 'Resource Watch'}</title>
+        <title>{title ? `${title}` : 'Ocean Watch'}</title>
 
         <meta property="og:url" content={url} />
         <meta name="description" content={description} />
