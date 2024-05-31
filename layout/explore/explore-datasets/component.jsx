@@ -99,9 +99,6 @@ export default function ExploreDatasets(props) {
         <div className="related-dashboards">
           <div className="header">
             <h4>Related dashboards</h4>
-            <Link href="/dashboards">
-              <a className="header-button">SEE ALL</a>
-            </Link>
           </div>
           {relatedDashboards.map((dashboard) => (
             <Link key={dashboard.id} href={`/dashboards/${dashboard.slug}`} passHref>
