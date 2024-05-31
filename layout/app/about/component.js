@@ -206,9 +206,6 @@ class AboutPage extends PureComponent {
                     <br />
                     Help us strengthen Resource Watch.
                   </p>
-                  <Link href="/about/contact-us">
-                    <a className="c-button -alt -primary">Contact us</a>
-                  </Link>
                 </Banner>
               </div>
             </div>
