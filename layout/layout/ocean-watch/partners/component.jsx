@@ -10,7 +10,7 @@ export default function OceanWatchPartners({ partners }) {
     () =>
       partners.map((_partner) => (
         <div key={_partner.id} className="item">
-          <Link href={`/about/partners/${_partner.id}`}>
+          <Link href={`/partners/${_partner.id}`}>
             <a>
               <img className="-img" src={`${_partner.logo.thumb}`} alt={_partner.name} />
             </a>

@@ -64,9 +64,6 @@ module.exports = withBundleAnalyzer({
   // exportPathMap: async (defaultPathMap) => ({
   //   ...defaultPathMap,
   //   '/': { page: '/home' },
-  //   '/about/faqs': { page: '/faqs' },
-  //   '/about/howto': { page: 'how-to' },
-  //   '/about/partners': { page: '/partners' },
   //   '/privacy-policy': { page: '/policy' },
   //   '/api-attribution-requirements': { page: 'attribution-requirements' },
   //   '/data/explore': { page: '/explore' },
