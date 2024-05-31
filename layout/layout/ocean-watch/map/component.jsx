@@ -149,7 +149,7 @@ export default function MapSelection() {
       } = evt.features[0];
 
       router.push({
-        pathname: '/dashboards/ocean-watch/country/[iso]',
+        pathname: '/country/[iso]',
         query: {
           iso,
         },
@@ -201,7 +201,7 @@ export default function MapSelection() {
   const handleCountryList = useCallback(
     ({ value }) => {
       router.push({
-        pathname: '/dashboards/ocean-watch/country/[iso]',
+        pathname: '/country/[iso]',
         query: {
           iso: value,
         },
@@ -216,7 +216,7 @@ export default function MapSelection() {
     (evt) => {
       const iso = evt.currentTarget.value;
       router.push({
-        pathname: '/dashboards/ocean-watch/country/[iso]',
+        pathname: '/country/[iso]',
         query: {
           iso,
         },

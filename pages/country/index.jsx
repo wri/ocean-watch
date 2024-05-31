@@ -31,7 +31,7 @@ export default function OceanWatchCountryProfiles() {
     ({ value }) => {
       setCountryValue(value);
       router.push({
-        pathname: '/dashboards/ocean-watch/country/[iso]',
+        pathname: '/country/[iso]',
         query: {
           iso: value,
         },

@@ -9,8 +9,8 @@ export const APP_HEADER_ITEMS = [
   {
     id: 'coastal-profiles',
     label: 'Coastal Profiles',
-    href: '/dashboards/ocean-watch/country',
-    root: '/dashboards/ocean-watch/country',
+    href: '/country',
+    root: '/country',
     children: [],
   },
   {
