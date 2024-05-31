@@ -21,7 +21,7 @@ export const FOOTER_LINKS = [
       },
       {
         label: 'Our Partners',
-        href: '/dashboards/ocean-watch/partners',
+        href: '/partners',
       },
     ],
   },
