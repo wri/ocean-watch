@@ -34,7 +34,7 @@ export default function OceanWatchAboutPage({ content }) {
   const handleCountry = useCallback(
     (iso) => {
       router.push({
-        pathname: '/dashboards/ocean-watch/country/[iso]',
+        pathname: '/country/[iso]',
         query: {
           iso,
         },

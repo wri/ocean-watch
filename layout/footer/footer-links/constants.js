@@ -9,7 +9,7 @@ export const FOOTER_LINKS = [
       },
       {
         label: 'Coastal Profiles',
-        href: '/dashboards/ocean-watch/country',
+        href: '/country',
       },
       {
         label: 'Coral Reef Dashboards',
