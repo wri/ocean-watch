@@ -17,7 +17,7 @@ export const FOOTER_LINKS = [
       },
       {
         label: 'About Ocean Watch',
-        href: '/dashboards/ocean-watch/about',
+        href: '/about',
       },
       {
         label: 'Our Partners',
