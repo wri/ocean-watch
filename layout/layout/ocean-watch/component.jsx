@@ -11,7 +11,6 @@ import { browserSupported } from 'utils/browser';
 // components
 import HeadApp from 'layout/head/app';
 import Footer from 'layout/footer';
-import Search from 'layout/header/search';
 import IconsRW from 'components/icons';
 import Modal from 'components/ui/Modal';
 import NoBrowserSupport from 'components/app/common/Browser';
@@ -52,8 +51,6 @@ export default function LayoutOceanWatch({ title, description, children }) {
       {children}
 
       <Footer />
-
-      <Search />
 
       <Toastr preventDuplicates transitionIn="fadeIn" transitionOut="fadeOut" />
 

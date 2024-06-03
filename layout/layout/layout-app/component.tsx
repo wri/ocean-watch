@@ -14,7 +14,6 @@ import IconsRW from 'components/icons';
 import Tooltip from 'components/ui/Tooltip';
 import Modal from 'components/ui/Modal';
 import Toastr from 'react-redux-toastr';
-import Search from 'layout/header/search';
 import NoBrowserSupport from 'components/app/common/Browser';
 import GDPRBanner from 'components/ui/gdpr-banner';
 import ProgressBar from 'components/progress-bar';
@@ -73,8 +72,6 @@ const LayoutApp: FC<LayoutAppProps> = ({
       {!isFullScreen && <Footer />}
 
       <Tooltip />
-
-      <Search />
 
       <Modal
         open={modal.open}

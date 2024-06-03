@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 
 // components
 import Tabs from 'components/ui/Tabs';
-import Spinner from 'components/ui/Spinner';
-import Paginator from 'components/ui/Paginator';
-import SearchInput from 'components/ui/SearchInput';
-import WidgetCardList from 'components/widgets/card-list';
 
 class WidgetBlockEdition extends PureComponent {
   static propTypes = {
@@ -57,45 +53,6 @@ class WidgetBlockEdition extends PureComponent {
                       selected={tab}
                       onChange={onChangeTab}
                     />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="dock-widget-container">
-            <div className="c-page-section -small">
-              <div className="l-container">
-                <div className="row">
-                  <div className="column small-12">
-                    <SearchInput
-                      input={{ placeholder: 'Search visualization' }}
-                      link={{}}
-                      onSearch={onChangeSearch}
-                    />
-
-                    <Spinner isLoading={loading} className="-relative -small -light" />
-
-                    <WidgetCardList
-                      widgets={widgets}
-                      mode="grid"
-                      onWidgetClick={onSelectWidget}
-                      showFavorite={false}
-                      thumbnail
-                      clickable
-                    />
-
-                    {pages > 1 && (
-                      <Paginator
-                        options={{
-                          size: total,
-                          page,
-                          pages,
-                          limit: pageSize,
-                        }}
-                        onChange={onChangePage}
-                      />
-                    )}
                   </div>
                 </div>
               </div>

@@ -1,9 +1,6 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-// components
-import SearchInput from 'components/ui/SearchInput';
-
 export default function TooltipList({ list, onClickItem, placeholder }) {
   const [search, setSearch] = useState('');
   const searchBoxRef = useRef(null);
@@ -40,16 +37,6 @@ export default function TooltipList({ list, onClickItem, placeholder }) {
 
   return (
     <div className="c-tooltip-list">
-      <div className="search-container">
-        <SearchInput
-          getRef={getSearchBoxRef}
-          input={{
-            value: search,
-            placeholder,
-          }}
-          onSearch={handleSearch}
-        />
-      </div>
       <div className="list-container before:from-white before:bg-gradient-to-b after:from-white after:bg-gradient-to-t">
         <ul className="list">
           {results.map(({ label, value }) => (
