@@ -36,23 +36,27 @@ export default function DatasetCardItem(props) {
 
     if (layer || isWidgetMap) {
       return (
-        <Link href={`/data/explore/${dataset.slug}`}>
-          <a>
-            <div className={classNameValue}>
-              <MapThumbnail layer={layer} />
-            </div>
-          </a>
-        </Link>
+        <a
+          href={`https://resourcewatch.org/data/explore/${dataset.slug}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className={classNameValue}>
+            <MapThumbnail layer={layer} />
+          </div>
+        </a>
       );
     }
 
     return (
       <div className={classNameValue}>
-        <Link href={`/data/explore/${dataset.slug}`}>
-          <a>
-            <PlaceholderChart />
-          </a>
-        </Link>
+        <a
+          href={`https://resourcewatch.org/data/explore/${dataset.slug}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <PlaceholderChart />
+        </a>
       </div>
     );
   }, [widget, dataset, layer, expandedChart]);
@@ -67,7 +71,13 @@ export default function DatasetCardItem(props) {
       <Media greaterThanOrEqual="md">{renderChart()}</Media>
 
       <Media at="sm">
-        <Link href={dataset.hrefLink}>{renderChart()}</Link>
+        <a
+          href={`https://resourcewatch.org/data/explore/${dataset.slug}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {renderChart()}
+        </a>
       </Media>
 
       {/* INFO */}
@@ -84,9 +94,13 @@ export default function DatasetCardItem(props) {
         {/* Title */}
         <div className="title-actions">
           <h4>
-            <Link href={dataset.hrefLink}>
-              <a>{(metadata && metadata.info && metadata.info.name) || dataset.name}</a>
-            </Link>
+            <a
+              href={`https://resourcewatch.org/data/explore/${dataset.slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {(metadata && metadata.info && metadata.info.name) || dataset.name}
+            </a>
           </h4>
           {actions && <Media greaterThanOrEqual="md">{cloneElement(actions, { ...props })}</Media>}
         </div>
