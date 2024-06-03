@@ -27,7 +27,10 @@ function LayerInfoModal(props) {
           <button
             className="c-btn -primary"
             onClick={() => {
-              router.push(`/data/explore/${slug}`);
+              const url = new URL('https://resourcewatch.org');
+              url.pathname = `/data/explore/${slug}`;
+
+              window.open(url.toString(), '_blank', 'noopener,noreferrer');
 
               if (props.onRequestClose) {
                 props.onRequestClose();

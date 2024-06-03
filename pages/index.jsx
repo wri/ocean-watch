@@ -134,11 +134,14 @@ export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
                     <h4 className="text-lg font-light text-center text-white md:text-xl md:leading-10">
                       View Ocean Watch Data on WRI Data Explorer
                     </h4>
-                    <Link href="https://datasets.wri.org/dataset?q=Ocean">
-                      <a className="c-button -alt -primary w-full md:w-40 text-center py-2 px-4 mt-4 md:mt-0">
-                        Explore
-                      </a>
-                    </Link>
+                    <a
+                      className="c-button -alt -primary w-full md:w-40 text-center py-2 px-4 mt-4 md:mt-0"
+                      href="https://datasets.wri.org/dataset?q=Ocean"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Explore
+                    </a>
                   </div>
                 </Banner>
               </div>
