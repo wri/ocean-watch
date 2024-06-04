@@ -12,9 +12,7 @@ const StaticContentComponent = ({ content = '' }) => {
         <div className="l-container">
           <div className="row align-center">
             <div className="column small-12 medium-8">
-              <div className="c-terms">
-                { renderHTML(content) }
-              </div>
+              <div className="c-terms">{renderHTML(content)}</div>
             </div>
           </div>
         </div>

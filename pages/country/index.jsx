@@ -52,8 +52,8 @@ export default function OceanWatchCountryProfiles() {
 
   return (
     <LayoutOceanWatch
-      title="Ocean Watch – Country Profiles Index"
-      description="Ocean Watch description" // todo: replace description
+      title="Country Profiles Index | Ocean Watch"
+      description="Select a coastline country to further explore land-based pressures upon the ocean."
     >
       <Header />
       <section className="l-section -secondary -small">
