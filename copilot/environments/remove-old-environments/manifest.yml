@@ -1,9 +1,9 @@
-# The manifest for the "use-mapbox-api-token" environment.
+# The manifest for the "remove-old-environments" environment.
 # Read the full specification for the "Environment" type at:
 #  https://aws.github.io/copilot-cli/docs/manifest/environment/
 
 # Your environment name will be used in naming your resources like VPC, cluster, etc.
-name: use-mapbox-api-token
+name: remove-old-environments
 type: Environment
 
 # Import your own VPC and subnets or configure how they should be created.
