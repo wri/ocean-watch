@@ -22,8 +22,8 @@ const OceanWatchStoryTelling = dynamic(() => import('../layout/layout/ocean-watc
 export default function OceanWatchIntroPage({ geostore, oceanWatchConfig }) {
   return (
     <LayoutOceanWatch
-      title="Ocean Watch – Introduction"
-      description="Ocean Watch description" // todo: replace description
+      title="Introduction | Ocean Watch"
+      description="Ocean Watch provides the data and information policymakers need to make better-informed decisions about sustainable ocean management."
       isExtendedHero
     >
       <div

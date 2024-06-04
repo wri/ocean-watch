@@ -178,8 +178,8 @@ export default function OceanWatchCountryProfilePage({ iso }) {
 
   return (
     <LayoutOceanWatch
-      title="Ocean Watch"
-      description="Ocean Watch description" // todo: replace description
+      title={`${defaultAreaOption?.label} | Ocean Watch`}
+      description="Further explore land-based pressures upon the ocean."
     >
       <Head>
         <meta name="viewport" content="width=1024" />

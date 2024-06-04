@@ -53,7 +53,7 @@ export default function HeadApp({ title, description, thumbnail }) {
 HeadApp.defaultProps = {
   title: null,
   description: null,
-  thumbnail: 'https://resourcewatch.org/static/images/social-big.jpg',
+  thumbnail: 'https://resourcewatch.org/static/images/backgrounds/jellyfish.jpg',
 };
 
 HeadApp.propTypes = {
