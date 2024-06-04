@@ -239,7 +239,7 @@
   padding-right: 15px;
 }
 .Select-arrow {
-  @include arrow(8px, 2px, $dark-pink, 'down');
+  @include arrow(8px, 2px, $ow-blue, 'down');
 }
 .is-open .Select-arrow,
 .Select-arrow-zone:hover > .Select-arrow {

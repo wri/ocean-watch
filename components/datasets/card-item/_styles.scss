@@ -21,10 +21,10 @@
 
   &.-active {
     border: none;
-    box-shadow: 0 0 0 2px $dark-pink, 0 1px 6px 0 rgba(0,0,0,.0);
+    box-shadow: 0 0 0 2px $ow-blue, 0 1px 6px 0 rgba(0,0,0,.0);
 
     &:hover {
-      box-shadow: 0 0 0 2px $dark-pink, 0 20px 30px rgba(0,0,0,.2);
+      box-shadow: 0 0 0 2px $ow-blue, 0 20px 30px rgba(0,0,0,.2);
     }
   }
 
