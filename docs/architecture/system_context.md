@@ -30,7 +30,7 @@ C4Context
 ---
 title: "Ocean Watch C4 Model: System Context"
 ---
-flowchart TD
+flowchart LR
   PersonResearcher["Anonymous\nExternal Researcher\nor Policy Maker\n[Person]\n\nA researcher or policy maker\nseeking to understand the\nhuman-influenced pressures on\nocean ecosystems"]
   
   subgraph BoundaryWRI["World Resources Institute (WRI) [Organization]"]
@@ -44,8 +44,8 @@ flowchart TD
   end
 
   PersonResearcher -- "Uses" --> SystemOceanWatch
-  SystemOceanWatch -- "Gathers dashboard, widget, and content from" --> ExtSystemResourceWatchAPI
-  SystemOceanWatch -- "Redirects traffic from researchers wanting to explore datasets to" --> ExtSystemResourceWatchPlatform
+  SystemOceanWatch -- "Gathers dashboard, widget,\nand content from" --> ExtSystemResourceWatchAPI
+  SystemOceanWatch -- "Redirects traffic from researchers\nwanting to explore datasets to" --> ExtSystemResourceWatchPlatform
   
   click SystemOceanWatch "https://oceanwatchdata.org" _blank
   click ExtSystemResourceWatchPlatform "https://resourcewatch.org" _blank
