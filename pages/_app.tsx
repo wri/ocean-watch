@@ -38,10 +38,6 @@ const OceanWatchApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
         </noscript>
       )}
 
-      {/* Google places API */}
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?v=weekly&key=${process.env.NEXT_PUBLIC_RW_GOGGLE_API_TOKEN_SHORTENER}&libraries=places`}
-      />
       <QueryClientProvider client={queryClient}>
         <MediaContextProvider>
           <Hydrate state={pageProps.dehydratedState}>
