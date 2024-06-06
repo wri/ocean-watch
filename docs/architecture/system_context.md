@@ -35,7 +35,7 @@ flowchart LR
       SystemOceanWatch["Ocean Watch Platform\n[Software System]\n\nAllows researchers to conduct research\nand share findings with others via\nembeddable urls and downloadable artifacts"]
     end
     subgraph BoundaryDataLab["Data Lab [Data Innovation and Product Delivery]"]
-      ExtSystemResourceWatchPlatform["Resource Watch Platform\n[Software System]\n\nProvides ability to explore datasets\nwithin a mapping context"]
+      ExtSystemResourceWatchPlatform["Resource Watch Platform\n[Software System]\n\nProvides ability to explore datasets\nwithin a geospatial context"]
       ExtSystemResourceWatchAPI["Resource Watch API\n[Software System]\n\nProvides programmatic management of\ndatasets, widgets, and other artifacts"]
     end
   end
