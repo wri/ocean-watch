@@ -44,15 +44,24 @@ flowchart TD
       ContainerNextjsApp["|Browser|\nReact Application\n[Container: Javascript and React ]\n\nProvides all of the\nfunctionality via\ntheir web browser"]
     end
     
+    subgraph ThirdPartySystems["Third Party Systems"]
+      ExtSystemMapboxAPI["Mapbox API \n [Software System] \n\n Provides mapping functionality and tiles"]
+      ExtSystemCartoAPI["Carto API \n [Software System] \n\n Provides analysis and tiles"]
+    end
+    
     ExtSystemResourceWatchPlatform["Resource Watch Platform\n[Software System]\n\nProvides ability to explore datasets\nwithin a geospatial context"]
     ExtSystemResourceWatchAPI["Resource Watch API\n[Software System]\n\nProvides programmatic management of\ndatasets, widgets, and other artifacts"]
     ExtSystemResourceWatchS3["Resource Watch S3 Bucket\n [Data Storage] \n\n Provides static images of partner organization logos"]
 
   PersonResearcher -- "Visits \n <code>oceanwatchdata.org</code> \n using \n [HTTPS]" --> ContainerWebApplication
+  
   ContainerWebApplication -- "Delivers to the\ncustomer's web\nbrowser" --> ContainerNextjsApp
-  ContainerWebApplication -- "Gathers dashboard, widget,\nand content from" --> ExtSystemResourceWatchAPI
+  
+  ContainerNextjsApp -- "Gathers geostore, dashboard, widget,\n and content from \n <code>api.resourcewatch.org/</code> \n using \n [HTTPS]" --> ExtSystemResourceWatchAPI
   ContainerNextjsApp -- "Redirects traffic from researchers\nwanting to explore datasets to\n<code>resourcewatch.org/explore</code>\nusing\n[HTTPS]" --> ExtSystemResourceWatchPlatform
   ContainerNextjsApp -- "Gathers static image content at \n <code>s3.amazonaws.com/wri-api-backups/resourcewatch/staging/partners/logos</code> \n using \n [HTTPS]" --> ExtSystemResourceWatchS3
+  ContainerNextjsApp -- "Fetches tiles and styles at \n <code>api.mapbox.com/*</code> \n using \n [HTTPS]" --> ExtSystemMapboxAPI
+  ContainerNextjsApp -- "Fetches tiles and requests analysis at \n <code>wri-rw.carto.com/api/*</code> \n and \n <code>a.gusc.cartocdn.com/wri-rw/api/*</code> \n using \n [HTTPS]" --> ExtSystemCartoAPI
   
   click ExtSystemResourceWatchPlatform "https://resourcewatch.org" _blank
   click ExtSystemResourceWatchAPI "https://api.resourcewatch.org/" _blank
@@ -63,10 +72,11 @@ flowchart TD
   
   class ContainerWebApplication,ContainerNextjsApp focusSystem
   class ExtSystemResourceWatchAPI,ExtSystemResourceWatchPlatform,ExtSystemResourceWatchS3 supportingSystem
+  class ExtSystemMapboxAPI,ExtSystemCartoAPI supportingSystem
   class PersonResearcher person
   
   style SystemOceanWatch fill:none,stroke:#CCC,stroke-width:2px,stroke-dasharray: 5 5
 ```
 
 ## Notes
-Right-click linked
+Right-click linked nodes in the diagram when viewing in Github due to security issues.
