@@ -3,30 +3,6 @@
 ## C4 System Context Diagram for Ocean Watch
 
 ```mermaid
-C4Context
-    Person(researcherPublic, "Anonymous External Researcher or Policy Maker", "A researcher or policy maker seeking to understand the human-influenced pressures on ocean ecosystems")
-
-    Boundary(BoundaryWRI, "World Resources Institute (WRI)", "ORGANIZATION") {
-        Boundary(BoundaryDataLab, "Data Lab", "Data Innovation and Product Delivery"){
-            System_Ext(ExtSystemResourceWatch, "Resource Watch System (Platform)")
-        }
-        Boundary(BoundaryOceanProgram, "Ocean Program", "PROGRAM", $link="https://www.wri.org/ocean") {
-            System(SystemOceanWatch, "Ocean Watch System (Platform)", "Allows researchers to conduct research and share findings with others via embeddable urls and downloadable artifacts", $link="https://oceanwatchdata.org")
-           
-        }
-        
-        
-    }
-
-    Rel(researcherPublic, SystemOceanWatch, "Uses")
-    UpdateRelStyle(researcherPublic, SystemOceanWatch, $offsetX="180", $offsetY="100")
-    
-    Rel(SystemOceanWatch, ExtSystemResourceWatch, "Loads Dasboards, Widgets, and Layers from")
-    UpdateRelStyle(SystemOceanWatch, ExtSystemResourceWatch, $offsetX="-230", $offsetY="10")
-    
-    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="2")
-```
-```mermaid
 ---
 title: "Ocean Watch C4 Model: System Context"
 ---
@@ -63,3 +39,6 @@ flowchart LR
   style BoundaryDataLab fill:none,stroke:#CCC,stroke-width:2px,stroke-dasharray: 5 5
   style BoundaryOceanProgram fill:none,stroke:#CCC,stroke-width:2px,stroke-dasharray: 5 5
 ```
+
+## Notes
+Right-click linked nodes in the diagram when viewing in Github due to security issues.
