@@ -58,7 +58,7 @@ flowchart TD
   ContainerWebApplication -- "Delivers to the\ncustomer's web\nbrowser" --> ContainerNextjsApp
   
   ContainerNextjsApp -- "Gathers geostore, dashboard, widget,\n and content from \n <code>api.resourcewatch.org/</code> \n using \n [HTTPS]" --> ExtSystemResourceWatchAPI
-  ContainerNextjsApp -- "Redirects traffic from researchers\nwanting to explore datasets to\n<code>resourcewatch.org/explore</code>\nusing\n[HTTPS]" --> ExtSystemResourceWatchPlatform
+  ContainerNextjsApp -- "Redirects traffic from researchers\nwanting to explore datasets to\n<code>resourcewatch.org/data/explore</code>\nusing\n[HTTPS]" --> ExtSystemResourceWatchPlatform
   ContainerNextjsApp -- "Gathers static image content at \n <code>s3.amazonaws.com/wri-api-backups/resourcewatch/staging/partners/logos</code> \n using \n [HTTPS]" --> ExtSystemResourceWatchS3
   ContainerNextjsApp -- "Fetches tiles and styles at \n <code>api.mapbox.com/*</code> \n using \n [HTTPS]" --> ExtSystemMapboxAPI
   ContainerNextjsApp -- "Fetches tiles and requests analysis at \n <code>wri-rw.carto.com/api/*</code> \n and \n <code>a.gusc.cartocdn.com/wri-rw/api/*</code> \n using \n [HTTPS]" --> ExtSystemCartoAPI
