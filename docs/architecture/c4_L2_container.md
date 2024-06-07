@@ -59,6 +59,7 @@ flowchart TD
   PersonResearcher -- "Visits \n <code>oceanwatchdata.org</code> \n using \n [HTTPS]" --> ContainerWebApplication
   
   ContainerWebApplication -- "Delivers to the\ncustomer's web\nbrowser" --> ContainerNextjsApp
+  ContainerWebApplication -- "Generates static content \n for pages with calls \n using \n [HTTPS]" --> ExtSystemResourceWatchAPI
   
   ContainerNextjsApp -- "Gathers geostore, dashboard, widget,\n datasets, and content from \n <code>api.resourcewatch.org/</code> \n using \n [HTTPS]" --> ExtSystemResourceWatchAPI
   ContainerNextjsApp -- "Redirects traffic from researchers\nwanting to explore datasets to\n<code>resourcewatch.org/data/explore</code>\nusing\n[HTTPS]" --> ExtSystemResourceWatchPlatform
