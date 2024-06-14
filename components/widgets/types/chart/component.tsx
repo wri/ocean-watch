@@ -27,7 +27,6 @@ const ChartType = ({
   widget,
   adapter,
   style,
-  params,
   isEmbed,
   isWebshot,
   isFetching,
@@ -52,7 +51,6 @@ const ChartType = ({
         <div className="p-4 border border-b-0 rounded-tl rounded-tr widget-header-container border-gray-light">
           <WidgetHeader
             widget={widget}
-            params={params}
             onToggleInfo={handleInfoToggle}
             onToggleShare={handleShareToggle}
             isInfoVisible={isInfoWidgetVisible}

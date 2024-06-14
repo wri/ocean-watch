@@ -54,12 +54,10 @@ const WidgetCard = ({
   showActions = false,
   showEmbed = false,
   showRemove = false,
-  showFavorite = true,
   thumbnail = false,
   clickable = false,
   params = {},
   onWidgetClick,
-  onWidgetRemove,
   toggleModal,
   setModalOptions,
 }: WidgetCardProps): JSX.Element => {
@@ -69,7 +67,7 @@ const WidgetCard = ({
   const widgetType = useMemo(() => getWidgetType(widget), [widget]);
 
   const handleRemoveVisualization = useCallback(() => {
-    const { id, name, dataset } = widget;
+    const { name } = widget;
 
     toastr.confirm(`Are you sure you want to remove the visualization: ${name}?`, {
       // eslint-disable-next-line @typescript-eslint/no-empty-function

@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import type { AppProps } from 'next/app';
-import Script from 'next/script';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Hydrate } from 'react-query/hydration';

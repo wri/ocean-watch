@@ -1,6 +1,5 @@
 import { useCallback, cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
 import classnames from 'classnames';
 
 // components
