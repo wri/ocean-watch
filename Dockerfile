@@ -33,6 +33,9 @@ RUN npm run build
 
 # 3. Production image, copy all the files and run next
 FROM base AS runner
+
+LABEL org.opencontainers.image.description="Ocean Watch Website"
+
 WORKDIR /app
 
 ENV NODE_ENV=production

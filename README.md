@@ -20,14 +20,10 @@
 The ocean and humanity are connected. To ensure the health and economic vitality of ocean ecosystems, ocean management needs an upgrade. Ocean Watch provides the data and information policymakers need to make better-informed decisions about sustainable ocean management.
 
 ## Architecture
-Explain the architecture of your project. You can include a Mermaid diagram here to visualize the architecture or workflow.
-
-```mermaid
-graph LR
-  A[Client] -- Request --> B((Server))
-  B -- Response --> A
-  B --> C[Database]
-```
+C4 Documentation can be found in our [docs/architecture directory](docs/architecture)
+- High Level [System Context](docs/architecture/c4_L1_system_context.md)
+- Medium Level [Container Diagram](docs/architecture/c4_L2_container.md)
+- [Deployment Diagrams](docs/architecture/c4_deployment.md)
 
 ## Getting Started
 ### Prerequisites
@@ -107,7 +103,11 @@ Remember, building the Docker image locally requires you to have Docker installe
 
 ### Running the GHCR Docker Container
 
-Our project's Docker images are hosted on GitHub Container Registry (GHCR), allowing you to easily download and run the container locally. Here’s how you can run our Next.js application using Docker:
+Our project's Docker images are hosted on GitHub Container Registry (GHCR), allowing you to easily download and run the container locally. 
+
+The prebuilt images can be browsed at [Ocean Watch's GHCR](https://github.com/wri/ocean-watch/pkgs/container/ocean-watch%2Fnextjs-app).
+
+Here’s how you can run our Next.js application using Docker:
 
 1. **Authenticate with GitHub Container Registry**: The Docker images are private, you'll need to authenticate with GHCR to pull them. Use the following command, replacing `YOUR_GITHUB_USERNAME` and `YOUR_GITHUB_PERSONAL_ACCESS_TOKEN` with your GitHub username and a [personal access token](https://github.com/settings/tokens) with the appropriate scopes (`read:packages` to pull images).
 
@@ -118,26 +118,24 @@ Our project's Docker images are hosted on GitHub Container Registry (GHCR), allo
 
    For more information on GitHub Container Registry and how to generate a personal access token, visit [GHCR documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
 
-2. **Pull the Docker Image**: Replace `wri/ocean-watch/BRANCH_NAME:IMAGE_TAG` with the correct path and tag for the image you wish to run. The `IMAGE_TAG` could be `latest`, or a commit SHA.
+2. **Pull the Docker Image**: Replace `docker pull ghcr.io/wri/ocean-watch/nextjs-app:IMAGE_TAG` with the correct tag for the image you wish to run. The `IMAGE_TAG` could be `latest`, or a commit SHA.
 
     ```bash
-    docker pull ghcr.io/wri/ocean-watch/BRANCH_NAME:IMAGE_TAG
+    docker pull ghcr.io/wri/ocean-watch/nextjs-app:IMAGE_TAG
     ```
 
    Example to pull the latest version of the image:
 
     ```bash
-    docker pull ghcr.io/wri/ocean-watch/BRANCH_NAME:latest
+    docker pull ghcr.io/wri/ocean-watch/nextjs-app:latest
     ```
 
 3. **Run the Docker Container**: Once the image is pulled, you can run it with the following command. This command maps port 3000 of the container to port 3000 on your host machine, as specified in the Dockerfile.
 
     ```bash
-    docker run -d -p 3000:3000 ghcr.io/wri/ocean-watch/BRANCH_NAME:IMAGE_TAG
+    docker run -d -p 3000:3000 ghcr.io/wri/ocean-watch/nextjs-app:IMAGE_TAG
     ```
 
-   Adjust the `BRANCH_NAME`, and `IMAGE_TAG` placeholders accordingly. If your application requires different port mappings or additional environment variables, modify this command to fit your needs.
+   Adjust the `IMAGE_TAG` placeholder accordingly. If your application requires different port mappings or additional environment variables, modify this command to fit your needs.
 
 4. **Accessing the Application**: With the container running, access the application by navigating to `http://localhost:3000` in your web browser.
-
-Ensure you replace `REPOSITORY_NAME`, and `IMAGE_TAG` with the actual values for your project.
