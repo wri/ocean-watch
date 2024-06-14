@@ -37,7 +37,7 @@ export default function OceanWatchHero({ className }) {
                   <span>Share</span>
                 </button>
               </div>
-              <h1 className="mb-2 page-header-title md:mb-8">Ocean Watch</h1>
+              <h1 className="mb-2 page-header-title md:mb-8">Ocean Watch <sup>Beta</sup></h1>
             </div>
           </div>
         </div>
