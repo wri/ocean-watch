@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "resolutions": {
+    "lodash": "^4.17.13"
+  },
   "dependencies": {
     "@artsy/fresnel": "^1.5.0",
     "@danmarshall/deckgl-typings": "4.9.24",
@@ -117,6 +120,7 @@
     "webpack": "^4.44.2"
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
