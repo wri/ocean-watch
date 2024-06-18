@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "resolutions": {
-    "lodash": "^4.17.13"
+    "lodash": "^4.17.13",
+    "glob-parent": "^5.1.2"
   },
   "dependencies": {
     "@artsy/fresnel": "^1.5.0",
