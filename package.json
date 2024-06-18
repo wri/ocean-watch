@@ -6,7 +6,9 @@
   "resolutions": {
     "lodash": "^4.17.13",
     "glob-parent": "^5.1.2",
-    "follow-redirects": "^1.14.7"
+    "follow-redirects": "^1.14.7",
+    "node-fetch": "^2.6.7",
+    "axios": "^0.21.2"
   },
   "dependencies": {
     "@artsy/fresnel": "^1.5.0",
