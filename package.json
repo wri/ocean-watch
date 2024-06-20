@@ -8,7 +8,7 @@
     "glob-parent": "^5.1.2",
     "follow-redirects": "^1.14.7",
     "node-fetch": "^2.6.7",
-    "axios": "^0.21.2",
+    "axios": "^1",
     "trim": "^0.0.3"
   },
   "dependencies": {
@@ -35,7 +35,7 @@
     "@widget-editor/renderer": "2.7.2",
     "@widget-editor/rw-adapter": "2.7.2",
     "@widget-editor/widget-editor": "2.7.2",
-    "axios": "^0.21.1",
+    "axios": "^1",
     "bitly": "^7.1.2",
     "brace": "0.10.0",
     "classnames": "2.2.5",
