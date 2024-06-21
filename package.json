@@ -12,7 +12,8 @@
     "trim": "^0.0.3",
     "postcss-loader": "^8.1.1",
     "postcss": "^8.4.38",
-    "braces": "^3.0.3"
+    "braces": "^3.0.3",
+    "yargs-parser": "^13.1.2"
   },
   "dependencies": {
     "@artsy/fresnel": "^1.5.0",
