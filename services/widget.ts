@@ -25,7 +25,7 @@ export const fetchWidgets = (
   logger.info('fetches widgets');
   return WRIAPI.get('/v1/widget', {
     headers: {
-      ...WRIAPI.defaults.headers,
+      ...WRIAPI.defaults.headers.common,
       // TO-DO: forces the API to not cache, this should be removed at some point
       'Upgrade-Insecure-Requests': 1,
       ...headers,
@@ -80,7 +80,7 @@ export const fetchWidget = (
 
   return WRIAPI.get<APIWidgetSpec>(`/v1/widget/${id}`, {
     headers: {
-      ...WRIAPI.defaults.headers,
+      ...WRIAPI.defaults.headers.common,
       // TO-DO: forces the API to not cache, this should be removed at some point
       'Upgrade-Insecure-Requests': 1,
     },
@@ -128,7 +128,7 @@ export const deleteWidget = (
 
   return WRIAPI.delete<APIWidgetSpec>(`/v1/dataset/${datasetId}/widget/${widgetId}`, {
     headers: {
-      ...WRIAPI.defaults.headers,
+      ...WRIAPI.defaults.headers.common,
       Authorization: token,
     },
   })
@@ -165,7 +165,7 @@ export const updateWidget = (
 ): Promise<APIWidgetSpec> => {
   logger.info(`Update widget: ${widget.id}`);
   return WRIAPI.patch<APIWidgetSpec>(`/v1/widget/${widget.id}`, widget, {
-    headers: { Authorization: token },
+    headers: { Authorization: `Bearer ${token}` },
   })
     .then((response) => WRISerializer(response.data))
     .catch(({ response }) => {
@@ -195,7 +195,7 @@ export const createWidget = (
       env: process.env.NEXT_PUBLIC_API_ENV,
       ...widget,
     },
-    { headers: { Authorization: token } },
+    { headers: { Authorization: `Bearer ${token}` } },
   )
     .then((response) => WRISerializer(response.data))
     .catch(({ response }) => {
@@ -221,7 +221,7 @@ export const fetchWidgetMetadata = (
 ): Promise<Pick<APIWidgetSpec, 'metadata'>> => {
   logger.info(`Update widget metadata: ${widgetId}`);
   return WRIAPI.get(`/v1/dataset/${datasetId}/widget/${widgetId}/metadata`, {
-    headers: { Authorization: token },
+    headers: { Authorization: `Bearer ${token}` },
     params: {
       application: process.env.NEXT_PUBLIC_APPLICATIONS,
       env: process.env.NEXT_PUBLIC_API_ENV,
@@ -255,7 +255,7 @@ export const updateWidgetMetadata = (
     `/v1/dataset/${datasetId}/widget/${widgetId}/metadata`,
     metadata,
     {
-      headers: { Authorization: token },
+      headers: { Authorization: `Bearer ${token}` },
     },
   )
     .then((response) => WRISerializer(response.data))
@@ -294,7 +294,7 @@ export const createWidgetMetadata = (
       env: process.env.NEXT_PUBLIC_API_ENV,
       ...metadata,
     },
-    { headers: { Authorization: token } },
+    { headers: { Authorization: `Bearer ${token}` } },
   )
     .then((response) => WRISerializer(response.data))
     .catch((error) => {

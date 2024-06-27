@@ -5,7 +5,6 @@ import Title from 'components/ui/Title';
 
 export default function WidgetHeader({
   widget,
-  params = {},
   onToggleInfo,
   onToggleShare,
   isInfoVisible = false,

@@ -20,19 +20,7 @@ class WidgetBlockEdition extends PureComponent {
   };
 
   render() {
-    const {
-      tab,
-      loading,
-      total,
-      page,
-      pages,
-      pageSize,
-      widgets,
-      onChangeTab,
-      onChangePage,
-      onChangeSearch,
-      onSelectWidget,
-    } = this.props;
+    const { tab, onChangeTab } = this.props;
 
     return (
       <div className="c-dashboard-widget-edition">

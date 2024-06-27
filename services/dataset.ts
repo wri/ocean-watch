@@ -26,7 +26,7 @@ export const fetchDatasets = (params = {}, headers = {}, _meta = false) => {
   };
   return WRIAPI.get('/v1/dataset', {
     headers: {
-      ...WRIAPI.defaults.headers,
+      ...WRIAPI.defaults.headers.common,
       // TO-DO: forces the API to not cache, this should be removed at some point
       'Upgrade-Insecure-Requests': 1,
       ...headers,
@@ -141,7 +141,7 @@ export const deleteDataset = (id, token) => {
 
   return WRIAPI.delete(`/v1/dataset/${id}`, {
     headers: {
-      ...WRIAPI.defaults.headers,
+      ...WRIAPI.defaults.headers.common,
       Authorization: token,
     },
   })

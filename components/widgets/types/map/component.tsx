@@ -61,7 +61,6 @@ export interface MapTypeWidgetProps extends Omit<MapTypeWidgetContainerProps, 'w
 
 const MapTypeWidget = ({
   widget,
-  shareableParams,
   layerGroups = [],
   aoiLayer = null,
   maskLayer = null,
@@ -211,7 +210,6 @@ const MapTypeWidget = ({
         <div className="p-4 border border-b-0 rounded-tl rounded-tr border-gray-light">
           <WidgetHeader
             widget={widget}
-            params={shareableParams}
             onToggleInfo={handleInfoToggle}
             onToggleShare={handleShareToggle}
             isInfoVisible={isInfoWidgetVisible}

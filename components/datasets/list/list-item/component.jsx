@@ -15,7 +15,7 @@ import { getDateConsideringTimeZone } from 'utils/utils';
 import { Media } from 'lib/media';
 
 const DatasetListItem = (props) => {
-  const { dataset, widget, layer, mode, user, actions, tags, metadata } = props;
+  const { dataset, widget, layer, mode, actions, tags, metadata } = props;
   const renderChart = useCallback(() => {
     const isWidgetMap = widget && widget.widgetConfig.type === 'map';
     const isEmbedWidget = widget && widget.widgetConfig.type === 'embed';

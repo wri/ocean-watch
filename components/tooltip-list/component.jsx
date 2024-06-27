@@ -1,18 +1,9 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-export default function TooltipList({ list, onClickItem, placeholder }) {
-  const [search, setSearch] = useState('');
+export default function TooltipList({ list, onClickItem }) {
+  const [search] = useState('');
   const searchBoxRef = useRef(null);
-  const handleSearch = useCallback(
-    (_search) => {
-      setSearch(_search);
-    },
-    [setSearch],
-  );
-  const getSearchBoxRef = useCallback((ref) => {
-    searchBoxRef.current = ref;
-  }, []);
 
   const handleCountry = useCallback(
     ({ target }) => {

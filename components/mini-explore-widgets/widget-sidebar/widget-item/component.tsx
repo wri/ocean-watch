@@ -43,7 +43,6 @@ export default function WidgetItem({
           <>
             <WidgetHeader
               widget={widgetState.data}
-              params={params}
               onToggleInfo={handleInfoToggle}
               onToggleShare={handleShareToggle}
               isInfoVisible={isInfoVisible}

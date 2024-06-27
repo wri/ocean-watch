@@ -27,11 +27,9 @@ export interface RankingWidgetProps {
 
 const RankingWidget = ({
   widget,
-  params,
   data,
   isFetching,
   isError,
-  isInACollection,
   onToggleShare,
 }: RankingWidgetProps): JSX.Element => {
   const [isInfoWidgetVisible, setInfoWidgetVisibility] = useState(false);
@@ -51,7 +49,6 @@ const RankingWidget = ({
       <div className="p-4 border border-b-0 rounded-tl rounded-tr border-gray-light">
         <WidgetHeader
           widget={widget}
-          params={params}
           onToggleInfo={handleInfoToggle}
           onToggleShare={handleShareToggle}
           isInfoVisible={isInfoWidgetVisible}
