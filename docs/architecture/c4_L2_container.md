@@ -37,37 +37,87 @@ and support staff.
 title: "Ocean Watch Platform C4 Model: Container Diagram"
 ---
 flowchart TD
-  PersonResearcher["Anonymous\nExternal Researcher\nor Policy Maker\n[Person]\n\nA researcher or policy maker\nseeking to understand the\nhuman-influenced pressures on\nocean ecosystems"]
+  PersonResearcher["Anonymous
+  External Researcher
+  or Policy Maker
+  [Person]
+  <br>
+  A researcher or policy maker
+  seeking to understand the
+  human-influenced pressures on
+  ocean ecosystems"]
   
-    subgraph SystemOceanWatch["Ocean Watch Platform\n[Software System]"]
-      ContainerWebApplication["Web Application\n[Container: Javascript/Typescript and Next.js]\n\nDelivers the static content\nand the Ocean Watch\nReact application"]
-      ContainerNextjsApp["|Browser|\nReact Application\n[Container: Javascript and React ]\n\nProvides all of the\nfunctionality via\ntheir web browser"]
+    subgraph SystemOceanWatch["Ocean Watch Platform<br>[Software System]"]
+      ContainerWebApplication["Web Application
+      [Container: Javascript/Typescript and Next.js]
+      <br>
+      Delivers the static content
+      and the Ocean Watch
+      React application"]
+      ContainerNextjsApp["|Browser|
+      React Application
+      [Container: Javascript and React ]
+      <br>
+      Provides all of the
+      functionality via
+      their web browser"]
     end
     
     subgraph ThirdPartySystems["Third Party Systems"]
-      ExtSystemAmazonS3["Resource Watch S3 Bucket\n [Data Storage] \n\n Provides static images, \n partner organization logos, \n and \n coral reefs map"]
-      ExtSystemMapboxAPI["Mapbox API \n [Software System] \n\n Provides mapping functionality and tiles"]
-      ExtSystemCartoAPI["Carto API \n [Software System] \n\n Provides analysis and tiles"]
-      ExtSystemGEEAPI["Google Earth Engine \n [Software System] \n\n Provides tiles"]
-      ExtSystemGithubAPI["GitHub API \n [Configuration Management System] \n\n Stores Ocean Watch datasets"]
+      ExtSystemAmazonS3["Resource Watch S3 Bucket
+      [Data Storage]
+      <br>
+      Provides static images,
+      partner organization logos,
+      and
+      coral reefs map"]
+
+      ExtSystemMapboxAPI["Mapbox API
+      [Software System]
+      <br>
+      Provides mapping functionality and tiles"]
+
+      ExtSystemCartoAPI["Carto API
+      [Software System]
+      <br>
+      Provides analysis and tiles"]
+
+      ExtSystemGEEAPI["Google Earth Engine
+      [Software System]
+      <br>
+      Provides tiles"]
+
+      ExtSystemGithubAPI["GitHub API
+      [Configuration Management System]
+      <br>
+      Stores Ocean Watch datasets"]
     end
     
-    ExtSystemResourceWatchPlatform["Resource Watch Platform\n[Software System]\n\nProvides ability to explore datasets\nwithin a geospatial context"]
-    ExtSystemResourceWatchAPI["Resource Watch API\n[Software System]\n\nProvides programmatic management of\ndatasets, widgets, and other artifacts"]
+    ExtSystemResourceWatchPlatform["Resource Watch Platform
+    [Software System]
+    <br>
+    Provides ability to explore datasets
+    within a geospatial context"]
+
+    ExtSystemResourceWatchAPI["Resource Watch API
+    [Software System]
+    <br>
+    Provides programmatic management of
+    datasets, widgets, and other artifacts"]
     
 
-  PersonResearcher -- "Visits \n <code>oceanwatchdata.org</code> \n using \n [HTTPS]" --> ContainerWebApplication
+  PersonResearcher -- "Visits<br><code>oceanwatchdata.org</code><br>using<br>[HTTPS]" --> ContainerWebApplication
   
-  ContainerWebApplication -- "Delivers to the\ncustomer's web\nbrowser" --> ContainerNextjsApp
-  ContainerWebApplication -- "Generates static content \n for pages with calls \n using \n [HTTPS]" --> ExtSystemResourceWatchAPI
+  ContainerWebApplication -- "Delivers to the<br>customer's web<br>browser" --> ContainerNextjsApp
+  ContainerWebApplication -- "Generates static content<br>for pages with calls<br>using<br>[HTTPS]" --> ExtSystemResourceWatchAPI
   
-  ContainerNextjsApp -- "Gathers geostore, dashboard, widget,\n datasets, and content from \n <code>api.resourcewatch.org/</code> \n using \n [HTTPS]" --> ExtSystemResourceWatchAPI
-  ContainerNextjsApp -- "Redirects traffic from researchers\nwanting to explore datasets to\n<code>resourcewatch.org/data/explore</code>\nusing\n[HTTPS]" --> ExtSystemResourceWatchPlatform
-  ContainerNextjsApp -- "Gathers static image content at \n <code>s3.amazonaws.com/wri-api-backups/resourcewatch/staging/*</code> \n or \n <code>s3.amazonaws.com/wri-api-backups/resourcewatch/production/*</code> \n using \n [HTTPS]" --> ExtSystemAmazonS3
-  ContainerNextjsApp -- "Fetches tiles and styles at \n <code>api.mapbox.com/*</code> \n using \n [HTTPS]" --> ExtSystemMapboxAPI
-  ContainerNextjsApp -- "Fetches tiles and requests analysis at \n <code>wri-rw.carto.com/api/*</code> \n <code>rw-nrt.carto.com/api/*</code> \n and \n <code>a.gusc.cartocdn.com/wri-rw/api/*</code> \n using \n [HTTPS]" --> ExtSystemCartoAPI
-  ContainerNextjsApp -- "Fetches tiles at \n <code>storage.googleapis.com/gee-tiles/*</code> \n using \n [HTTPS]" --> ExtSystemGEEAPI
-  ContainerNextjsApp -- "renders widgets with links to \n <code>github.com/resource-watch/ocean-watch-data/*</code> \n using \n [HTTPS]" --> ExtSystemGithubAPI
+  ContainerNextjsApp -- "Gathers geostore, dashboard, widget,<br>datasets, and content from<br><code>api.resourcewatch.org/</code><br>using<br>[HTTPS]" --> ExtSystemResourceWatchAPI
+  ContainerNextjsApp -- "Redirects traffic from researchers<br>wanting to explore datasets to<br><code>resourcewatch.org/data/explore</code><br>using<br>[HTTPS]" --> ExtSystemResourceWatchPlatform
+  ContainerNextjsApp -- "Gathers static image content at<br><code>s3.amazonaws.com/wri-api-backups/resourcewatch/staging/*</code><br>or<br><code>s3.amazonaws.com/wri-api-backups/resourcewatch/production/*</code><br>using<br>[HTTPS]" --> ExtSystemAmazonS3
+  ContainerNextjsApp -- "Fetches tiles and styles at<br><code>api.mapbox.com/*</code><br>using<br>[HTTPS]" --> ExtSystemMapboxAPI
+  ContainerNextjsApp -- "Fetches tiles and requests analysis at<br><code>wri-rw.carto.com/api/*</code><br><code>rw-nrt.carto.com/api/*</code><br>and<br><code>a.gusc.cartocdn.com/wri-rw/api/*</code><br>using<br>[HTTPS]" --> ExtSystemCartoAPI
+  ContainerNextjsApp -- "Fetches tiles at<br><code>storage.googleapis.com/gee-tiles/*</code><br>using<br>[HTTPS]" --> ExtSystemGEEAPI
+  ContainerNextjsApp -- "renders widgets with links to<br><code>github.com/resource-watch/ocean-watch-data/*</code><br>using<br>[HTTPS]" --> ExtSystemGithubAPI
   
   click ExtSystemResourceWatchPlatform "https://resourcewatch.org" _blank
   click ExtSystemResourceWatchAPI "https://api.resourcewatch.org/" _blank
