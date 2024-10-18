@@ -28,21 +28,42 @@ Technical and non-technical people, inside and outside of the immediate software
 title: "Ocean Watch C4 Model: System Context"
 ---
 flowchart LR
-  PersonResearcher["Anonymous\nExternal Researcher\nor Policy Maker\n[Person]\n\nA researcher or policy maker\nseeking to understand the\nhuman-influenced pressures on\nocean ecosystems"]
+  PersonResearcher["Anonymous
+  External Researcher
+  or Policy Maker
+  [Person]
+  <br/>
+  A researcher or policy maker
+  seeking to understand the
+  human-influenced pressures on
+  ocean ecosystems"]
   
   subgraph BoundaryWRI["World Resources Institute (WRI) [Organization]"]
     subgraph BoundaryOceanProgram["Ocean Program [Program]"]
-      SystemOceanWatch["Ocean Watch Platform\n[Software System]\n\nAllows researchers to conduct research\nand share findings with others via\nembeddable urls and downloadable artifacts"]
+      SystemOceanWatch["Ocean Watch Platform
+      [Software System]
+      <br>
+      Allows researchers to conduct research
+      and share findings with others via
+      embeddable urls and downloadable artifacts"]
     end
     subgraph BoundaryDataLab["Data Lab [Data Innovation and Product Delivery]"]
-      ExtSystemResourceWatchPlatform["Resource Watch Platform\n[Software System]\n\nProvides ability to explore datasets\nwithin a geospatial context"]
-      ExtSystemResourceWatchAPI["Resource Watch API\n[Software System]\n\nProvides programmatic management of\ndatasets, widgets, and other artifacts"]
+      ExtSystemResourceWatchPlatform["Resource Watch Platform
+      [Software System]
+      <br>
+      Provides ability to explore datasets
+      within a geospatial context"]
+      ExtSystemResourceWatchAPI["Resource Watch API
+      [Software System]
+      <br>
+      Provides programmatic management of
+      datasets, widgets, and other artifacts"]
     end
   end
 
   PersonResearcher -- "Uses" --> SystemOceanWatch
-  SystemOceanWatch -- "Gathers dashboard, widget,\nand content from" --> ExtSystemResourceWatchAPI
-  SystemOceanWatch -- "Redirects traffic from researchers\nwanting to explore datasets to" --> ExtSystemResourceWatchPlatform
+  SystemOceanWatch -- "Gathers dashboard, widget,<br>and content from" --> ExtSystemResourceWatchAPI
+  SystemOceanWatch -- "Redirects traffic from researchers<br>wanting to explore datasets to" --> ExtSystemResourceWatchPlatform
   
   click SystemOceanWatch "https://oceanwatchdata.org" _blank
   click ExtSystemResourceWatchPlatform "https://resourcewatch.org" _blank
