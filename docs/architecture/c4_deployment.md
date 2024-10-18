@@ -121,7 +121,14 @@ This sequence diagram outlines the main actions taken during the workflow, from 
 title: C4 Deployment Diagram for Staging Environment Managed my AWS Copilot
 ---
 flowchart LR
-    Browser["Ocean Watch Platform \n [Container: Javascript and React] \n\n <b>Web Browser</b> \n [Deployment Node: Chrome, Firefox, Safari, or Edge] \n\n User's Computer or Mobile Device"]
+    Browser["Ocean Watch Platform
+    [Container: Javascript and React]
+    <br>
+    <b>Web Browser</b>
+    [Deployment Node: Chrome, Firefox, Safari, or Edge]
+    <br>
+    User's Computer or Mobile Device"]
+
     subgraph AwsRegion["AWS Region <b>us-east-1</b>"]
       subgraph AwsVPC["AWS Virtual Private Cloud (VPC)"]
         ALB["AWS Application Load Balancer"]
@@ -132,14 +139,16 @@ flowchart LR
           subgraph AwsAZ1["AWS Availability Zone 1"]
             subgraph PubSubnet1["AWS Public Subnet"]
               subgraph dockerContainer1["ECS Task: Docker Container: <b>14.17-alpine</b>"]
-                ContainerWebApplication1["Web Application\n[Container: Javascript and Next.js]"]
+                ContainerWebApplication1["Web Application
+                [Container: Javascript and Next.js]"]
               end
             end
           end
           subgraph AwsAZ2["AWS Availability Zone 2"]
             subgraph PubSubnet2["AWS Public Subnet"]
                 subgraph dockerContainer2["ECS Task: Docker Container: <b>14.17-alpine</b>"]
-                    ContainerWebApplication2["Web Application\n[Container: Javascript and Next.js]"]
+                    ContainerWebApplication2["Web Application
+                    [Container: Javascript and Next.js]"]
                 end
             end
           end
@@ -275,7 +284,14 @@ This sequence diagram outlines the main actions taken during the workflow, from 
 title: C4 Deployment Diagram for Feature Branch Environment Managed my AWS Copilot
 ---
 flowchart LR
-    Browser["Ocean Watch Platform \n [Container: Javascript and React] \n\n <b>Web Browser</b> \n [Deployment Node: Chrome, Firefox, Safari, or Edge] \n\n User's Computer or Mobile Device"]
+    Browser["Ocean Watch Platform
+    [Container: Javascript and React]
+    <br>
+    <b>Web Browser</b>
+    [Deployment Node: Chrome, Firefox, Safari, or Edge]
+    <br>
+    User's Computer or Mobile Device"]
+
     subgraph AwsRegion["AWS Region <b>us-east-1</b>"]
       subgraph AwsVPC["AWS Virtual Private Cloud (VPC)"]
         ALB["AWS Application Load Balancer"]
@@ -286,14 +302,14 @@ flowchart LR
           subgraph AwsAZ1["AWS Availability Zone 1"]
             subgraph PubSubnet1["AWS Public Subnet"]
               subgraph dockerContainer1["ECS Task: Docker Container: <b>14.17-alpine</b>"]
-                ContainerWebApplication1["Web Application\n[Container: Javascript and Next.js]"]
+                ContainerWebApplication1["Web Application<br>[Container: Javascript and Next.js]"]
               end
             end
           end
           subgraph AwsAZ2["AWS Availability Zone 2"]
             subgraph PubSubnet2["AWS Public Subnet"]
                 subgraph dockerContainer2["ECS Task: Docker Container: <b>14.17-alpine</b>"]
-                    ContainerWebApplication2["Web Application\n[Container: Javascript and Next.js]"]
+                    ContainerWebApplication2["Web Application<br>[Container: Javascript and Next.js]"]
                 end
             end
           end
